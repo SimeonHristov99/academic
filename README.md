@@ -1,2 +1,3 @@
-# jobatron.
-Combine LinkedIn, Coursera and Leetcode in one platform
+# academic
+
+Create a platform like Coursera / Udemy.
