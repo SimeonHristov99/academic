@@ -2,15 +2,16 @@
 
 @import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css?family=Material+Icons+Outlined');
+@import url("https://fonts.googleapis.com/css?family=Material+Icons+Outlined");
 
 html {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -20,4 +21,9 @@ h1 {
 
 h2 {
     font-size: 40px;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
 }
