@@ -14,7 +14,7 @@
 .top-section {
     text-align: center;
 
-    padding: 100px 0px;
+    padding: 20px 0px;
 
     h1 {
         font-size: 120px;
@@ -31,8 +31,10 @@
 }
 
 .content-section {
+    display: flex;
     flex-grow: 1;
-    min-height: 0; 
+    min-height: 0;
+    justify-content: center; 
 }
 
 .bottom-section {

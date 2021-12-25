@@ -24,6 +24,8 @@ h2 {
 }
 
 .container {
-    max-width: 850px;
+    display: flex;
+    justify-content: right;
     margin: auto;
+    max-width: 1300px;
 }

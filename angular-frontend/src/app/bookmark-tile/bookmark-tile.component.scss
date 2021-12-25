@@ -1,7 +1,6 @@
 .bookmark-tile {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 
     padding: 10px;
@@ -11,8 +10,8 @@
     background: rgba(black, 0.55);
     border-radius: 5px;
 
-    width: 120px;
-    height: 100px;
+    width: 1000px;
+    height: 225px;
 
     cursor: pointer;
 
