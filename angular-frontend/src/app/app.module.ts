@@ -9,6 +9,10 @@ import { NotesComponent } from './notes/notes.component';
 import { TodosComponent } from './todos/todos.component';
 import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +22,16 @@ import { FiltersTileComponent } from './filters-tile/filters-tile.component';
     NotesComponent,
     TodosComponent,
     BookmarkTileComponent,
-    FiltersTileComponent
+    FiltersTileComponent,
+    OrganizationComponent,
+    AddCourseComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxEchartsModule.forRoot({
+      echarts
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
