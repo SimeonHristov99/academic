@@ -13,6 +13,7 @@ import { OrganizationComponent } from './organization/organization.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { InitialPageComponent } from './initial-page/initial-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
     FiltersTileComponent,
     OrganizationComponent,
     AddCourseComponent,
+    InitialPageComponent,
   ],
   imports: [
     BrowserModule,
