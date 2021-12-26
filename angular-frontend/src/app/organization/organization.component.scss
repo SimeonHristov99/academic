@@ -1,0 +1,54 @@
+.bookmarks-wrapper {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.bookmark-tiles-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.chart {
+    display: flex;
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+    height: 200px;
+    cursor: pointer;
+    transition: all 0.1s;
+    padding: 15px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 5px;
+    width: 1000px;
+}
+
+.grid-item {
+    padding: 5px;
+    text-align: center;
+    height: 250px;
+}
+
+.bookmark-tile {
+    display: flex;
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+    width: 600px;
+    height: 250px;
+    cursor: pointer;
+    transition: all 0.1s;
+
+    &:hover {
+        background: rgba(black, 0.68);
+        backdrop-filter: blur(2px);
+    }
+
+    &:active {
+        background: rgba(black, 0.75);
+        transform: translateY(2px);
+        transition-duration: 0s;  
+    }
+}
