@@ -1,0 +1,40 @@
+.bookmarks-wrapper {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.bookmark-tiles-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bookmark-tile {
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+    width: 1300px;
+    height: 335px;
+    transition: all 0.1s;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    padding: 40px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+button {
+    margin-top: 20px;
+    width: 1300px;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 15px;
+}
