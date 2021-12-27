@@ -1,4 +1,4 @@
-import { animate, query, style, transition, trigger } from '@angular/animations';
+import { animate, query, style, transition, trigger, group } from '@angular/animations';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -8,30 +8,74 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('routeAnim', [
-      transition('* => *', [
+      transition(':increment', [
         style({
-          position: 'relative'
+          position: 'relative',
+          overflow: 'hidden'
         }),
 
-        query(':enter', [
-          style({ opacity: 0, height: '100%' })
-        ], { optional: true }),
+        group([
+          query(':leave', [
+            style({
+            }),
+            animate('200ms ease-in', style({
+              opacity: 0,
+              transform: 'translateX(-50px)',
+              height: '100%',
+            }))
+          ], { optional: true }),
 
-        query(':leave', [
+          query(':enter', [
+            style({
+              opacity: 0,
+              transform: 'translateX(50px)',
+            }),
+            animate('250ms 120ms ease-out', style({
+              opacity: 1,
+              transform: 'translateX(0px)',
+            }))
+          ], { optional: true }),
+        ]),
+
+        query(':enter, :leave', [
           style({
-          }),
-          animate(1000, style({
-            opacity: 0,
+            position: 'absolute',
+            top: 0,
+            left: 0,
             height: '100%',
-          }))
-        ], { optional: true }),
+            width: '100%'
+          })
+        ], { optional: true })
+      ]),
 
-        query(':enter', [
-          style({
-            opacity: 0,
-          }),
-          animate(1000)
-        ], { optional: true }),
+      transition(':decrement', [
+        style({
+          position: 'relative',
+          overflow: 'hidden'
+        }),
+
+        group([
+          query(':leave', [
+            style({
+            }),
+            animate('200ms ease-in', style({
+              opacity: 0,
+              transform: 'translateX(50px)',
+              height: '100%',
+            }))
+          ], { optional: true }),
+
+          query(':enter', [
+            style({
+              opacity: 0,
+              transform: 'translateX(-50px)',
+            }),
+            animate('250ms 120ms ease-out', style({
+              opacity: 1,
+              transform: 'translateX(0px)',
+            }))
+          ], { optional: true }),
+        ]),
 
         query(':enter, :leave', [
           style({
@@ -49,7 +93,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
 
   prepareRoute(outlet: RouterOutlet) {
-    if (outlet.isActivated) return outlet.activatedRoute.snapshot.url;
+    if (outlet.isActivated) return outlet.activatedRouteData['tab'];
     return undefined;
   }
 

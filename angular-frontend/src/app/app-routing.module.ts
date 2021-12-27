@@ -8,9 +8,9 @@ import { NotesComponent } from './notes/notes.component';
 import { OrganizationComponent } from './organization/organization.component';
 
 const routes: Routes = [
-  { path: 'bookmarks', component: BookmarksComponent },
-  { path: 'notes', component: NotesComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'bookmarks', component: BookmarksComponent, data: {'tab': 0} },
+  { path: 'cart', component: CartComponent, data: {'tab': 1} },
+  { path: 'notes', component: NotesComponent, data: {'tab': 2} },
   { path: 'organization', component: OrganizationComponent },
   { path: 'organization/add-course', component: AddCourseComponent },
   { path: 'welcome', component: InitialPageComponent },
