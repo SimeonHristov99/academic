@@ -14,6 +14,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
     OrganizationComponent,
     AddCourseComponent,
     InitialPageComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
