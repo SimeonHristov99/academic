@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { NotesComponent } from './notes/notes.component';
-import { TodosComponent } from './todos/todos.component';
 import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
 import { OrganizationComponent } from './organization/organization.component';
@@ -22,7 +21,6 @@ import { CartComponent } from './cart/cart.component';
     TabsComponent,
     BookmarksComponent,
     NotesComponent,
-    TodosComponent,
     BookmarkTileComponent,
     FiltersTileComponent,
     OrganizationComponent,
