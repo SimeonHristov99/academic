@@ -1,0 +1,50 @@
+.wrapper {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.filter-tile {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    width: 200px;
+
+    padding: 10px;
+    gap: 12px;
+
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+
+    transition: all 0.1s;
+
+    &:hover {
+        background: rgba(black, 0.68);
+        backdrop-filter: blur(2px);
+    }
+
+    &:active {
+        background: rgba(black, 0.75);
+        transform: translateY(2px);
+        transition-duration: 0s;
+    }
+}
+
+.filter-tile li {
+    color: rgba(white, 0.85);
+}
+
+.filter-tile img {
+    max-width: 32px;
+}
+
+.tile-text {
+    font-size: 14px;
+    color: rgba(white, 0.85);
+
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
