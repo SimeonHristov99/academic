@@ -17,33 +17,6 @@
     gap: 20px;
 }
 
-.note-card {
-    background-color: rgba(black, 0.5);
-    color: rgba(white, 0.95);
-
-    border-radius: 4px;
-
-    padding: 25px;
-
-    cursor: pointer;
-
-    transition: 0.1s;
-
-    &:hover {
-        background-color: rgba(black, 0.68);
-        backdrop-filter: blur(2px);
-    }
-}
-
-.notes-card-title {
-    font-weight: 600;
-    font-size: 20px;
-}
-
-.notes-card-content {
-    margin-top: 7px;
-}
-
 .add-btn i {
     margin-right: 5px;
     margin-left: -5px;

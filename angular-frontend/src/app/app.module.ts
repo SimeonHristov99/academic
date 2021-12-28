@@ -16,6 +16,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { CartComponent } from './cart/cart.component';
 import { AddNoteComponent } from './add-note/add-note.component';
+import { NoteCardComponent } from './note-card/note-card.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddNoteComponent } from './add-note/add-note.component';
     InitialPageComponent,
     CartComponent,
     AddNoteComponent,
+    NoteCardComponent,
   ],
   imports: [
     BrowserModule,

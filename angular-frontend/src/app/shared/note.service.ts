@@ -9,7 +9,10 @@ export class NoteService {
   notes: Note[]
 
   constructor() {
-    this.notes = []
+    this.notes = [
+      new Note('Test title', 'Test content!'),
+      new Note('Heyo!', 'Testing one, two, three!'),
+    ]
   }
 
   getNotes() {
