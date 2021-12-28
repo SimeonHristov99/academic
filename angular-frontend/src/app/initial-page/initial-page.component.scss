@@ -1,20 +1,13 @@
-.bookmarks-wrapper {
-    height: 100%;
-    overflow-y: auto;
-}
 
-.bookmark-tiles-container {
+
+.wrapper {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+    flex-direction: column;
 
-.bookmark-tile {
-    background: rgba(black, 0.55);
-    border-radius: 5px;
-    width: 1300px;
-    height: 335px;
-    transition: all 0.1s;
+    height: 100%;
+
+    justify-content: center;
+    margin-top: -100px;
 }
 
 button {
