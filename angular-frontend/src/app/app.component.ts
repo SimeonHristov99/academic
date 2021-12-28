@@ -111,9 +111,15 @@ export class AppComponent {
   }
 
   updateGreeting(event: any) {
-    this.header = event.greeting.header;
-    this.context = event.greeting.context;
-    this.inUser = (event.greeting.inUser ? true : false);
+    if (event.greeting) {
+      this.header = event.greeting.header;
+      this.context = event.greeting.context;
+      this.inUser = (event.greeting.inUser ? true : false);
+    } else {
+      this.header = '';
+      this.context = '';
+      this.inUser = false;
+    }
   }
 
 }
