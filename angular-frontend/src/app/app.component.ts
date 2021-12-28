@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 export interface Greeting {
   header: string,
   context: string,
+  inUser?: boolean
 }
 
 @Component({
@@ -99,6 +100,7 @@ export class AppComponent {
 
   header: string = '';
   context: string = '';
+  inUser: boolean = false;
 
   defaultHeader: string = 'Welcome to Academic';
   defaultContext: string = 'Create an account or log in to access out courses';
@@ -111,6 +113,8 @@ export class AppComponent {
   updateGreeting(event: any) {
     this.header = event.greeting.header;
     this.context = event.greeting.context;
+    console.log(event.greeting.inUser);
+    this.inUser = (event.greeting.inUser ? true : false);
   }
 
 }
