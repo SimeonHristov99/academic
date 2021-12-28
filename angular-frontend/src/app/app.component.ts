@@ -113,7 +113,6 @@ export class AppComponent {
   updateGreeting(event: any) {
     this.header = event.greeting.header;
     this.context = event.greeting.context;
-    console.log(event.greeting.inUser);
     this.inUser = (event.greeting.inUser ? true : false);
   }
 
