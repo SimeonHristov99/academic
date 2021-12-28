@@ -83,6 +83,10 @@ h2.is-bold {
     backdrop-filter: blur(20px);
 }
 
+.form-field {
+    margin-bottom: 20px;
+}
+
 .textbox,
 .textarea {
     display: block;
@@ -96,8 +100,6 @@ h2.is-bold {
     background: rgba(white, 0.9);
 
     padding: 8px 10px;
-
-    margin-bottom: 20px;
 
     width: 100%;
 

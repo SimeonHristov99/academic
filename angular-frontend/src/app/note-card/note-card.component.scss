@@ -23,4 +23,6 @@
 
 .notes-card-content {
     margin-top: 7px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
