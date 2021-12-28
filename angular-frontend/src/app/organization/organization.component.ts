@@ -15,7 +15,6 @@ export class OrganizationComponent implements OnInit {
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
-
   options: any;
 
   ngDoCheck(): void {
@@ -57,6 +56,14 @@ export class OrganizationComponent implements OnInit {
         }
       ]
     };
+  }
+
+  editCourse(id: any) : void {
+    console.log("Course: " + id + " editing");
+  }
+
+  deleteCourse(id: any) : void {
+    console.log("Course: " + id + " deleting");
   }
 
 }

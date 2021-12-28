@@ -1,53 +1,76 @@
-.bookmarks-wrapper {
-    height: 100%;
+.wrapper {
+    height: 80%;
+    width: 120%;
     overflow-y: auto;
 }
 
-.bookmark-tiles-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.chart-container {
+    height: 90%;
+    width: 100%;
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 5px;
 }
 
 .chart {
-    display: flex;
-    background: rgba(black, 0.55);
-    border-radius: 5px;
-    height: 200px;
+    height: 100%;
+    margin-right: -50px; 
+    margin-left: 20px;
+}
+
+.course-button, .add-course-button {
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-block;
+    outline: 0;
     cursor: pointer;
-    transition: all 0.1s;
-    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+    background: #FFF;
+    border: 1px solid #D5D9D9;
+    font-size: 10px;
+    height: 30px;
+    padding: 0 11px;
+    text-align: center;
+    font-weight: 400;
+    color: #0F1111;
+    margin: 3px;
+    :hover{
+        background-color: #F7FAFA;
+        border-color: #D5D9D9;
+    }
+    margin-left: 10px;
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 5px;
-    width: 1000px;
+    width: 100%;
 }
 
 .grid-item {
     padding: 5px;
     text-align: center;
-    height: 250px;
+    height: 90%;
     font-family: 'Courier New', Courier, monospace;
     color: white;
 }
 
-.bookmark-tile {
+.title {
     display: flex;
     background: rgba(black, 0.55);
     border-radius: 5px;
-    width: 600px;
+    width: 500px;
     height: 250px;
     cursor: pointer;
     transition: all 0.1s;
-
     &:hover {
         background: rgba(black, 0.68);
         backdrop-filter: blur(2px);
     }
-
     &:active {
         background: rgba(black, 0.75);
         transform: translateY(2px);

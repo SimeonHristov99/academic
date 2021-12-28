@@ -32,9 +32,25 @@
 }
 
 button {
-    margin-top: 20px;
-    width: 1300px;
     padding: 5px;
     border-radius: 8px;
     font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+    background: #FFF;
+    border: 1px solid #D5D9D9;
+    height: 30px;
+    padding: 0 11px;
+    text-align: center;
+    font-weight: 400;
+    color: #0F1111;
+    margin: 3px;
+    :hover{
+        background-color: #F7FAFA;
+        border-color: #D5D9D9;
+    }
 }

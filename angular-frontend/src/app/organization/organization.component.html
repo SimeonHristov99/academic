@@ -1,14 +1,24 @@
-<div class="bookmarks-wrapper">
-    <div class="container">
-        <div class="bookmark-tiles-container">
-            <div *ngFor="let i of [1,2,3,4,5]">
-                <div class="grid-container">
-                    <div class="grid-item">
-                        <div class="bookmark-tile"></div>
-                    </div>
-                    <div class="grid-item">
-                        <h6 class="course-details">Course name</h6>
+<div class="wrapper">
+    <button class="add-course-button" routerLink="/organization/add-course">Add new course</button>
+    <div>
+        <div *ngFor="let i of [1,2,3,4,5]">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <div class="title"></div>
+                </div>
+                <div class="grid-item">
+                    <div class="chart-container">
+                        <h6>Course {{i}}</h6>
                         <div echarts [options]="options" class="chart"></div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="button-container">
+                        <button class="course-button" (click)="editCourse(i)">Details</button>
+                        <br>
+                        <button class="course-button" (click)="editCourse(i)">Edit</button>
+                        <br>
+                        <button class="course-button" (click)="deleteCourse(i)">Delete</button>
                     </div>
                 </div>
             </div>
