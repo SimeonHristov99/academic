@@ -1,0 +1,14 @@
+<div class="title">
+    <div class="grid-container">
+        <div class="grid-item">Name: <input /></div>
+        <div class="grid-item"> I am:
+            <select name="register" [(ngModel)]="register">
+                <option value="organization" >Organization</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+        <div class="grid-item" *ngIf="register === 'user'">Promoted by: <input /></div>
+    </div>
+</div>
+<button type="button" routerLink="/">Go back</button>
+<button type="button" routerLink="/">Create new account</button>

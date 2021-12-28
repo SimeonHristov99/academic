@@ -19,6 +19,7 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
 import { CartComponent } from './cart/cart.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { NoteCardComponent } from './note-card/note-card.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NoteCardComponent } from './note-card/note-card.component';
     CartComponent,
     AddNoteComponent,
     NoteCardComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
