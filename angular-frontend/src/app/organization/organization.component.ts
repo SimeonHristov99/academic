@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Greeting } from '../app.component';
 
 @Component({
   selector: 'app-organization',
@@ -7,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationComponent implements OnInit {
 
+  greeting: Greeting = {
+    header: 'Hello, Google',
+    context: '10:00, 17 May 2022'
+  };
+
+  @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
+
+
   options: any;
 
   ngDoCheck(): void {
@@ -14,6 +23,8 @@ export class OrganizationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.headerData.emit(this.greeting);
+
     const data1 = [];
     const data2 = [];
     const data3 = [];

@@ -1,12 +1,12 @@
 <div class="app-wrapper">
 
   <div class="top-section">
-    <h1>Hello, Jim</h1>
-    <h2>19:00, 1 January 2021</h2>
+    <h1> {{ this.header }} </h1>
+    <h2> {{ this.context }} </h2>
   </div>
 
   <div class="content-section" [@routeAnim]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet"></router-outlet>
+    <router-outlet (activate)="updateGreeting($event);" #outlet="outlet"></router-outlet>
   </div>
 
   <div class="bottom-section">

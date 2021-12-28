@@ -2,6 +2,11 @@ import { animate, query, style, transition, trigger, group } from '@angular/anim
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+export interface Greeting {
+  header: string,
+  context: string,
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -92,9 +97,20 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
 
+  header: string = '';
+  context: string = '';
+
+  defaultHeader: string = 'Welcome to Academic';
+  defaultContext: string = 'Create an account or log in to access out courses';
+
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) return outlet.activatedRouteData['tab'];
     return undefined;
+  }
+
+  updateGreeting(event: any) {
+    this.header = event.greeting.header;
+    this.context = event.greeting.context;
   }
 
 }

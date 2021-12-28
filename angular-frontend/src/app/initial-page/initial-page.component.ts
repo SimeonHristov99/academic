@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Greeting } from '../app.component';
 
 @Component({
   selector: 'app-initial-page',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InitialPageComponent implements OnInit {
 
+  greeting: Greeting = {
+    header: 'Welcome to Academic',
+    context: 'Create an account or log in to access our courses'
+  };
+
+  @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+    this.headerData.emit(this.greeting);
   }
 
 }
