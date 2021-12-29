@@ -1,0 +1,23 @@
+.notes-wrapper {
+    width: 1300px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.container {
+    display: block;
+    max-height: 100%;
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.add-btn i {
+    margin-right: 5px;
+    margin-left: -5px;
+}

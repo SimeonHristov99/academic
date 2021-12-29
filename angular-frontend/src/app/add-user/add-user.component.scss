@@ -1,0 +1,21 @@
+.title {
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+    width: 1300px;
+    height: 335px;
+    transition: all 0.1s;
+    margin-bottom: 50px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    padding: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}

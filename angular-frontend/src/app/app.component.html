@@ -1,16 +1,22 @@
 <div class="app-wrapper">
 
   <div class="top-section">
-    <h1>19:00</h1>
-    <h2>1 January 2021</h2>
+    <h1> {{ this.header }} </h1>
+    <h2> {{ this.context }} </h2>
+
+    <button class="btn" routerLink="/" *ngIf="router.url !== '/'">
+      <div class="button-label-wrapper">
+        <i class="material-icons-outlined">logout</i><span class="home-label">Log out</span>
+      </div>
+    </button>
   </div>
 
-  <div class="content-section">
-    <router-outlet></router-outlet>
+  <div class="content-section" [@routeAnim]="prepareRoute(outlet)">
+    <router-outlet (activate)="updateGreeting($event);" #outlet="outlet"></router-outlet>
   </div>
 
   <div class="bottom-section">
-    <app-tabs></app-tabs>
+    <app-tabs *ngIf="this.inUser"></app-tabs>
   </div>
 
 </div>
