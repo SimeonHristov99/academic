@@ -23,6 +23,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
     EditNoteComponent,
     CartItemComponent,
     SidebarInfoComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
