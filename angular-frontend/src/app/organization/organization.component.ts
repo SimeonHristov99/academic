@@ -28,33 +28,67 @@ export class OrganizationComponent implements OnInit {
 
     const data1 = [];
     const data2 = [];
-    const data3 = [];
+
+    data1.push(6.0);
+    data2.push(7.5);
 
     data1.push(10.0);
-    data2.push(20);
-    data3.push(6.0);
+    data2.push(8.5);
 
+    data1.push(50);
+    data2.push(30);
+    
     this.options = {
       tooltip: {
-        confine: true
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
       },
-      xAxis: {},
-      yAxis: {},
+      legend: {
+        data: ['Current', 'Average'],
+        textStyle: {
+          color: 'white'
+        }
+      },
+      xAxis: [{
+        type: 'category',
+        axisTick: { show: false },
+        data: ['Rating', 'Price', 'People'],
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: 'white'
+          }
+        },
+      }],
+      yAxis: [{
+        type: 'value',
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: 'white'
+          }
+        }
+      }],
       series: [
         {
+          name: 'Current',
           type: 'bar',
-          barCategoryGap: '0%',
+          barGap: 0,
+          emphasis: {
+            focus: 'series'
+          },
           data: data1
         },
         {
+          name: 'Average',
           type: 'bar',
-          barCategoryGap: '0%',
+          barGap: 0,
+          emphasis: {
+            focus: 'series'
+          },
           data: data2
-        },
-        {
-          type: 'bar',
-          barCategoryGap: '0%',
-          data: data3
         }
       ]
     };
