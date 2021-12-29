@@ -14,7 +14,7 @@
 .top-section {
     text-align: center;
 
-    padding: 20px 0px;
+    padding: 10px 0px;
 
     h1 {
         font-size: 120px;
@@ -27,6 +27,10 @@
         font-size: 28px;
         color: white;
         text-shadow: 0px 1px 4px rgba(black, 0.1);
+    }
+    
+    button {
+        margin-top: 10px;
     }
 }
 
@@ -43,29 +47,6 @@
     app-tabs {
         margin: auto;
     }
-}
-
-.home-button {
-    border-radius: 8px;
-    font-size: 18px;
-    display: inline-block;
-    outline: 0;
-    cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
-    background: #FFF;
-    border: 1px solid #D5D9D9;
-    height: 30px;
-    text-align: center;
-    font-weight: 400;
-    color: #0F1111;
-    margin-left: 48%;
-    margin-bottom: 5px;
-    :hover{
-        background-color: #F7FAFA;
-        border-color: #D5D9D9;
-    }
-    width: fit-content;
 }
 
 .home-label {
