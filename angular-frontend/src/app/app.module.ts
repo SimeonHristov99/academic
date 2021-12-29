@@ -21,6 +21,7 @@ import { AddNoteComponent } from './add-note/add-note.component';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EditNoteComponent } from './edit-note/edit-note.component';
     NoteCardComponent,
     AddUserComponent,
     EditNoteComponent,
+    CartItemComponent,
   ],
   imports: [
     BrowserModule,

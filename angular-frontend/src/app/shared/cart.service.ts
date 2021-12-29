@@ -9,7 +9,10 @@ export class CartService {
   items: CartItem[]
 
   constructor() {
-    this.items = []
+    this.items = [
+      new CartItem('This is a test'),
+      new CartItem('Hey!!'),
+    ]
   }
 
   getItems() {

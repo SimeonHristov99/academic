@@ -1,19 +1,7 @@
 <div class="cart-wrapper">
     <div class="container">
-        
-        <div class="cart-item completed">
-            <div class="check-box">
-                <i class="material-icons-outlined">check</i>
-            </div>
-            <p class="cart-item-text">This is the name of the item.</p>
-        </div>
-
-        <div class="cart-item">
-            <div class="check-box">
-                <i class="material-icons-outlined">check</i>
-            </div>
-            <p class="cart-item-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, quasi cupiditate, dolorum illum, error id voluptatem odio harum nobis dolore cum. Culpa officiis qui nesciunt eos nobis recusandae exercitationem minima..</p>
-        </div>
+      
+        <app-cart-item *ngFor="let item of items" [cartItem]="item" (click)="toggleWillBuy(item)"></app-cart-item>
 
     </div>
 </div>
