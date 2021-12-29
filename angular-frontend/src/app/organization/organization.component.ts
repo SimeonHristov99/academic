@@ -16,6 +16,8 @@ export class OrganizationComponent implements OnInit {
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   options: any;
+  showEditModal: boolean[] = [false, false, false, false, false];
+  showDeleteModal: boolean[] = [false, false, false, false, false];
 
   ngDoCheck(): void {
     console.log('doCheck');
