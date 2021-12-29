@@ -6,24 +6,24 @@
 
 .sidebar-tile {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
 
     width: 200px;
+
+    color: rgba(white, 0.85);
+    font-size: 18px;
+    user-select: none;
 
     padding: 10px;
 
     background: rgba(black, 0.55);
     border-radius: 5px;
 
-    p {
-        padding-left: 10px;
-        font-size: 18px;
+    &:hover {
+        background: rgba(black, 0.68);
+        backdrop-filter: blur(2px);
     }
-}
-
-.sidebar-tile li {
-    color: rgba(white, 0.85);
 }
 
 .sidebar-tile img {
