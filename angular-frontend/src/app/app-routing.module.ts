@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { AdminComponent } from './admin/admin.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { CartComponent } from './cart/cart.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
@@ -21,6 +22,8 @@ const routes: Routes = [
   
   { path: 'organization', component: OrganizationComponent },
   { path: 'organization/add-course', component: AddCourseComponent },
+
+  { path: 'try_to_guess_who_is_here/admin', component: AdminComponent },
 
   { path: 'register', component: AddUserComponent },
 ];
