@@ -1,5 +1,5 @@
 .wrapper {
-    height: 80%;
+    height: 95%;
     width: 120%;
     overflow-y: auto;
 }
@@ -22,23 +22,22 @@
 }
 
 .course-button, .add-course-button {
+    background: rgba(black, 0.55);
     display: inline-block;
     outline: 0;
     cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
-    background: #FFF;
+    border-radius: 10px;
     border: 1px solid #D5D9D9;
     font-size: 12px;
     height: 30px;
     padding: 0 11px;
     text-align: center;
     font-weight: 400;
-    color: #0F1111;
+    color: white;
     margin: 3px;
     :hover{
-        background-color: #F7FAFA;
-        border-color: #D5D9D9;
+        opacity: 1;
+        transform: scale(1.1);
     }
     margin-left: 10px;
 }

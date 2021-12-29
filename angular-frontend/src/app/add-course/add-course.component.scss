@@ -20,25 +20,24 @@
 }
 
 button {
+    background: rgba(black, 0.55);
     padding: 5px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 12px;
     display: inline-block;
     outline: 0;
     cursor: pointer;
-    border-radius: 8px;
     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
-    background: #FFF;
     border: 1px solid #D5D9D9;
     height: 30px;
     padding: 0 11px;
     text-align: center;
     font-weight: 400;
-    color: #0F1111;
+    color: white;
     margin: 3px;
     :hover{
-        background-color: #F7FAFA;
-        border-color: #D5D9D9;
+        opacity: 1;
+        transform: scale(1.1);
     }
 }
 
