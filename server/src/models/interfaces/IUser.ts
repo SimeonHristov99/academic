@@ -1,4 +1,4 @@
-import IComment from './IComment';
+import IComment from './INote';
 import ICourse from './ICourse';
 
 interface IUser {

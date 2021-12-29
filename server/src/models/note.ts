@@ -1,16 +1,16 @@
 import { Decimal128 } from 'mongodb';
 import { Schema, model, Types, Document, Model } from 'mongoose';
-import IComment from './interfaces/IComment';
+import INote from './interfaces/INote';
 
-export interface CommentDocument extends IComment, Document {
+export interface NoteDocument extends INote, Document {
   _id: string
 }
 
-export interface CommentModel extends Model<CommentDocument> {
+export interface NoteModel extends Model<NoteDocument> {
 
 }
 
-const commentSchema = new Schema<CommentDocument, CommentModel>({
+const NoteSchema = new Schema<NoteDocument, NoteModel>({
     createdBy: {
       type: Types.ObjectId,
       requeired: true,
@@ -32,4 +32,4 @@ const commentSchema = new Schema<CommentDocument, CommentModel>({
   }
 );
 
-export const Comment = model<CommentDocument>('Comment', commentSchema);
+export const Note = model<NoteDocument>('Note', NoteSchema);

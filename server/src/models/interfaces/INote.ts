@@ -1,4 +1,4 @@
-interface IComment {
+interface INote {
   _id: String,
   createdBy: String,
   title: String,
@@ -6,4 +6,4 @@ interface IComment {
   createdAt?: Number,
 }
 
-export default IComment;
+export default INote;
