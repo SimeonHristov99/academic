@@ -23,7 +23,7 @@
 button {
     padding: 5px;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 12px;
     font-family: 'Courier New', Courier, monospace;
     display: inline-block;
     outline: 0;
@@ -42,4 +42,9 @@ button {
         background-color: #F7FAFA;
         border-color: #D5D9D9;
     }
+}
+
+.material-icons-outlined {
+    font-size: 12px;
+    margin-right: 8px;
 }
