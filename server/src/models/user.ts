@@ -11,25 +11,27 @@ export interface UserModel extends Model<UserDocument, UserModel> {
 
 const userSchema = new Schema<IUser>({
     email: {
-        type: String,
-        requeired: true,
+      type: String,
+      requeired: true,
     },
     firstname: {
-        type: String,
-        requeired: true,
+      type: String,
     },
     lastname: {
-        type: String,
-        requeired: true,
+      type: String,
     },
     password: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     birthDate: {
-        type: Date,
-        required: true,
+      type: Date,
     },
+    type: {
+      type: String,
+      required: true,
+    },
+    comment: [{type: Schema.Types.ObjectId, ref: 'Comment' }],
     courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
     certificates: [{ type: Schema.Types.ObjectId, ref: 'Certificate' }],
   },
