@@ -24,6 +24,7 @@ import { EditNoteComponent } from './edit-note/edit-note.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
 import { AdminComponent } from './admin/admin.component';
+import { StudentDetailsComponent } from './student-details/student-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminComponent } from './admin/admin.component';
     CartItemComponent,
     SidebarInfoComponent,
     AdminComponent,
+    StudentDetailsComponent,
   ],
   imports: [
     BrowserModule,
