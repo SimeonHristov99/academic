@@ -5,6 +5,12 @@
     <h2> {{ this.context }} </h2>
   </div>
 
+  <button class="home-button" routerLink="/" *ngIf="router.url !== '/'">
+    <div class="button-label-wrapper">
+      <i class="material-icons-outlined">home</i><span class="home-label">Home</span>
+    </div>
+  </button>
+
   <div class="content-section" [@routeAnim]="prepareRoute(outlet)">
     <router-outlet (activate)="updateGreeting($event);" #outlet="outlet"></router-outlet>
   </div>

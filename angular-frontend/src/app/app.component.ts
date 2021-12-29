@@ -1,6 +1,6 @@
 import { animate, query, style, transition, trigger, group } from '@angular/animations';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 export interface Greeting {
   header: string,
@@ -104,6 +104,9 @@ export class AppComponent {
 
   defaultHeader: string = 'Welcome to Academic';
   defaultContext: string = 'Create an account or log in to access out courses';
+
+  constructor(public router: Router) {
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) return outlet.activatedRouteData['tab'];
