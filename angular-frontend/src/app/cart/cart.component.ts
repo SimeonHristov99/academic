@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Greeting } from '../app.component';
 import { CartItem } from '../shared/cart.model';
@@ -6,7 +7,18 @@ import { CartService } from '../shared/cart.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  animations: [
+    trigger('cartItemAnim', [
+      transition(':leave', [
+        animate(200, style({
+          opacity: 0,
+          height: 0,
+          marginBottom: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class CartComponent implements OnInit {
 

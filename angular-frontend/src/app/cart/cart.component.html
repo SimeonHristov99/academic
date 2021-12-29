@@ -9,6 +9,7 @@
         <div class="cart-items-container">
 
             <app-cart-item
+                @cartItemAnim
                 *ngFor="let item of items"
                 [cartItem]="item"
                 (click)="toggleWillBuy(item)"
