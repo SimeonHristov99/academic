@@ -29,6 +29,10 @@ h2.is-bold {
     margin-bottom: 25px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .container {
     display: flex;
     justify-content: right;
@@ -67,6 +71,7 @@ h2.is-bold {
 
 .btns-container {
     display: flex;
+    gap: 12px;    
     margin-top: 20px;
 
     &.btns-centered {
