@@ -14,12 +14,34 @@
                 </div>
                 <div class="grid-item">
                     <div class="button-container">
-                        <button class="course-button" (click)="editCourse(i)">Details</button>
+                        <button class="course-button">Details</button>
                         <br>
-                        <button class="course-button" (click)="editCourse(i)">Edit</button>
+                        <button class="course-button" (click)="showEditModal[i] = true">Edit</button>
                         <br>
-                        <button class="course-button" (click)="deleteCourse(i)">Delete</button>
+                        <button class="course-button" (click)="showDeleteModal[i] = true">Delete</button>
                     </div>
+                </div>
+            </div>
+            <div id="myModal" class="modal" role="dialog" *ngIf="showEditModal[i] === true">
+                <div class="modal-content">
+                    <h4 class="modal-header">Editing course {{i}}...</h4>
+                    <div class="title-modal">
+                        <div class="grid-container">
+                            <div class="grid-item">Title: <input /></div>
+                            <div class="grid-item">Price: <input /></div>
+                            <div class="grid-item">Description: <input /></div>
+                            <div class="grid-item">Duration: <input /></div>
+                        </div>
+                    </div>
+                    <button class="course-button" (click)="showEditModal[i] = false && editCourse(i)">Submit changes</button>
+                    <button class="course-button" (click)="showEditModal[i] = false">Cancel</button>
+                </div>
+            </div>
+            <div id="myModal" class="modal" role="dialog" *ngIf="showDeleteModal[i] === true">
+                <div class="modal-content">
+                    <h4 class="modal-header">You are deleting course {{i}}. Are you sure?</h4>
+                    <button class="course-button" (click)="showDeleteModal[i] = false && deleteCourse(i)">Delete course</button>
+                    <button class="course-button" (click)="showDeleteModal[i] = false">Cancel</button>
                 </div>
             </div>
         </div>
