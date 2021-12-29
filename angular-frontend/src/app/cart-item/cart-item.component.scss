@@ -1,9 +1,10 @@
 .cart-item {
+    position: relative;
+
     display: flex;
     align-items: center;
 
     width: 1000px;
-
 
     background-color: rgba(black, 0.5);
     border-radius: 25px;
@@ -62,4 +63,59 @@
 .cart-item-text,
 .check-box {
     transition: 0.2s;
+}
+
+.item-edit-actions {
+    position: absolute;
+    right: 5px;
+
+    background: rgba(72, 72, 72, 0.85);
+    backdrop-filter: blur(2px);
+
+    box-shadow: 0px 4px 12px rgba(black, 0.2);
+
+    border-radius: 20px;
+
+    transition: 0.2s;
+    transform: scale(0.8);
+
+    // hide by default
+    visibility: hidden;
+    opacity: 0;
+}
+
+.item-edit-action-btn {
+    background: transparent;
+
+    padding: 10px;
+
+    border-radius: inherit;
+
+    &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-left: 14px;
+    }
+
+    &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding-right: 14px;
+    }
+
+    &:hover {
+        background: rgb(50, 50, 53);
+    }
+}
+
+.item-edit-action-btn i {
+    font-size: 20px;
+}
+
+.cart-item:hover .item-edit-actions {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+
+    transition-delay: 0.5s;
 }
