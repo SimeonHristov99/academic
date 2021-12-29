@@ -5,8 +5,8 @@
 
     <p class="cart-item-text"> {{ cartItem.text }} </p>
 
-    <div class="item-edit-actions">
-        <div class="btn item-edit-action-btn">
+    <div class="item-edit-actions" (click)="$event.stopPropagation()">
+        <div class="btn item-edit-action-btn" (click)="onDeleteClick()">
             <i class="material-icons">delete</i>
         </div>
     </div>

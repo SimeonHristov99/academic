@@ -1,6 +1,6 @@
 <div class="cart-wrapper">
 
-    <div class="container">
+    <div class="container" *ngIf="this.items.length > 0; else elseBlock">
 
         <div class="filters-container">
             <app-sidebar-info></app-sidebar-info>
@@ -8,10 +8,19 @@
 
         <div class="cart-items-container">
 
-            <app-cart-item *ngFor="let item of items" [cartItem]="item" (click)="toggleWillBuy(item)"></app-cart-item>
+            <app-cart-item
+                *ngFor="let item of items"
+                [cartItem]="item"
+                (click)="toggleWillBuy(item)"
+                (deleteClick)="onDeleteClick(item)">
+            </app-cart-item>
 
         </div>
 
     </div>
+
+    <ng-template #elseBlock>
+        <p>Nothing in cart</p>
+    </ng-template>
 
 </div>

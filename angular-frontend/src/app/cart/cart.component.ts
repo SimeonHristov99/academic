@@ -35,4 +35,8 @@ export class CartComponent implements OnInit {
     this.cartService.updateItem(item.id, { willBuy: !item.willBuy })
   }
 
+  onDeleteClick(item: CartItem) {
+    this.cartService.deleteItem(item.id)
+  }
+
 }
