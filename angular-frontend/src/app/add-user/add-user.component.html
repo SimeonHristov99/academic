@@ -1,17 +1,20 @@
 <div class="title">
     <div class="grid-container">
-        <div class="grid-item">Name: <input /></div>
+        <div class="grid-item">Email: <input type="email"/></div>
+        <div class="grid-item">First Name: <input /></div>
+        <div class="grid-item">Last Name: <input /></div>
+        <div class="grid-item">Birthday: <input type="date"/></div>
         <div class="grid-item"> I am:
             <select name="register" [(ngModel)]="register">
                 <option value="organization" >Organization</option>
                 <option value="user">User</option>
             </select>
         </div>
-        <div class="grid-item" *ngIf="register === 'user'">Promoted by: <input /></div>
+        <div class="grid-item" *ngIf="register === 'user'">Code: <input/></div>
     </div>
 </div>
 
 <div class="btns-container">
-    <button type="button" class="btn" routerLink="/">Go back</button>
-    <button type="button" class="btn align-end" routerLink="/">Create new account</button>
+    <button type="button" class="btn" routerLink="/"><i class="material-icons-outlined">arrow_back_ios</i>Go back</button>
+    <button type="button" class="btn align-end" routerLink="/"><i class="material-icons-outlined">add</i>Create new account</button>
 </div>
