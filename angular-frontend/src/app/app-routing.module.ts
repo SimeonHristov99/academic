@@ -10,6 +10,7 @@ import { EditNoteComponent } from './edit-note/edit-note.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { NotesComponent } from './notes/notes.component';
 import { OrganizationComponent } from './organization/organization.component';
+import { StudentDetailsComponent } from './student-details/student-details.component';
 
 const routes: Routes = [
   { path: '', component: InitialPageComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   
   { path: 'organization', component: OrganizationComponent },
   { path: 'organization/add-course', component: AddCourseComponent },
+  { path: 'organization/course/students', component: StudentDetailsComponent },
 
   { path: 'try_to_guess_who_is_here/admin', component: AdminComponent },
 
