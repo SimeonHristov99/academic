@@ -38,7 +38,7 @@ export default class UserController {
         firstname: user.firstname,
         lastname: user.lastname,
         birthDate: user.birthDate,
-        type: user.type,
+        role: user.role,
       });
 
       await newUser.save();

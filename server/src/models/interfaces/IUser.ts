@@ -8,7 +8,7 @@ interface IUser {
   lastname: String,
   password: String,
   birthDate: Date,
-  type: String,
+  role: String,
   comment?: Set<IComment>,
   courses?: Set<ICourse>,
   certificates?: Set<ICourse>,
