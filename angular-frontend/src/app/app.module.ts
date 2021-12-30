@@ -25,6 +25,7 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { StudentDetailsComponent } from './components/student-details/student-de
     NgxEchartsModule.forRoot({
       echarts
     }),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

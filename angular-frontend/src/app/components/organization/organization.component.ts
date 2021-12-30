@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Course } from 'src/app/models/Course';
 import { CourseService } from 'src/app/services/course.service';
@@ -18,12 +19,20 @@ export class OrganizationComponent implements OnInit {
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   options: any = [];
-  showEditModal: boolean[] = [false, false, false, false, false];
-  showDeleteModal: boolean[] = [false, false, false, false, false];
+  showEditModal: boolean[] = [];
+  showDeleteModal: boolean[] = [];
 
   courses: Course[] = [];
 
-  constructor(private courseService: CourseService) {
+  updateCourseBody: Course = {
+    title: '',
+    description: '',
+    price: 1.0,
+    raiting: 0.0,
+    duration: 1
+  };
+
+  constructor(private courseService: CourseService, private http: HttpClient) {
 
   }
 
@@ -34,6 +43,7 @@ export class OrganizationComponent implements OnInit {
   ngOnInit() {
     this.headerData.emit(this.greeting);
     this.getCourseList();
+    this.closeModals();
   }
 
   getCourseList(): void {
@@ -134,8 +144,15 @@ export class OrganizationComponent implements OnInit {
     }
   }
 
+  closeModals(): void {
+    for(let i = 0; i < this.courses.length; i++){
+      this.showEditModal[i] = false;
+      this.showDeleteModal[i] = false;
+    }
+  }
+
   editCourse(id: any): void {
-    console.log("Course: " + id + " editing");
+    console.log(JSON.stringify(this.updateCourseBody));
   }
 
   deleteCourse(id: any): void {

@@ -10,7 +10,7 @@ export class CourseService {
 
   constructor() { }
 
-  getStudentsListByCourseTitle(): User[] {
+  getStudentListByCourse(): User[] {
     return [{
       email: 'ivan@gmail.com',
       firstname: 'Ivan',
@@ -20,6 +20,16 @@ export class CourseService {
       email: 'dimitar@gmail.com',
       firstname: 'Dimitar',
       lastname: 'Dimitrov'
+    },
+    {
+      email: 'kaloyan@gmail.com',
+      firstname: 'Kaloyan',
+      lastname: 'Kaloyanov'
+    },
+    {
+      email: 'petar@gmail.com',
+      firstname: 'Petar',
+      lastname: 'Petrov'
     }
   ];
   }
@@ -43,8 +53,8 @@ export class CourseService {
       duration: 10
     },
     {
-      title: 'AI',
-      description: 'AI Advanced',
+      title: 'Algorithms',
+      description: 'Algorithms Advanced',
       price: 24.90,
       raiting: 8.9,
       duration: 15
