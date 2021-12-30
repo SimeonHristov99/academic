@@ -14,7 +14,7 @@ export class AddUserComponent implements OnInit {
     lastname: '',
     password: '',
     birthDate: undefined,
-    type: ''
+    role: ''
   };
 
   constructor() { }
@@ -23,7 +23,7 @@ export class AddUserComponent implements OnInit {
   }
 
   register() {
-    if(this.userBody.type === 'organization'){
+    if (this.userBody.role === 'organization') {
       this.userBody.lastname = this.userBody.firstname;
     }
     console.log(this.userBody);
