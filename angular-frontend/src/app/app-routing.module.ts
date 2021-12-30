@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddCourseComponent } from './add-course/add-course.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 import { AddNoteComponent } from './add-note/add-note.component';
-import { AddUserComponent } from './add-user/add-user.component';
-import { AdminComponent } from './admin/admin.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { CartComponent } from './cart/cart.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { NotesComponent } from './notes/notes.component';
-import { OrganizationComponent } from './organization/organization.component';
-import { StudentDetailsComponent } from './student-details/student-details.component';
+import { OrganizationComponent } from './components/organization/organization.component';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 const routes: Routes = [
   { path: '', component: InitialPageComponent },

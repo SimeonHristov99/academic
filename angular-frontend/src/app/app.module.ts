@@ -11,20 +11,20 @@ import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { NotesComponent } from './notes/notes.component';
 import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
-import { OrganizationComponent } from './organization/organization.component';
+import { OrganizationComponent } from './components/organization/organization.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
-import { AddCourseComponent } from './add-course/add-course.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { CartComponent } from './cart/cart.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { NoteCardComponent } from './note-card/note-card.component';
-import { AddUserComponent } from './add-user/add-user.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
-import { AdminComponent } from './admin/admin.component';
-import { StudentDetailsComponent } from './student-details/student-details.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 @NgModule({
   declarations: [

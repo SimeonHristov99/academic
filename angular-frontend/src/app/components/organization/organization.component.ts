@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Greeting } from '../app.component';
+import { Greeting } from '../../app.component';
 
 @Component({
   selector: 'app-organization',
