@@ -1,0 +1,61 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Course } from '../models/Course';
+import { User } from '../models/User';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CourseService {
+
+  constructor() { }
+
+  getStudentsListByCourseTitle(): User[] {
+    return [{
+      email: 'ivan@gmail.com',
+      firstname: 'Ivan',
+      lastname: 'Ivanov'
+    },
+    {
+      email: 'dimitar@gmail.com',
+      firstname: 'Dimitar',
+      lastname: 'Dimitrov'
+    }
+  ];
+  }
+
+  getCourse(): Course {
+    return {
+      title: 'AI',
+      description: 'AI Advanced',
+      price: 24.90,
+      raiting: 8.9,
+      duration: 15
+    };
+  }
+
+  getCourseList(): Course[] {
+    return [{
+      title: 'AI',
+      description: 'AI Basics',
+      price: 15.75,
+      raiting: 9.0,
+      duration: 10
+    },
+    {
+      title: 'AI',
+      description: 'AI Advanced',
+      price: 24.90,
+      raiting: 8.9,
+      duration: 15
+    },
+    {
+      title: 'OOP',
+      description: 'Everything you have to know',
+      price: 7.90,
+      raiting: 7.1,
+      duration: 4
+    },
+    ];
+  }
+}

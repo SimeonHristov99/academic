@@ -12,7 +12,7 @@ export class AddCourseComponent implements OnInit {
     title: '',
     description: '',
     price: 10.0,
-    raiting: undefined,
+    raiting: 0.0,
     duration: 3
   }
 
