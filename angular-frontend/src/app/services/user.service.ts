@@ -15,4 +15,27 @@ export class UserService {
       lastname: 'Ivanov'
     };
   }
+
+  getUserList(): User[] {
+    return [{
+      email: 'ivan@gmail.com',
+      firstname: 'Ivan',
+      lastname: 'Ivanov'
+    },
+    {
+      email: 'dimitar@gmail.com',
+      firstname: 'Dimitar',
+      lastname: 'Dimitrov'
+    },
+    {
+      email: 'kaloyan@gmail.com',
+      firstname: 'Kaloyan',
+      lastname: 'Kaloyanov'
+    },
+    {
+      email: 'petar@gmail.com',
+      firstname: 'Petar',
+      lastname: 'Petrov'
+    }];
+  }
 }

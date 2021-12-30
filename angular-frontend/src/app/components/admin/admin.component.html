@@ -1,10 +1,9 @@
 <div class="wrapper">
     <div class="title">
         <ul>
-            <li *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-                <input type="radio" id="i" name="users" value="i">
-                <label>User {{i}}: Firstname Lastname</label>
-                <button>
+            <li *ngFor="let user of users; let i=index">
+                <label>{{user.email}}</label>
+                <button (click)="deleteUser(i)">
                     <i class="material-icons-outlined">delete</i>
                 </button>
             </li>
