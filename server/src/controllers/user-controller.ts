@@ -67,22 +67,18 @@ export default class UserController {
       const user = await this.findUser(email);
 
       if (user) {
-        bcrypt.compare(
-          password,
-          user.password,
-          (error: Error, result: boolean) => {
-            if (error) {
-              res.status(400).json({ success: false, error: error });
-            }
-
-            if (result) {
-              generateToken(res, email);
-              res.status(200).json({ success: true });
-            } else {
-              res.status(401).json({ success: false, error: 'Invalid password' });
-            }
+        bcrypt.compare(password, user.password, (error: Error, result: boolean) => {
+          if (error) {
+            res.status(400).json({ success: false, error: error });
           }
-        );
+
+          if (result) {
+            generateToken(res, email);
+            res.status(200).json({ success: true });
+          } else {
+            res.status(401).json({ success: false, error: 'Invalid password' });
+          }
+        });
       } else {
         res.status(401).json({ success: false, error: 'Invalid email' });
       }
