@@ -11,10 +11,10 @@ export class AddCourseComponent implements OnInit {
   courseBody: Course = {
     title: '',
     description: '',
-    price: 10.0,
+    price: 1.0,
     raiting: 0.0,
-    duration: 3
-  }
+    duration: 1
+  };
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class AddCourseComponent implements OnInit {
   }
 
   addCourse() {
-    console.log(this.courseBody);
+    console.log(JSON.stringify(this.courseBody));
   }
 
 }

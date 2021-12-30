@@ -23,7 +23,7 @@ const routes: Routes = [
   
   { path: 'organization', component: OrganizationComponent },
   { path: 'organization/add-course', component: AddCourseComponent },
-  { path: 'organization/course/students', component: StudentDetailsComponent },
+  { path: 'organization/course/:courseId/students', component: StudentDetailsComponent },
 
   { path: 'try_to_guess_who_is_here/admin', component: AdminComponent },
 

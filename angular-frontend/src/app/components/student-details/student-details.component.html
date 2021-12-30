@@ -1,8 +1,8 @@
 <div class="title">
     <div class="grid-container">
-        <div *ngFor="let i of [1,2,3,4,5]" class="grid-item">
-            <div>Student {{i}}</div>
-            <div>Work</div>
+        <div *ngFor="let student of students; let i=index" class="grid-item">
+            <div>{{student.firstname}} {{student.lastname}}</div>
+            <div>Download work</div>
             <div>Certificate</div>
         </div>
     </div>
