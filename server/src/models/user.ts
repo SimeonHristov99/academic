@@ -10,29 +10,33 @@ export interface UserModel extends Model<UserDocument, UserModel> {
 }
 
 const userSchema = new Schema<IUser>({
-    email: {
-        type: String,
-        requeired: true,
-    },
-    firstname: {
-        type: String,
-        requeired: true,
-    },
-    lastname: {
-        type: String,
-        requeired: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    birthDate: {
-        type: Date,
-        required: true,
-    },
-    courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
-    certificates: [{ type: Schema.Types.ObjectId, ref: 'Certificate' }],
+  email: {
+    type: String,
+    requeired: true,
   },
+  firstname: {
+    type: String,
+  },
+  lastname: {
+    type: String,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  birthDate: {
+    type: Date,
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'organisation'],
+    default: 'user',
+    required: true,
+  },
+  comment: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
+  certificates: [{ type: Schema.Types.ObjectId, ref: 'Certificate' }],
+},
   {
     timestamps: {
       createdAt: true,

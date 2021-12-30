@@ -1,3 +1,4 @@
+import IComment from './INote';
 import ICourse from './ICourse';
 
 interface IUser {
@@ -7,6 +8,8 @@ interface IUser {
   lastname: String,
   password: String,
   birthDate: Date,
+  role: String,
+  comment?: Set<IComment>,
   courses?: Set<ICourse>,
   certificates?: Set<ICourse>,
   createdAt?: Number,
