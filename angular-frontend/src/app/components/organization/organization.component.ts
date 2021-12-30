@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Course } from 'src/app/models/Course';
+import { CourseService } from 'src/app/services/course.service';
 import { Greeting } from '../../app.component';
 
 @Component({
@@ -15,9 +17,15 @@ export class OrganizationComponent implements OnInit {
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
-  options: any;
+  options: any = [];
   showEditModal: boolean[] = [false, false, false, false, false];
   showDeleteModal: boolean[] = [false, false, false, false, false];
+
+  courses: Course[] = [];
+
+  constructor(private courseService: CourseService) {
+
+  }
 
   ngDoCheck(): void {
     console.log('doCheck');
@@ -25,80 +33,112 @@ export class OrganizationComponent implements OnInit {
 
   ngOnInit() {
     this.headerData.emit(this.greeting);
-
-    const data1 = [];
-    const data2 = [];
-
-    data1.push(6.0);
-    data2.push(7.5);
-
-    data1.push(10.0);
-    data2.push(8.5);
-
-    data1.push(50);
-    data2.push(30);
-    
-    this.options = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow'
-        }
-      },
-      legend: {
-        data: ['Current', 'Average'],
-        textStyle: {
-          color: 'white'
-        }
-      },
-      xAxis: [{
-        type: 'category',
-        axisTick: { show: false },
-        data: ['Rating', 'Price', 'People'],
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: 'white'
-          }
-        },
-      }],
-      yAxis: [{
-        type: 'value',
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: 'white'
-          }
-        }
-      }],
-      series: [
-        {
-          name: 'Current',
-          type: 'bar',
-          barGap: 0,
-          emphasis: {
-            focus: 'series'
-          },
-          data: data1
-        },
-        {
-          name: 'Average',
-          type: 'bar',
-          barGap: 0,
-          emphasis: {
-            focus: 'series'
-          },
-          data: data2
-        }
-      ]
-    };
+    this.getCourseList();
   }
 
-  editCourse(id: any) : void {
+  getCourseList(): void {
+    this.courses = this.courseService.getCourseList();
+    this.buildGraphics();
+    console.log(this.courses);
+  }
+
+  getAverage(): number[] {
+    let i = 0, raiting = 0, people = 0, price = 0;
+    let result: number[] = [];
+
+    for(i = 0; i < this.courses.length; i++){
+      raiting = raiting + this.courses[i].raiting;
+      price = price + this.courses[i].price;
+    }
+
+    result[0] = raiting / i;
+    result[1] = price / i;
+
+    return result;
+  }
+
+  buildGraphics(): void {
+    const data1: number[][] = [[]];
+    const data2: number[][] = [[]];
+    const average_val = this.getAverage();
+
+    data1.push([]);
+    data1.push([]);
+
+    data2.push([]);
+    data2.push([]);
+
+    for(let i = 0; i < this.courses.length; i++){
+      data1[i][0] = this.courses[i].raiting;
+      data1[i][1] = this.courses[i].price;
+      data1[i][2] = 50;
+
+      data2[i][0] = average_val[0];
+      data2[i][1] = average_val[1];
+      data2[i][2] = 30;
+
+      this.options[i] = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['Current', 'Average'],
+          textStyle: {
+            color: 'white'
+          }
+        },
+        xAxis: [{
+          type: 'category',
+          axisTick: { show: false },
+          data: ['Rating', 'Price', 'People'],
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: 'white'
+            }
+          },
+        }],
+        yAxis: [{
+          type: 'value',
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: 'white'
+            }
+          }
+        }],
+        series: [
+          {
+            name: 'Current',
+            type: 'bar',
+            barGap: 0,
+            emphasis: {
+              focus: 'series'
+            },
+            data: data1[i]
+          },
+          {
+            name: 'Average',
+            type: 'bar',
+            barGap: 0,
+            emphasis: {
+              focus: 'series'
+            },
+            data: data2[i]
+          }
+        ]
+      }
+    }
+  }
+
+  editCourse(id: any): void {
     console.log("Course: " + id + " editing");
   }
 
-  deleteCourse(id: any) : void {
+  deleteCourse(id: any): void {
     console.log("Course: " + id + " deleting");
   }
 
