@@ -8,11 +8,11 @@ import generateToken from './generate-token';
 export default class UserController {
   construct() { }
 
-  public async findUser(email: string): Promise<UserDocument> {
+  findUser = async (email: string): Promise<UserDocument> => {
     return User.findOne({ email: email }).exec();
   }
 
-  public validateUser(user: IUser): string[] {
+  validateUser = (user: IUser): string[] => {
     const errors: string[] = [];
 
     if (!user.email) {
@@ -26,7 +26,7 @@ export default class UserController {
     return errors;
   }
 
-  public async createUser(user: IUser): Promise<void> {
+  createUser = async (user: IUser): Promise<void> => {
     bcrypt.hash(user.password, 10, async (error: Error, hash: string) => {
       if (error) {
         return error;
@@ -45,7 +45,7 @@ export default class UserController {
     });
   };
 
-  public async register(req: Request, res: Response, next: () => void) {
+  register = async (req: Request, res: Response, next: () => void) => {
     const userExist: IUser = await this.findUser(req.body.email);
 
     if (userExist) {
@@ -58,9 +58,9 @@ export default class UserController {
       generateToken(res, req.body.email);
       res.status(200).json({ success: true, message: 'User created' });
     }
-  }
+  };
 
-  public async login(req: Request, res: Response, next: () => void) {
+  login = async (req: Request, res: Response, next: () => void) => {
     const { email, password } = req.body;
 
     try {
@@ -86,5 +86,5 @@ export default class UserController {
       console.log(error);
       res.status(401).json({ success: false, error: 'Invalid email' });
     }
-  }
+  };
 }

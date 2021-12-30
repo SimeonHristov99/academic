@@ -1,4 +1,3 @@
-
 import { Request, Response } from 'express';
 import UserController from '../controllers/user-controller';
 import IUser from '../models/interfaces/IUser';
