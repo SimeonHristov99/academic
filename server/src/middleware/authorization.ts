@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { User } from '../models/user';
 
-const verifyAuth = (req: Request, res: Response, next: () => void): void => {
+const authorization = (req: Request, res: Response, next: () => void): void => {
   const token = req.cookies.auth;
 
   if (token) {
@@ -16,7 +16,7 @@ const verifyAuth = (req: Request, res: Response, next: () => void): void => {
           res.locals.user = user;
           next();
         } else {
-          res.status(404).json({ success: false, message: 'Invalid user' });
+          res.status(404).json({ success: false, message: 'Invalid token' });
         }
       }).catch(error => {
         res.status(500).json({ success: false });
@@ -27,4 +27,4 @@ const verifyAuth = (req: Request, res: Response, next: () => void): void => {
   }
 };
 
-export default verifyAuth;
+export default authorization;
