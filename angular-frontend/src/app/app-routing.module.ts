@@ -11,11 +11,13 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
 import { NotesComponent } from './notes/notes.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
+import { SeeCourseComponent } from './components/see-course/see-course.component';
 
 const routes: Routes = [
   { path: '', component: InitialPageComponent },
   
   { path: 'user/courses', component: CoursesComponent, data: {'tab': 0} },
+  { path: 'user/courses/:id', component: SeeCourseComponent },
   { path: 'user/cart', component: CartComponent, data: {'tab': 1} },
   { path: 'user/notes', component: NotesComponent, data: {'tab': 2} },
   { path: 'user/notes/add', component: AddNoteComponent },

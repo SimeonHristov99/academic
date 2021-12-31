@@ -11,11 +11,23 @@ export class CourseService {
   constructor() {
     this.courses = [
       new Course('AI For Everyone',
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
-                'DeepLearningAI.com',
-                'Beginner',
-                'https://www.youtube.com/watch?v=NWONeJKn6kc',
-                700, 5, 5)
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+        'DeepLearningAI.com',
+        'Beginner',
+        'https://www.youtube.com/watch?v=NWONeJKn6kc',
+        700, 5, 5),
+      new Course('AI For Everyone',
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+        'DeepLearningAI.com',
+        'Beginner',
+        'https://www.youtube.com/watch?v=NWONeJKn6kc',
+        700, 5, 5),
+      new Course('AI For Everyone',
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+        'DeepLearningAI.com',
+        'Beginner',
+        'https://www.youtube.com/watch?v=NWONeJKn6kc',
+        700, 5, 5)
     ]
   }
 
@@ -31,14 +43,14 @@ export class CourseService {
     this.courses.push(course)
   }
 
-  updateCourse(id: string, updatedFields: Partial<Course>){
+  updateCourse(id: string, updatedFields: Partial<Course>) {
     const course = this.getCourse(id)
     Object.assign(course, updatedFields)
   }
 
   deleteCourse(id: string) {
     const courseIdx = this.courses.findIndex(c => c.id === id)
-    if(courseIdx == -1) return
-    this.courses.splice(courseIdx, 1)    
+    if (courseIdx == -1) return
+    this.courses.splice(courseIdx, 1)
   }
 }
