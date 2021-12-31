@@ -6,8 +6,9 @@ const roleValidator = (role: string) => {
 
     if (user.role === role) {
       next();
+    } else {
+      res.status(403).json({ success: false, message: 'Unauthorized' });
     }
-    res.status(403).json({ success: false, message: 'Unauthorized' });
   };
 }
 

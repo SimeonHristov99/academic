@@ -101,7 +101,7 @@ export default class UserController {
 
       if (user) {
         user.remove((err: Error, _) => {
-          if (!err) {
+          if (err) {
             console.log(err);
             res.status(401).json({ success: false, error: err });
           }
