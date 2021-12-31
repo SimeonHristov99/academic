@@ -13,6 +13,6 @@ user.post('/login', validateUser, userController.login);
 
 user.post('/logout', authorization, userController.logout);
 
-user.delete('/delete', authorization, roleValidator('admin'), userController.deleteUser);
+user.delete('/delete', authorization, roleValidator(['admin']), userController.deleteUser);
 
 export default user;
