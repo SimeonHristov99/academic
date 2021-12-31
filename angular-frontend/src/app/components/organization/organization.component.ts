@@ -57,7 +57,7 @@ export class OrganizationComponent implements OnInit {
     let result: number[] = [];
 
     for(i = 0; i < this.courses.length; i++){
-      raiting = raiting + this.courses[i].raiting;
+      raiting = raiting + this.courses[i].rating;
       price = price + this.courses[i].price;
     }
 
@@ -79,7 +79,7 @@ export class OrganizationComponent implements OnInit {
     data2.push([]);
 
     for(let i = 0; i < this.courses.length; i++){
-      data1[i][0] = this.courses[i].raiting;
+      data1[i][0] = this.courses[i].rating;
       data1[i][1] = this.courses[i].price;
       data1[i][2] = 50;
 
