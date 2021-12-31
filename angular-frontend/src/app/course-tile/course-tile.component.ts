@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Course } from '../shared/course.model';
 
 @Component({
   selector: 'app-course-tile',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseTileComponent implements OnInit {
 
-  constructor() { }
+  @Input() course: Course
+
+  constructor() {
+    this.course = new Course('NA', 'NA', 'Google', 'Beginner', 'https://www.google.com/', -1, -1, -1)
+  }
 
   ngOnInit(): void {
   }

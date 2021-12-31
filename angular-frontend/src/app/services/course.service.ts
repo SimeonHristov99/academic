@@ -10,7 +10,12 @@ export class CourseService {
 
   constructor() {
     this.courses = [
-      new Course('AI', 'AI descrption', 'https://www.youtube.com/watch?v=NWONeJKn6kc', 700, 5, 5)
+      new Course('AI For Everyone',
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+                'DeepLearningAI.com',
+                'Beginner',
+                'https://www.youtube.com/watch?v=NWONeJKn6kc',
+                700, 5, 5)
     ]
   }
 
