@@ -5,8 +5,7 @@
         <div class="grid-item">Description: <textarea [(ngModel)]="courseBody.description"></textarea></div>
         <div class="grid-item">Duration: <input type="number" [(ngModel)]="courseBody.duration"/></div>
         <div class="grid-item">
-            <div *ngFor="let i of [1]">Week {{i}}: <input /></div>
-        </div>
+            <div *ngFor="let item of [].constructor(courseBody.duration); let i = index">Week {{i+1}}: <input /></div>        </div>
     </div>
 </div>
 <button type="button" routerLink="/organization">
