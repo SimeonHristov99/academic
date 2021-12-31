@@ -26,21 +26,22 @@ export class SidebarInfoComponent implements OnInit {
     .Buttons({
       createOrder: (data: any, actions: { order: { create: (arg0: { purchase_units: { description: string; amount: { currency_code: string; value: number; }; }[]; }) => any; }; }) => {
         return actions.order.create({
-          purchase_units: [
-            {
-              description: this.itemsToBuy[0].description.slice(0, 127),
-              amount: {
-                currency_code: 'USD',
-                value: this.itemsToBuy[0].price
-              }
-            }
-          ]
+          purchase_units: this.itemsToBuy.map(i => ({
+            reference_id: i.id,
+            description: i.description.slice(0, 127),
+            amount: {
+              currency_code: 'USD',
+              value: i.price
+            }})
+          )
         })
       },
       onApprove: async (data: any, actions: { order: { capture: () => any; }; }) => {
         const order = await actions.order.capture()
-        this.cartService.deleteItem(this.itemsToBuy[0].id)
+        this.itemsToBuy.map(i => this.cartService.deleteItem(i.id))
+        console.log('Transaction successful!')
         console.log(order)
+        this.itemsToBuy = []
       },
       onError: (err: any) => {
         console.log(err)
