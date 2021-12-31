@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 import UserController from '../controllers/user-controller';
 import validateUser from '../middleware/validate-user';
 import authorization from '../middleware/authorization';
