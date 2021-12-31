@@ -28,7 +28,7 @@ export class SidebarInfoComponent implements OnInit {
         return actions.order.create({
           purchase_units: [
             {
-              description: this.itemsToBuy[0].description,
+              description: this.itemsToBuy[0].description.slice(0, 127),
               amount: {
                 currency_code: 'USD',
                 value: this.itemsToBuy[0].price
