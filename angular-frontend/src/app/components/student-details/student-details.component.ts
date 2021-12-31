@@ -19,7 +19,7 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   getStudentList(): void {
-    this.students = this.courseService.getStudentListByCourse();
+    // this.students = this.courseService.getStudentListByCourse();
   }
 
 }
