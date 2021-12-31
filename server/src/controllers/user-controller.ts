@@ -87,4 +87,31 @@ export default class UserController {
       res.status(401).json({ success: false, error: 'Invalid email' });
     }
   };
+
+  logout = async (req: Request, res: Response) => {
+    res.clearCookie('auth');
+    res.status(200).json({ success: true });
+  };
+
+  deleteUser = async (req: Request, res: Response, next: () => void) => {
+    const email = req.body.email;
+
+    try {
+      const user = await this.findUser(email);
+
+      if (user) {
+        user.remove((err: Error, _) => {
+          if (!err) {
+            console.log(err);
+            res.status(401).json({ success: false, error: err });
+          }
+          res.status(200).json({ success: true });
+        });
+      } else {
+        res.status(401).json({ success: false, error: 'Invalid email' });
+      }
+    } catch (error) {
+      res.status(401).json({ success: false, error: 'Invalid email' });
+    }
+  }
 }
