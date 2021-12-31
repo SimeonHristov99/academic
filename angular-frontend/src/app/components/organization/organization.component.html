@@ -8,7 +8,13 @@
         <div *ngFor="let course of courses; let i=index">
             <div class="grid-container">
                 <div class="grid-item">
-                    <div class="title"></div>
+                    <div class="title">
+                        <div class="headers">
+                            <h2>{{course.title}}</h2>
+                            <h4>{{course.description}}</h4>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="grid-item">
                     <div class="chart-container">

@@ -58,7 +58,8 @@
 
 .title {
     display: flex;
-    background: rgba(black, 0.55);
+    background-image: url(course.png);
+    background-size: cover;
     border-radius: 5px;
     width: 500px;
     height: 250px;
@@ -67,11 +68,19 @@
     &:hover {
         background: rgba(black, 0.68);
         backdrop-filter: blur(2px);
+        .headers {
+            color: white;
+            margin: 18%;
+        }
     }
     &:active {
         background: rgba(black, 0.75);
         transform: translateY(2px);
         transition-duration: 0s;  
+    }
+    .headers {
+        color: black;
+        margin: 18%;
     }
 }
 

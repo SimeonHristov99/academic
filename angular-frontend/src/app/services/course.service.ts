@@ -36,7 +36,7 @@ export class CourseService {
 
   getCourse(): Course {
     return {
-      title: 'AI',
+      title: 'Artificial Intelligence',
       description: 'AI Advanced',
       price: 24.90,
       raiting: 8.9,
@@ -46,21 +46,21 @@ export class CourseService {
 
   getCourseList(): Course[] {
     return [{
-      title: 'AI',
+      title: 'Artificial Intelligence',
       description: 'AI Basics',
       price: 15.75,
       raiting: 9.0,
       duration: 10
     },
     {
-      title: 'Algorithms',
+      title: 'Algorithms - Part 2',
       description: 'Algorithms Advanced',
       price: 24.90,
       raiting: 8.9,
       duration: 15
     },
     {
-      title: 'OOP',
+      title: 'Object Oriented Programming',
       description: 'Everything you have to know',
       price: 7.90,
       raiting: 7.1,
