@@ -12,7 +12,7 @@ export class CartItemComponent implements OnInit {
   @Output() deleteClick: EventEmitter<void>
 
   constructor() {
-    this.cartItem = new CartItem('NA')
+    this.cartItem = new CartItem('NA', -1)
     this.deleteClick = new EventEmitter()
   }
 

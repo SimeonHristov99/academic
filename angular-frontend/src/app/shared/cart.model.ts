@@ -4,7 +4,7 @@ export class CartItem {
     id: string
     willBuy: boolean
 
-    constructor(public text: string) {
+    constructor(public description: string, public price: number) {
         this.id = uuidv4()
         this.willBuy = false
     }
