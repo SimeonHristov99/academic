@@ -60,7 +60,7 @@ export class CartComponent implements OnInit {
             ]
           })
         },
-        onApprove:async (data: any, actions: { order: { capture: () => any; }; }) => {
+        onApprove: async (data: any, actions: { order: { capture: () => any; }; }) => {
           const order = await actions.order.capture()
           this.cartService.deleteItem(this.items[0].id)
           console.log(order)
@@ -78,6 +78,10 @@ export class CartComponent implements OnInit {
 
   onDeleteClick(item: CartItem) {
     this.cartService.deleteItem(item.id)
+  }
+
+  getItemsToBuy() {
+    return this.items.filter(s => s.willBuy)
   }
 
 }

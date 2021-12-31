@@ -4,7 +4,7 @@
     <div class="container" *ngIf="this.items.length > 0; else elseBlock">
 
         <div class="filters-container">
-            <app-sidebar-info></app-sidebar-info>
+            <app-sidebar-info [itemsToBuy]="this.getItemsToBuy()"></app-sidebar-info>
         </div>
 
         <div class="cart-items-container">
