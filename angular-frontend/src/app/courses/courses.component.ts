@@ -2,11 +2,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Greeting } from '../app.component';
 
 @Component({
-  selector: 'app-bookmarks',
-  templateUrl: './bookmarks.component.html',
-  styleUrls: ['./bookmarks.component.scss']
+  selector: 'app-courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.scss']
 })
-export class BookmarksComponent implements OnInit {
+export class CoursesComponent implements OnInit {
 
   greeting: Greeting = {
     header: 'Hello, Jim',
