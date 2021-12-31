@@ -2,14 +2,15 @@
     <div class="grid-container">
         <div class="grid-item">Email: <input type="email" [(ngModel)]="userBody.email" /></div>
         <div class="grid-item">Password: <input type="password" [(ngModel)]="userBody.password" /></div>
-        <div class="grid-item">First Name: <input [(ngModel)]="userBody.firstname" /></div>
-        <div class="grid-item" *ngIf="userBody.role === 'user'">Last Name: <input [(ngModel)]="userBody.lastname" />
-        </div>
         <div class="grid-item"> I am:
             <select name="type" [(ngModel)]="userBody.role">
                 <option value="organization">Organization</option>
                 <option value="user">User</option>
             </select>
+        </div>
+        <div class="grid-item" *ngIf="userBody.role === 'user'">First Name: <input [(ngModel)]="userBody.firstname" /></div>
+        <div class="grid-item" *ngIf="userBody.role === 'organization'">Organization Name: <input [(ngModel)]="userBody.firstname" /></div>
+        <div class="grid-item" *ngIf="userBody.role === 'user'">Last Name: <input [(ngModel)]="userBody.lastname" />
         </div>
         <div class="grid-item" *ngIf="userBody.role === 'user'">Birthday: <input type="date"
                 [(ngModel)]="userBody.birthDate" /></div>
