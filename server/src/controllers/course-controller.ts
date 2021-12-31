@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Course } from '../models/course';
 import ICourse from '../models/interfaces/ICourse';
-import course from '../routes/course';
 
 export default class CourseController {
   construct() { }
@@ -16,7 +15,8 @@ export default class CourseController {
     },
     {
       $unset: "__v"
-    }]);
+    }
+    ]);
 
     res.status(200).json(courses);
   }
