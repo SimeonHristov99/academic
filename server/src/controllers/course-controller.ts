@@ -7,17 +7,18 @@ export default class CourseController {
   construct() { }
 
   listCourses = async (req: Request, res: Response) => {
-    const courses1 = Course.find({}, '-__v',
-      (err: Error, courses: Array<ICourse>) => {
-        if (!err) {
-          return res.status(200).json(courses);
+    const courses = await Course.aggregate([{
+      $addFields: {
+        "usersEnrolled": {
+          $size: "$usersEnrolled"
         }
+      }
+    },
+    {
+      $unset: "__v"
+    }]);
 
-        res.status(404).json({ success: false, error: 'No courses found' });
-      });
-
-    // const courses = Course.aggregate([{ $project: { usersEnrolled: { $size: '$usersEnrolled' } } }]);
-    // res.status(200).json(courses);
+    res.status(200).json(courses);
   }
 
   createCourse = async (req: Request, res: Response) => {
