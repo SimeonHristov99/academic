@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
-import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
+import { CourseTileComponent } from './course-tile/course-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -33,7 +33,7 @@ import {HttpClientModule} from '@angular/common/http';
     TabsComponent,
     CoursesComponent,
     NotesComponent,
-    BookmarkTileComponent,
+    CourseTileComponent,
     FiltersTileComponent,
     OrganizationComponent,
     AddCourseComponent,
