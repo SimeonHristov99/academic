@@ -9,6 +9,7 @@ interface ICourse {
   price: Number,
   rating: Number,
   duration: Number,
+  level: String,
   usersEnrolled?: Set<IUser>,
   createdAt?: Number,
 }

@@ -36,6 +36,12 @@ const courseSchema = new Schema<CourseDocument, CourseModel>({
     type: Number,
     required: true,
   },
+  level: {
+    type: String,
+    enum: ['beginner', 'intermediate', 'advanced'],
+    default: 'user',
+    required: true,
+  },
   usersEnrolled: [{ type: Types.ObjectId, ref: 'User' }],
 },
   {

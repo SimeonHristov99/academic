@@ -8,8 +8,19 @@ const courseController: CourseController = new CourseController();
 
 course.get('/courses', courseController.listCourses);
 
-course.post('/course', authorization,
+course.post('/course',
+  authorization,
   roleValidator(['organisation', 'admin']),
   courseController.createCourse);
+
+course.post('/course/delete', 
+  authorization,
+  roleValidator(['organisation', 'admin']),
+  courseController.deleteCourse);
+
+course.post('/course/update', 
+  authorization,
+  roleValidator(['organisation', 'admin']),
+  courseController.updateCourse);
 
 export default course;

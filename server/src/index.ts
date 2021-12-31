@@ -8,6 +8,8 @@ import routes from './routes/intex';
 
 require('dotenv').config();
 
+var bodyParser = require('body-parser')
+
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
 
 const app = express();
@@ -15,6 +17,9 @@ const app = express();
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
 
 app.use(routes);
 
