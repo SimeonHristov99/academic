@@ -9,7 +9,9 @@ export class CourseService {
   courses: Course[]
 
   constructor() {
-    this.courses = []
+    this.courses = [
+      new Course('AI', 'AI descrption', 'https://www.youtube.com/watch?v=NWONeJKn6kc', 700, 5, 5)
+    ]
   }
 
   getCourses() {

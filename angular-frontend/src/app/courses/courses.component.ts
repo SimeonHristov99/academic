@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Greeting } from '../app.component';
+import { CourseService } from '../services/course.service';
+import { Course } from '../shared/course.model';
 
 @Component({
   selector: 'app-courses',
@@ -16,10 +18,17 @@ export class CoursesComponent implements OnInit {
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
-  constructor() { }
+  courses: Course[]
+
+  constructor(
+    private courseService: CourseService
+  ) {
+    this.courses = []
+  }
 
   ngOnInit(): void {
     this.headerData.emit(this.greeting);
+    this.courses = this.courseService.getCourses();
   }
 
 }
