@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/User';
 import { CourseService } from 'src/app/services/course.service';
+import { User } from 'src/app/shared/user.model';
 
 @Component({
   selector: 'app-student-details',

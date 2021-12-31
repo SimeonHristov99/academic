@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Course } from 'src/app/models/Course';
 import { CourseService } from 'src/app/services/course.service';
+import { Course } from 'src/app/shared/course.model';
 import { Greeting } from '../../app.component';
 
 @Component({
