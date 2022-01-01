@@ -11,6 +11,7 @@ import { User } from 'src/app/shared/user.model';
 export class StudentDetailsComponent implements OnInit {
 
   students: User[] = [];
+  studentMark: number = 1;
 
   constructor(private courseService: CourseService, private http: HttpClient) { }
 
@@ -20,6 +21,10 @@ export class StudentDetailsComponent implements OnInit {
 
   getStudentList(): void {
     // this.students = this.courseService.getStudentListByCourse();
+  }
+
+  submitMark(id: any): void {
+    console.log(this.studentMark);
   }
 
 }
