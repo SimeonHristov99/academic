@@ -25,7 +25,7 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { SeeCourseComponent } from './components/see-course/see-course.component';
 
 @NgModule({
