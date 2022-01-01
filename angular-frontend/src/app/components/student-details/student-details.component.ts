@@ -27,8 +27,4 @@ export class StudentDetailsComponent implements OnInit {
     console.log(this.studentMark);
   }
 
-  submitMark(id: any): void {
-    console.log(this.studentMark);
-  }
-
 }
