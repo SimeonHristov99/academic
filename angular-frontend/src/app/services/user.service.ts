@@ -6,36 +6,25 @@ import { User } from '../shared/user.model';
 })
 export class UserService {
 
-  constructor() { }
+  users: User[]
 
-  getUser(): User {
-    return {
-      email: 'ivan@gmail.com',
-      firstname: 'Ivan',
-      lastname: 'Ivanov'
-    };
+  constructor() {
+    this.users = []
   }
 
-  getUserList(): User[] {
-    return [{
-      email: 'ivan@gmail.com',
-      firstname: 'Ivan',
-      lastname: 'Ivanov'
-    },
-    {
-      email: 'dimitar@gmail.com',
-      firstname: 'Dimitar',
-      lastname: 'Dimitrov'
-    },
-    {
-      email: 'kaloyan@gmail.com',
-      firstname: 'Kaloyan',
-      lastname: 'Kaloyanov'
-    },
-    {
-      email: 'petar@gmail.com',
-      firstname: 'Petar',
-      lastname: 'Petrov'
-    }];
+  getUser(id: string) {
+    return this.users.find(u => u.id)
+  }
+
+  getUsers(): User[] {
+    return this.users;
+  }
+
+  enroll(userId: string, courseId: string) {
+    console.log('Will enrol ' + userId + ' in ' + courseId)
+  }
+
+  complete() {
+    console.log('ERROR: Not implemented')
   }
 }
