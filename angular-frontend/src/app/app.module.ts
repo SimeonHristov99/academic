@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
 import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
@@ -31,7 +31,7 @@ import {HttpClientModule} from '@angular/common/http';
   declarations: [
     AppComponent,
     TabsComponent,
-    BookmarksComponent,
+    CoursesComponent,
     NotesComponent,
     BookmarkTileComponent,
     FiltersTileComponent,
