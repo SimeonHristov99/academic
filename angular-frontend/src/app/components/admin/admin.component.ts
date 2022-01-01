@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   }
 
   getUserList(): void {
-    this.users = this.userService.getUserList();
+    this.users = this.userService.getUsers();
   }
 
   deleteUser(id: any): void {

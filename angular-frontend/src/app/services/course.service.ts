@@ -10,22 +10,22 @@ export class CourseService {
 
   constructor() {
     this.courses = [
-      new Course('AI For Everyone',
+      new Course('AI For Everyone 1',
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
         'DeepLearningAI.com',
         'Beginner',
         'https://www.youtube.com/watch?v=NWONeJKn6kc',
         700, 5, 5),
-      new Course('AI For Everyone',
+      new Course('AI For Everyone 2',
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
         'DeepLearningAI.com',
-        'Beginner',
+        'Intermediate',
         'https://www.youtube.com/watch?v=NWONeJKn6kc',
         700, 5, 5),
-      new Course('AI For Everyone',
+      new Course('AI For Everyone 3',
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
         'DeepLearningAI.com',
-        'Beginner',
+        'Advanced',
         'https://www.youtube.com/watch?v=NWONeJKn6kc',
         700, 5, 5)
     ]
@@ -52,5 +52,9 @@ export class CourseService {
     const courseIdx = this.courses.findIndex(c => c.id === id)
     if (courseIdx == -1) return
     this.courses.splice(courseIdx, 1)
+  }
+
+  buyCourse(id: string) {
+    
   }
 }
