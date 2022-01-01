@@ -24,13 +24,17 @@ export class OrganizationComponent implements OnInit {
 
   courses: Course[] = [];
 
-  // updateCourseBody: Course = {
-  //   title: '',
-  //   description: '',
-  //   price: 1.0,
-  //   raiting: 0.0,
-  //   duration: 1
-  // };
+  updateCourseBody: Course = {
+    id: '',
+    rating: 0,
+    title: '',
+    description: '',
+    organization: '',
+    level: '',
+    url: '',
+    price: 1,
+    duration: 1
+  };
 
   constructor(private courseService: CourseService, private http: HttpClient) {
 
@@ -47,7 +51,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   getCourseList(): void {
-    // this.courses = this.courseService.getCourseList();
+    this.courses = this.courseService.getCourses();
     this.buildGraphics();
     console.log(this.courses);
   }

@@ -10,24 +10,35 @@ export class CourseService {
 
   constructor() {
     this.courses = [
-      new Course('AI For Everyone 1',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
-        'DeepLearningAI.com',
-        'Beginner',
-        'https://www.youtube.com/watch?v=NWONeJKn6kc',
-        700, 5, 5),
-      new Course('AI For Everyone 2',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
-        'DeepLearningAI.com',
-        'Intermediate',
-        'https://www.youtube.com/watch?v=NWONeJKn6kc',
-        700, 5, 5),
-      new Course('AI For Everyone 3',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
-        'DeepLearningAI.com',
-        'Advanced',
-        'https://www.youtube.com/watch?v=NWONeJKn6kc',
-        700, 5, 5)
+      {
+        id: '',
+        rating: 0,
+        title: '',
+        description: '',
+        organization: '',
+        level: '',
+        url: '',
+        price: 1,
+        duration: 1
+      }
+      // new Course('AI For Everyone 1',
+      //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+      //   'DeepLearningAI.com',
+      //   'Beginner',
+      //   'https://www.youtube.com/watch?v=NWONeJKn6kc',
+      //   700, 5, 5),
+      // new Course('AI For Everyone 2',
+      //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+      //   'DeepLearningAI.com',
+      //   'Intermediate',
+      //   'https://www.youtube.com/watch?v=NWONeJKn6kc',
+      //   700, 5, 5),
+      // new Course('AI For Everyone 3',
+      //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+      //   'DeepLearningAI.com',
+      //   'Advanced',
+      //   'https://www.youtube.com/watch?v=NWONeJKn6kc',
+      //   700, 5, 5)
     ]
   }
 
@@ -56,5 +67,17 @@ export class CourseService {
 
   buyCourse(id: string) {
     
+  }
+
+  getStudentListByCourse() {
+    return [{
+      id: '',
+      email: '',
+      firstname: '',
+      lastname: '',
+      password: '',
+      birthDate: undefined,
+      role: ''
+    }]
   }
 }

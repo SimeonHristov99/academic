@@ -17,7 +17,17 @@ export class SeeCourseComponent implements OnInit {
     private courseService: CourseService,
     private router: Router
   ) {
-    this.course = new Course('NA', 'NA', 'Google', 'Beginner', 'https://www.google.com/', -1, -1, -1)
+    this.course = {
+      id: '',
+      rating: 0,
+      title: '',
+      description: '',
+      organization: '',
+      level: '',
+      url: '',
+      price: 1,
+      duration: 1
+    };
   }
 
   ngOnInit(): void {

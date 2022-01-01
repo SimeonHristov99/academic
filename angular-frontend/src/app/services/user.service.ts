@@ -9,7 +9,15 @@ export class UserService {
   users: User[]
 
   constructor() {
-    this.users = []
+    this.users = [{
+      id: '',
+      email: '',
+      firstname: '',
+      lastname: '',
+      password: '',
+      birthDate: undefined,
+      role: ''
+    }]
   }
 
   getUser(id: string) {
