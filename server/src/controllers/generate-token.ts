@@ -9,6 +9,7 @@ const generateToken = (res: Response, email: string) => {
   const cookie = {
     maxAge: 7 * 24 * 60 * 60 * 1000,
     secure: false,
+    sameSite: true,
   };
 
   return res.cookie('auth', token, cookie);
