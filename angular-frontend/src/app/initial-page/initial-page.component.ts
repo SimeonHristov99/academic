@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Greeting } from '../app.component';
 
 @Component({
@@ -21,4 +22,7 @@ export class InitialPageComponent implements OnInit {
     this.headerData.emit(this.greeting);
   }
 
+  onFormSubmit(form: NgForm) {
+    console.log(form)
+  }
 }
