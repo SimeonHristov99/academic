@@ -8,16 +8,19 @@ import { User } from '../../shared/user.model';
 })
 export class AddUserComponent implements OnInit {
 
-  userBody: User = {
-    email: '',
-    firstname: '',
-    lastname: '',
-    password: '',
-    birthDate: undefined,
-    role: ''
-  };
+  userBody: User;
 
-  constructor() { }
+  constructor() {
+    this.userBody = {
+      id: '',
+      email: '',
+      firstname: '',
+      lastname: '',
+      password: '',
+      birthDate: undefined,
+      role: ''
+    };
+  }
 
   ngOnInit(): void {
   }

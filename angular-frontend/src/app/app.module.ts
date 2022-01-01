@@ -7,9 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
-import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
+import { CourseTileComponent } from './course-tile/course-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -25,15 +25,16 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { SeeCourseComponent } from './components/see-course/see-course.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TabsComponent,
-    BookmarksComponent,
+    CoursesComponent,
     NotesComponent,
-    BookmarkTileComponent,
+    CourseTileComponent,
     FiltersTileComponent,
     OrganizationComponent,
     AddCourseComponent,
@@ -47,6 +48,7 @@ import {HttpClientModule} from '@angular/common/http';
     SidebarInfoComponent,
     AdminComponent,
     StudentDetailsComponent,
+    SeeCourseComponent,
   ],
   imports: [
     BrowserModule,

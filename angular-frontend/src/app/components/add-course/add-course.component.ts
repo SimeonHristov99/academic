@@ -8,15 +8,21 @@ import { Course } from 'src/app/shared/course.model';
 })
 export class AddCourseComponent implements OnInit {
 
-  courseBody: Course = {
-    title: '',
-    description: '',
-    price: 1.0,
-    raiting: 0.0,
-    duration: 1
-  };
+  courseBody: Course;
 
-  constructor() { }
+  constructor() {
+    this.courseBody = {
+      id: '',
+      rating: 0,
+      title: '',
+      description: '',
+      organization: '',
+      level: '',
+      url: '',
+      price: 1,
+      duration: 1
+    };
+  }
 
   ngOnInit(): void {
   }

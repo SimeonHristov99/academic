@@ -1,71 +1,83 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Course } from '../shared/course.model';
-import { User } from '../shared/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  constructor() { }
+  courses: Course[]
 
-  getStudentListByCourse(): User[] {
-    return [{
-      email: 'ivan@gmail.com',
-      firstname: 'Ivan',
-      lastname: 'Ivanov'
-    },
-    {
-      email: 'dimitar@gmail.com',
-      firstname: 'Dimitar',
-      lastname: 'Dimitrov'
-    },
-    {
-      email: 'kaloyan@gmail.com',
-      firstname: 'Kaloyan',
-      lastname: 'Kaloyanov'
-    },
-    {
-      email: 'petar@gmail.com',
-      firstname: 'Petar',
-      lastname: 'Petrov'
-    }
-  ];
+  constructor() {
+    this.courses = [
+      {
+        id: '',
+        rating: 0,
+        title: '',
+        description: '',
+        organization: '',
+        level: '',
+        url: '',
+        price: 1,
+        duration: 1
+      }
+      // new Course('AI For Everyone 1',
+      //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+      //   'DeepLearningAI.com',
+      //   'Beginner',
+      //   'https://www.youtube.com/watch?v=NWONeJKn6kc',
+      //   700, 5, 5),
+      // new Course('AI For Everyone 2',
+      //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+      //   'DeepLearningAI.com',
+      //   'Intermediate',
+      //   'https://www.youtube.com/watch?v=NWONeJKn6kc',
+      //   700, 5, 5),
+      // new Course('AI For Everyone 3',
+      //   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, asperiores? Veritatis eos reiciendis quis enim iste quos distinctio aliquid perspiciatis, et eveniet, expedita alias consectetur perferendis, quaerat nesciunt blanditiis amet.',
+      //   'DeepLearningAI.com',
+      //   'Advanced',
+      //   'https://www.youtube.com/watch?v=NWONeJKn6kc',
+      //   700, 5, 5)
+    ]
   }
 
-  getCourse(): Course {
-    return {
-      title: 'Artificial Intelligence',
-      description: 'AI Advanced',
-      price: 24.90,
-      raiting: 8.9,
-      duration: 15
-    };
+  getCourses() {
+    return this.courses
   }
 
-  getCourseList(): Course[] {
+  getCourse(id: string) {
+    return this.courses.find(c => c.id === id)
+  }
+
+  addCourse(course: Course) {
+    this.courses.push(course)
+  }
+
+  updateCourse(id: string, updatedFields: Partial<Course>) {
+    const course = this.getCourse(id)
+    Object.assign(course, updatedFields)
+  }
+
+  deleteCourse(id: string) {
+    const courseIdx = this.courses.findIndex(c => c.id === id)
+    if (courseIdx == -1) return
+    this.courses.splice(courseIdx, 1)
+  }
+
+  buyCourse(id: string) {
+    
+  }
+
+  getStudentListByCourse() {
     return [{
-      title: 'Artificial Intelligence',
-      description: 'AI Basics',
-      price: 15.75,
-      raiting: 9.0,
-      duration: 10
-    },
-    {
-      title: 'Algorithms - Part 2',
-      description: 'Algorithms Advanced',
-      price: 24.90,
-      raiting: 8.9,
-      duration: 15
-    },
-    {
-      title: 'Object Oriented Programming',
-      description: 'Everything you have to know',
-      price: 7.90,
-      raiting: 7.1,
-      duration: 4
-    },
-    ];
+      id: '',
+      email: '',
+      firstname: '',
+      lastname: '',
+      password: '',
+      birthDate: undefined,
+      role: ''
+    }]
   }
 }

@@ -25,10 +25,14 @@ export class OrganizationComponent implements OnInit {
   courses: Course[] = [];
 
   updateCourseBody: Course = {
+    id: '',
+    rating: 0,
     title: '',
     description: '',
-    price: 1.0,
-    raiting: 0.0,
+    organization: '',
+    level: '',
+    url: '',
+    price: 1,
     duration: 1
   };
 
@@ -47,7 +51,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   getCourseList(): void {
-    this.courses = this.courseService.getCourseList();
+    this.courses = this.courseService.getCourses();
     this.buildGraphics();
     console.log(this.courses);
   }
@@ -57,7 +61,7 @@ export class OrganizationComponent implements OnInit {
     let result: number[] = [];
 
     for(i = 0; i < this.courses.length; i++){
-      raiting = raiting + this.courses[i].raiting;
+      raiting = raiting + this.courses[i].rating;
       price = price + this.courses[i].price;
     }
 
@@ -79,7 +83,7 @@ export class OrganizationComponent implements OnInit {
     data2.push([]);
 
     for(let i = 0; i < this.courses.length; i++){
-      data1[i][0] = this.courses[i].raiting;
+      data1[i][0] = this.courses[i].rating;
       data1[i][1] = this.courses[i].price;
       data1[i][2] = 50;
 
@@ -152,7 +156,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   editCourse(id: any): void {
-    console.log(JSON.stringify(this.updateCourseBody));
+    // console.log(JSON.stringify(this.updateCourseBody));
   }
 
   deleteCourse(id: any): void {
