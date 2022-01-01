@@ -1,4 +1,17 @@
 .wrapper {
-    background: wheat;
+    display: flex;
     height: 100%;
+    width: 1200px;
+}
+
+.container {
+    flex-direction: column;
+
+    max-height: 100%;
+    width: 100%;
+
+    overflow: auto;
+
+    padding: 35px;
+    border-radius: 5px;
 }
