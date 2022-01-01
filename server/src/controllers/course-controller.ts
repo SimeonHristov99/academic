@@ -22,6 +22,86 @@ export default class CourseController {
     res.status(200).json(courses);
   }
 
+  getEnrolledUsers =  async (req: Request, res: Response) => {
+    Course.findOne({_id: req.body.id}).select('usersEnrolled')
+    .then(course  => {res.status(200).json(course)})
+    .catch(err => {res.status(500).json({ success: false, error: 'Can not get enrolled users in course: ' + err })});
+  }
+
+  sortCoursesByPrice = async (req: Request, res: Response) => {
+    Course.aggregate([{
+      $addFields: {
+        "usersEnrolled": {
+          $size: "$usersEnrolled"
+        }
+      }
+    },
+    {
+      $unset: "__v"
+    }
+    ]).sort({price: 1})
+    .then(course  => {res.status(200).json(course)})
+    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+  }
+
+  sortCoursesByLevel = async (req: Request, res: Response) => {
+    Course.aggregate([{
+      $addFields: {
+        "usersEnrolled": {
+          $size: "$usersEnrolled"
+        },
+        "priority": {
+          $switch: {
+            branches: [
+              { 
+                case: {$eq: ["$level", "beginner"]},
+                then: 1
+              },
+              { 
+                case: {$eq: ["$level", "intermediate"]},
+                then: 2
+              },
+              {
+                case: {$eq: ["$level", "advanced"]},
+                then: 3
+              }
+            ],
+            default: -1
+          }
+        }
+      }
+    },
+    {
+      $unset: "__v"
+    }
+    ]).sort({priority: 1})
+    .then(course  => {res.status(200).json(course)})
+    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+  }
+
+  sortCoursesByRating = async (req: Request, res: Response) => {
+    Course.aggregate([{
+      $addFields: {
+        "usersEnrolled": {
+          $size: "$usersEnrolled"
+        }
+      }
+    },
+    {
+      $unset: "__v"
+    }
+    ]).sort({rating: 1})
+    .then(course  => {res.status(200).json(course)})
+    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+  }
+
+  searchCoursesByName = async (req: Request, res: Response) => {
+    const searchName = req.body.name;
+    Course.find({title: {$regex: `${searchName}`, $options: "i"}})
+    .then(course  => {res.status(200).json(course)})
+    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+  }
+
   createCourse = async (req: Request, res: Response) => {
     let course: ICourse = req.body;
     console.log(course);
