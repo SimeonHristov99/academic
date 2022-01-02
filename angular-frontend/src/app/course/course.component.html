@@ -1,20 +1,40 @@
 <div id="course">
-    <div id="video">
-        <iframe width="560" height="315" [src]='safeURL' frameborder="0" allowfullscreen></iframe>
-        <h1>{{name}}</h1>
+
+    <div id="main">
+
+        <div *ngIf="!payed">
+            <h1>{{mainName}}</h1>
+            <div id="main-info">
+                <p>Price: 2,50$</p>
+                <p>Rating: 5/10</p>
+                <p>Duration: 1h</p>
+            </div>
+            
+            <p>Description: </p>
+        </div>
+        <div *ngIf="payed">
+            <iframe width="560" height="315" [src]='safeURL' frameborder="0" allowfullscreen></iframe>
+            <h1>{{name}}</h1>
+        </div>
+
     </div>
 
 
     <div id="videoList">
-        <h1> Crash Course Psychology </h1>
+        <h1> {{mainName}} </h1>
         <ul>
             <li *ngFor="let video of videos">
                 <p (click)="loadVideo(video)">
-                    <input type="checkbox" [checked]="video.watched" (change)="onCheckboxChange(video, $event)"/>
+                    <input type="checkbox" [checked]="video.watched" (change)="onCheckboxChange(video, $event)" />
                     {{video.name}}
                 </p>
 
             </li>
         </ul>
     </div>
-</div>>
+</div>
+
+<div id="ad">
+    <img src="./assets/ad.jpg" alt="Ad">
+    <p>You may like this course too</p>
+</div>

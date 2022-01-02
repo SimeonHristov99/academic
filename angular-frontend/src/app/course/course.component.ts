@@ -9,8 +9,10 @@ import { Video } from './Video';
 })
 
 export class CourseComponent implements OnInit {
+  payed: boolean = false;
   safeURL: any;
   name?: string;
+  mainName: string = "Crash Course Psychology";
   videos: Video[] = [
     { name: 'Intro to Psychology', link: 'https://www.youtube.com/embed/vo4pMVb0R6M', watched: true },
     { name: 'Psychological Research', link: 'https://www.youtube.com/embed/hFV71QPvX2I', watched: false },
@@ -23,8 +25,6 @@ export class CourseComponent implements OnInit {
     this.name = this.videos[0].name;
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.videos[0].link);
   }
-
-
 
   ngOnInit(): void {
   }
@@ -46,6 +46,4 @@ export class CourseComponent implements OnInit {
   changeIsVideoWatched() {
     //TODO send to backend;
   }
-
-
 }

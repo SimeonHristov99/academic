@@ -4,11 +4,11 @@
 
 #course {
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
+  width: 1300px;
   overflow: hidden;
 }
 
-#video {
+#main {
   margin: 2%;
   width: 60%;
   float: left;
@@ -17,6 +17,8 @@
 #videoList {
   margin: 2%;
   overflow: hidden;
+  overflow-y: auto;
+  height: 330px;
 }
 
 h1 {
@@ -30,7 +32,7 @@ iframe {
 }
 
 input {
-  margin: 5%;
+  margin: 3%;
   width: 20px;
   height: 20px;
 }
@@ -39,7 +41,45 @@ p {
   font-size: large;
 }
 
-p:hover {
+#videoList p:hover {
     cursor:pointer;
     font-size: x-large;
 }
+
+
+#ad {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 1300px;
+  height: 150px;
+  margin-top: 10px;
+  text-align: center;
+  position: relative;
+}
+
+#ad img {
+  padding: 10px;
+  width: 1300px;
+  height: 150px;
+}
+
+#ad p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+}
+
+#main p {
+  font-size: x-large;
+}
+
+#main-info p {
+  display: inline-block;
+  margin: 15px 0 15px 0;
+  width: 250px;
+  text-align: center;
+}
+
