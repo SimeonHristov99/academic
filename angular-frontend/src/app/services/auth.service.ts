@@ -18,7 +18,8 @@ export class AuthService {
     return this.webService.login(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
-        this.setSession(res.body._id, res.headers.get('token'))
+        // console.log(res.cookies.auth)
+        // this.setSession()
         console.log('Logged In!')
       })
     )
@@ -28,15 +29,17 @@ export class AuthService {
     this.removeSession()
   }
 
-  private setSession(userId: string, token: string | null) {
+  getToken() {
+    // use the cookie service here
+  }
+
+  private setSession(token: string | null) {
     if(!token) return
 
-    localStorage.setItem('user-id', userId)
     localStorage.setItem('token', token)
   }
 
   private removeSession() {
-    localStorage.removeItem('user-id')
     localStorage.removeItem('token')
   }
 
