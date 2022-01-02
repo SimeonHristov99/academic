@@ -47,17 +47,18 @@ export default class UserController {
   };
 
   register = async (req: Request, res: Response, next: () => void) => {
-    const userExist: IUser = await this.findUser(req.body.email);
+    const user = req.body;
+    const userExist: IUser = await this.findUser(user.email);
 
     if (userExist) {
       res.status(400).json({ success: false, error: 'Email is already taken' });
     } else {
-      await this.createUser(req.body).catch((error) => {
+      await this.createUser(user).catch((error) => {
         res.status(400).json({ success: false, error: 'Invalid email or password' });
       });
 
-      generateToken(res, req.body.email);
-      res.status(200).json({ success: true, message: 'User created' });
+      generateToken(res, user.email);
+      res.status(200).json({ success: true, role: user.role, message: 'User created' });
     }
   };
 
@@ -75,7 +76,7 @@ export default class UserController {
 
           if (result) {
             generateToken(res, email);
-            res.status(200).json({ success: true });
+            res.status(200).json({ success: true, role: user.role });
           } else {
             res.status(401).json({ success: false, error: 'Invalid password' });
           }
