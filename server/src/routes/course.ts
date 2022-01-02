@@ -24,19 +24,21 @@ course.post('/courses/search',
   roleValidator(['organisation', 'admin']),
   courseController.searchCoursesByName);
 
-course.post('/course/users', 
+course.post('/course/users',
   authorization,
   roleValidator(['organisation', 'admin']),
   courseController.getEnrolledUsers);
 
-course.post('/course/delete', 
+course.post('/course/delete',
   authorization,
   roleValidator(['organisation', 'admin']),
   courseController.deleteCourse);
 
-course.post('/course/update', 
+course.post('/course/update',
   authorization,
   roleValidator(['organisation', 'admin']),
   courseController.updateCourse);
+
+course.post('/course/enroll', authorization, courseController.courseEnroll);
 
 export default course;

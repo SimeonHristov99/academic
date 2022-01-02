@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Course } from '../models/course';
 import ICourse from '../models/interfaces/ICourse';
-import course from '../routes/course';
 
 export default class CourseController {
   construct() { }
@@ -22,10 +21,10 @@ export default class CourseController {
     res.status(200).json(courses);
   }
 
-  getEnrolledUsers =  async (req: Request, res: Response) => {
-    Course.findOne({_id: req.body.id}).select('usersEnrolled')
-    .then(course  => {res.status(200).json(course)})
-    .catch(err => {res.status(500).json({ success: false, error: 'Can not get enrolled users in course: ' + err })});
+  getEnrolledUsers = async (req: Request, res: Response) => {
+    Course.findOne({ _id: req.body.id }).select('usersEnrolled')
+      .then(course => { res.status(200).json(course) })
+      .catch(err => { res.status(500).json({ success: false, error: 'Can not get enrolled users in course: ' + err }) });
   }
 
   sortCoursesByPrice = async (req: Request, res: Response) => {
@@ -39,9 +38,9 @@ export default class CourseController {
     {
       $unset: "__v"
     }
-    ]).sort({price: 1})
-    .then(course  => {res.status(200).json(course)})
-    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+    ]).sort({ price: 1 })
+      .then(course => { res.status(200).json(course) })
+      .catch(err => { res.status(500).json({ success: false, error: 'Can not get courses: ' + err }) });
   }
 
   sortCoursesByLevel = async (req: Request, res: Response) => {
@@ -53,16 +52,16 @@ export default class CourseController {
         "priority": {
           $switch: {
             branches: [
-              { 
-                case: {$eq: ["$level", "beginner"]},
+              {
+                case: { $eq: ["$level", "beginner"] },
                 then: 1
               },
-              { 
-                case: {$eq: ["$level", "intermediate"]},
+              {
+                case: { $eq: ["$level", "intermediate"] },
                 then: 2
               },
               {
-                case: {$eq: ["$level", "advanced"]},
+                case: { $eq: ["$level", "advanced"] },
                 then: 3
               }
             ],
@@ -74,9 +73,9 @@ export default class CourseController {
     {
       $unset: "__v"
     }
-    ]).sort({priority: 1})
-    .then(course  => {res.status(200).json(course)})
-    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+    ]).sort({ priority: 1 })
+      .then(course => { res.status(200).json(course) })
+      .catch(err => { res.status(500).json({ success: false, error: 'Can not get courses: ' + err }) });
   }
 
   sortCoursesByRating = async (req: Request, res: Response) => {
@@ -90,16 +89,16 @@ export default class CourseController {
     {
       $unset: "__v"
     }
-    ]).sort({rating: 1})
-    .then(course  => {res.status(200).json(course)})
-    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+    ]).sort({ rating: 1 })
+      .then(course => { res.status(200).json(course) })
+      .catch(err => { res.status(500).json({ success: false, error: 'Can not get courses: ' + err }) });
   }
 
   searchCoursesByName = async (req: Request, res: Response) => {
     const searchName = req.body.name;
-    Course.find({title: {$regex: `${searchName}`, $options: "i"}})
-    .then(course  => {res.status(200).json(course)})
-    .catch(err => {res.status(500).json({ success: false, error: 'Can not get courses: ' + err })});
+    Course.find({ title: { $regex: `${searchName}`, $options: "i" } })
+      .then(course => { res.status(200).json(course) })
+      .catch(err => { res.status(500).json({ success: false, error: 'Can not get courses: ' + err }) });
   }
 
   createCourse = async (req: Request, res: Response) => {
@@ -120,21 +119,21 @@ export default class CourseController {
   updateCourse = async (req: Request, res: Response) => {
     const course: ICourse = req.body;
 
-    Course.findOneAndUpdate( {_id: course._id}, course, {new: true}, function(err, data) {
-      if(err){
+    Course.findOneAndUpdate({ _id: course._id }, course, { new: true }, function (err, data) {
+      if (err) {
         return res.status(500);
-     } else {
+      } else {
         return res.status(200).send(data);
-     }
+      }
     });
 
   };
 
   deleteCourse = async (req: Request, res: Response, next: () => void) => {
-    const course_id = req.body.id;
+    const course_id = req.body.course_id;
     console.log(course_id);
     try {
-      const course = await Course.findOne({_id: course_id}).exec();
+      const course = await Course.findOne({ _id: course_id }).exec();
 
       if (course) {
         course.remove((err: Error, _) => {
@@ -151,4 +150,19 @@ export default class CourseController {
       res.status(401).json({ success: false, error: 'Invalid course id' });
     }
   };
+
+  courseEnroll = async (req: Request, res: Response, next: () => void) => {
+    const courseId: string = req.body.course_id;
+    const user = res.locals.user;
+
+    const course = await Course.findOneAndUpdate(
+      { _id: courseId },
+      { $push: { usersEnrolled: user } }, { returnNewDocument: true }
+    );
+
+    user.courses.push(course);
+    await user.save();
+
+    res.status(200).json({ success: true });
+  }
 }
