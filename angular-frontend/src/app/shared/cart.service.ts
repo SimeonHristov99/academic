@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserService } from '../services/user.service';
 import { CartItem } from './cart.model';
 
 @Injectable({
@@ -8,7 +9,7 @@ export class CartService {
 
   items: CartItem[]
 
-  constructor() {
+  constructor(private userService: UserService) {
     this.items = []
   }
   
@@ -33,5 +34,10 @@ export class CartService {
     const idx = this.items.findIndex(i => i.courseId === id)
     if (idx == -1) return
     this.items.splice(idx, 1)
+  }
+
+  buyItem(courseId: string) {
+    console.log(courseId)
+    this.userService.enroll(courseId)
   }
 }

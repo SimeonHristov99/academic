@@ -44,8 +44,8 @@ export class UserService {
     return this.webService.delete('/delete', payload);
   }
 
-  enroll(userId: string, courseId: string) {
-    console.log('Will enrol ' + userId + ' in ' + courseId)
+  enroll(courseId: string) {
+    console.log('Will enrol ' + localStorage.getItem('userId') + ' in ' + courseId)
   }
 
   complete() {

@@ -19,22 +19,41 @@ export class AuthService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
 
+        console.log(res)
+        return
+
         if (!document.cookie) {
           console.log('ERROR: No cookie')
           return
         }
 
-        console.log('Logged In!')
-        console.log(document.cookie)
+        const id = res.body.id
+        const firstName = res.body.firstName
 
-        this.router.navigateByUrl('/user/courses')
-        // add more according to role
+        if (!id) {
+          console.log('ERROR: No user id!')
+          return
+        }
+
+        if (!firstName) {
+          console.log('ERROR: No first name!')
+          return
+        }
+
+
+        localStorage.setItem('userId', res.body.firstName)
+        localStorage.setItem('firstName', res.body.firstName)
+
+        this.router.navigateByUrl(
+          `/${res.body.role}${res.body.role === "user" ? `/courses` : ''}`
+        )
       })
     )
   }
 
   logout() {
     document.cookie = 'auth=; Max-Age=0; path=/; domain=' + location.hostname;
+    localStorage.clear()
   }
 
   getToken() {
