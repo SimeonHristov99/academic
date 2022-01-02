@@ -1,0 +1,27 @@
+<div class="cart-wrapper">
+    
+    <div class="container" *ngIf="this.items.length > 0; else elseBlock">
+
+        <div class="filters-container">
+            <app-sidebar-info [itemsToBuy]="this.getItemsToBuy()"></app-sidebar-info>
+        </div>
+
+        <div class="cart-items-container">
+
+            <app-cart-item
+                @cartItemAnim
+                *ngFor="let item of items"
+                [cartItem]="item"
+                (click)="toggleWillBuy(item)"
+                (deleteClick)="onDeleteClick(item)">
+            </app-cart-item>
+
+        </div>
+
+    </div>
+
+    <ng-template #elseBlock>
+        <p>Cart is empty</p>
+    </ng-template>
+
+</div>

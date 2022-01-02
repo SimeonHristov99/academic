@@ -1,0 +1,17 @@
+<div class="cart-item" [class.completed]="cartItem.willBuy">
+    <div class="check-box">
+        <i class="material-icons-outlined">check</i>
+    </div>
+
+    <p class="cart-item-text"> {{ cartItem.title }} </p>
+
+    <div class="item-edit-actions" (click)="$event.stopPropagation()">
+        <div class="btn item-edit-action-btn">
+            <i class="material-icons-outlined">paid</i>
+            <p id="buyLabel"> {{ cartItem.price }} </p>
+        </div>
+        <div class="btn item-edit-action-btn" (click)="onDeleteClick()">
+            <i class="material-icons">delete</i>
+        </div>
+    </div>
+</div>

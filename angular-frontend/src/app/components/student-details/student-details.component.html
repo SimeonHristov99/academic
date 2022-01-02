@@ -1,0 +1,21 @@
+<div class="title">
+    <div class="grid-container">
+        <div *ngFor="let student of students; let i=index" class="grid-item">
+            <div>{{student.firstname}} {{student.lastname}}</div>
+            <div>Download work</div>
+            <select name="type" [(ngModel)]="studentMark">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button (click)="submitMark(i)">Submit</button>
+        </div>
+    </div>
+</div>
+<button type="button" routerLink="/organization">
+    <div class="button-label-wrapper">
+        <i class="material-icons-outlined">arrow_back_ios</i>Go back
+    </div>
+</button>

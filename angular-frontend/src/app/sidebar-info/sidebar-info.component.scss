@@ -1,0 +1,51 @@
+.wrapper {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.sidebar-tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 500px;
+    flex-wrap: wrap;
+
+    color: rgba(white, 0.85);
+    font-size: 18px;
+    user-select: none;
+
+    padding: 10px;
+
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+
+    &:hover {
+        background: rgba(black, 0.68);
+        backdrop-filter: blur(2px);
+    }
+}
+
+p {
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar-tile img {
+    max-width: 32px;
+}
+
+.tile-text {
+    font-size: 14px;
+    color: rgba(white, 0.85);
+
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#buyLabel {
+    padding-left: 5px;
+}

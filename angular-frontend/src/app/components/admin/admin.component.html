@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <div class="title">
+        <ul>
+            <li *ngFor="let user of users; let i=index">
+                <label>{{user.email}}</label>
+                <button (click)="deleteUser(user)">
+                    <i class="material-icons-outlined">delete</i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="title">
+    <div class="grid-container">
+        <div class="grid-item">Title: <input [(ngModel)]="courseBody.title" /></div>
+        <div class="grid-item">Level:
+            <select name="type" [(ngModel)]="courseBody.level">
+                <option value="beginner">beginner</option>
+                <option value="intermediate">intermediate</option>
+                <option value="advanced">advanced</option>
+            </select>
+        </div>
+        <div class="grid-item">Price: <input type="number" step="0.01" [(ngModel)]="courseBody.price" /> $</div>
+        <div class="grid-item">Description: <textarea [(ngModel)]="courseBody.description"></textarea></div>
+        <div class="grid-item">Duration: <input type="number" [(ngModel)]="courseBody.duration" /></div>
+        <div class="grid-item">
+            <div *ngFor="let item of [].constructor(courseBody.duration); let i = index">Week {{i+1}}: <input /></div>
+        </div>
+    </div>
+</div>
+<button type="button" routerLink="/organization">
+    <div class="button-label-wrapper">
+        <i class="material-icons-outlined">arrow_back_ios</i>Go back
+    </div>
+</button>
+<button type="button" (click)="addCourse()">
+    <div class="button-label-wrapper">
+        <i class="material-icons-outlined">add</i>Add new course
+    </div>
+</button>

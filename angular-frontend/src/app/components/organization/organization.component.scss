@@ -1,0 +1,135 @@
+.wrapper {
+    height: 95%;
+    width: 120%;
+    overflow-y: auto;
+}
+
+.chart-container {
+    height: 90%;
+    width: 100%;
+    background: rgba(black, 0.55);
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 5px;
+}
+
+.chart {
+    height: 100%;
+    margin-right: -50px; 
+    margin-left: 20px;
+}
+
+.course-button, .add-course-button {
+    background: rgba(black, 0.55);
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #D5D9D9;
+    font-size: 12px;
+    height: 30px;
+    padding: 0 11px;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    margin: 3px;
+    :hover{
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    margin-left: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 5px;
+    width: 100%;
+}
+
+.grid-item {
+    padding: 5px;
+    text-align: center;
+    height: 90%;
+    color: white;
+}
+
+.title {
+    display: flex;
+    background-image: url(course.png);
+    background-size: cover;
+    border-radius: 5px;
+    width: 500px;
+    height: 250px;
+    cursor: pointer;
+    transition: all 0.1s;
+    &:hover {
+        background: rgba(black, 0.68);
+        backdrop-filter: blur(2px);
+        .headers {
+            color: white;
+            margin: 18%;
+        }
+    }
+    &:active {
+        background: rgba(black, 0.75);
+        transform: translateY(2px);
+        transition-duration: 0s;  
+    }
+    .headers {
+        color: black;
+        margin: 18%;
+    }
+}
+
+.title-modal {
+    border-radius: 5px;
+    transition: all 0.1s;
+}
+
+.modal-header {
+    padding: 5px;
+    text-align: center;
+    height: 90%;
+    color: black;
+}
+
+.grid-container-modal {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: fit-content;
+}
+
+.grid-item-modal {
+    padding: 25px;
+    text-align: center;
+    color: black;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 20%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(black, 0.44);
+}
+  
+.modal-content {
+    background-color: rgba(white, 0.88);
+    margin: auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: fit-content;
+    border-radius: 8px;
+}
+
+.material-icons-outlined {
+    font-size: 12px;
+    margin-right: 8px;
+}

@@ -1,0 +1,87 @@
+<div class="wrapper">
+    <button class="add-course-button" routerLink="/organization/add-course">
+        <div class="button-label-wrapper">
+            <i class="material-icons-outlined">add</i>Add new course
+        </div>
+    </button>
+    <div>
+        <div *ngFor="let course of courses; let i=index">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <div class="title">
+                        <div class="headers">
+                            <h2>{{course.title}}</h2>
+                            <h4>{{course.description}}</h4>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="chart-container">
+                        <h6>{{course.title}}</h6>
+                        <div echarts [options]="options[i]" class="chart"></div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="button-container">
+                        <button class="course-button" routerLink="/organization/course/{{i}}/students">
+                            <div class="button-label-wrapper">
+                                <i class="material-icons-outlined">person</i>Students
+                            </div>
+                        </button>
+                        <br>
+                        <button class="course-button" (click)="showEditModal[i] = true">
+                            <div class="button-label-wrapper">
+                                <i class="material-icons-outlined">edit</i>Edit
+                            </div>
+                        </button>
+                        <br>
+                        <button class="course-button" (click)="showDeleteModal[i] = true">
+                            <div class="button-label-wrapper">
+                                <i class="material-icons-outlined">delete</i>Delete
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="myModal" class="modal" role="dialog" *ngIf="showEditModal[i] === true">
+                <div class="modal-content">
+                    <h4 class="modal-header">Editing course {{course.title}}...</h4>
+                    <div class="title-modal">
+                        <div class="grid-container-modal">
+                            <div class="grid-item-modal">Title: <input [(ngModel)]="updateCourseBody.title"/></div>
+                            <div class="grid-item-modal">Price: <input type="number" step="0.01" [(ngModel)]="updateCourseBody.price"/> $</div>
+                            <div class="grid-item-modal">Description: <textarea [(ngModel)]="updateCourseBody.description"></textarea></div>
+                            <div class="grid-item-modal">Duration: <input type="number" [(ngModel)]="updateCourseBody.duration"/></div>
+                        </div>
+                    </div>
+                    <button class="course-button" (click)= "editCourse(course._id); showEditModal[i] = false">
+                        <div class="button-label-wrapper">
+                            <i class="material-icons-outlined">check</i>Submit changes
+                        </div>
+                    </button>
+                    <button class="course-button" (click)="showEditModal[i] = false">
+                        <div class="button-label-wrapper">
+                            <i class="material-icons-outlined">close</i>Cancel
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div id="myModal" class="modal" role="dialog" *ngIf="showDeleteModal[i] === true">
+                <div class="modal-content">
+                    <h4 class="modal-header">You are deleting course {{course.title}}. Are you sure?</h4>
+                    <button class="course-button" (click)="deleteCourse(i); showDeleteModal[i] = false">
+                        <div class="button-label-wrapper">
+                            <i class="material-icons-outlined">delete</i>Delete course
+                        </div>
+                    </button>
+                    <button class="course-button" (click)="showDeleteModal[i] = false">
+                        <div class="button-label-wrapper">
+                            <i class="material-icons-outlined">close</i>Cancel
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
