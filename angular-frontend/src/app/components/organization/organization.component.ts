@@ -77,13 +77,10 @@ export class OrganizationComponent implements OnInit {
     const data2: number[][] = [[]];
     const average_val = this.getAverage();
 
-    data1.push([]);
-    data1.push([]);
-
-    data2.push([]);
-    data2.push([]);
-
     for(let i = 0; i < this.courses.length; i++){
+      data1.push([]);
+      data2.push([]);
+
       data1[i][0] = this.courses[i].rating;
       data1[i][1] = this.courses[i].price;
       data1[i][2] = 50;
