@@ -24,16 +24,22 @@ const courseSchema = new Schema<CourseDocument, CourseModel>({
     requeired: true,
   },
   price: {
-    type: Decimal128,
+    type: Number,
     required: true,
   },
   rating: {
-    type: Decimal128,
+    type: Number,
     required: false,
     default: 0,
   },
   duration: {
     type: Number,
+    required: true,
+  },
+  level: {
+    type: String,
+    enum: ['beginner', 'intermediate', 'advanced'],
+    default: 'user',
     required: true,
   },
   usersEnrolled: [{ type: Types.ObjectId, ref: 'User' }],
