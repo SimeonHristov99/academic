@@ -121,8 +121,16 @@ export default class UserController {
 
     const courses = await Course
       .find({ "_id": { $in: user.courses } })
-      .select('-usersEnrolled -__v');;
+      .select('-usersEnrolled -__v');
 
     res.status(200).json(courses);
+  }
+
+  getUsers = async (req: Request, res: Response) => {
+    const users = await User
+      .find({})
+      .select('email firstname lastname createdAt');
+
+    res.status(200).json(users);
   }
 }
