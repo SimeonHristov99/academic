@@ -20,7 +20,7 @@ export class SeeCourseComponent implements OnInit {
     private router: Router
   ) {
     this.course = {
-      id: '',
+      _id: '',
       rating: 0,
       title: '',
       description: '',
@@ -35,21 +35,24 @@ export class SeeCourseComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const idParam = paramMap.get('id')
 
-      if(!idParam) {
+      if (!idParam) {
         console.log('ERROR: Invalid course id ')
         console.log(idParam)
         return
       }
 
-      const course = this.courseService.getCourse(idParam)
+      console.log(idParam)
+      this.courseService.getCourses().subscribe(res => {
+        const course = res.find(c => c._id === idParam)
 
-      if(!course) {
-        console.log('ERROR: Invalid course ')
-        console.log(course)
-        return
-      }
+        if (!course) {
+          console.log('ERROR: Invalid course ')
+          console.log(course)
+          return
+        }
 
-      this.course = course
+        this.course = course
+      })
     })
   }
 
@@ -57,7 +60,7 @@ export class SeeCourseComponent implements OnInit {
     this.course.status = 'In Cart'
 
     this.cartService.addItem({
-      courseId: this.course.id,
+      courseId: this.course._id,
       title: this.course.title,
       description: this.course.description,
       price: this.course.price,

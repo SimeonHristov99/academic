@@ -25,7 +25,7 @@ export class OrganizationComponent implements OnInit {
   courses: Course[] = [];
 
   updateCourseBody: Course = {
-    id: '',
+    _id: '',
     rating: 0,
     title: '',
     description: '',

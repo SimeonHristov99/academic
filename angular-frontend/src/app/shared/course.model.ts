@@ -1,5 +1,5 @@
 export interface Course {
-    id: string
+    _id: string
     rating: number
     title: string
     description: string

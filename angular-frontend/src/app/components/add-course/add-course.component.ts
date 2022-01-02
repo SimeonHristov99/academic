@@ -12,7 +12,7 @@ export class AddCourseComponent implements OnInit {
 
   constructor() {
     this.courseBody = {
-      id: '',
+      _id: '',
       rating: 0,
       title: '',
       description: '',
