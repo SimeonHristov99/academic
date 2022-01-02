@@ -1,0 +1,20 @@
+<div id="course">
+    <div id="video">
+        <iframe width="560" height="315" [src]='safeURL' frameborder="0" allowfullscreen></iframe>
+        <h1>{{name}}</h1>
+    </div>
+
+
+    <div id="videoList">
+        <h1> Crash Course Psychology </h1>
+        <ul>
+            <li *ngFor="let video of videos">
+                <p (click)="loadVideo(video)">
+                    <input type="checkbox" [checked]="video.watched" (change)="onCheckboxChange(video, $event)"/>
+                    {{video.name}}
+                </p>
+
+            </li>
+        </ul>
+    </div>
+</div>>

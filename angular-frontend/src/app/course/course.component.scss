@@ -1,0 +1,45 @@
+* {
+  color: white;
+}
+
+#course {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  overflow: hidden;
+}
+
+#video {
+  margin: 2%;
+  width: 60%;
+  float: left;
+}
+
+#videoList {
+  margin: 2%;
+  overflow: hidden;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  width: 560;
+}
+
+iframe {
+  width: 100%;
+}
+
+input {
+  margin: 5%;
+  width: 20px;
+  height: 20px;
+}
+
+p {
+  font-size: large;
+}
+
+p:hover {
+    cursor:pointer;
+    font-size: x-large;
+}

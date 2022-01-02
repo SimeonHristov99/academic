@@ -9,6 +9,7 @@ import { NotesComponent } from './notes/notes.component';
 import { TodosComponent } from './todos/todos.component';
 import { BookmarkTileComponent } from './bookmark-tile/bookmark-tile.component';
 import { FiltersTileComponent } from './filters-tile/filters-tile.component';
+import { CourseComponent } from './course/course.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { FiltersTileComponent } from './filters-tile/filters-tile.component';
     NotesComponent,
     TodosComponent,
     BookmarkTileComponent,
-    FiltersTileComponent
+    FiltersTileComponent,
+    CourseComponent,
+    
   ],
   imports: [
     BrowserModule,
