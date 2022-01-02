@@ -1,5 +1,4 @@
 import { Course } from "./course.model";
-import { v4 as uuidv4 } from 'uuid'
 
 export interface User {
     id: string
