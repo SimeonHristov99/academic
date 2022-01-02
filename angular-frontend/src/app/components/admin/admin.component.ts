@@ -22,7 +22,9 @@ export class AdminComponent implements OnInit {
     this.users = this.userService.getUsers();
   }
 
-  deleteUser(id: any): void {
+  deleteUser(payload: Object): void {
+    this.userService.removeUser(payload).subscribe(res => {
+    });
     window.location.reload();
   }
 
