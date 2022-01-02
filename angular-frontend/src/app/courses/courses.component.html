@@ -13,35 +13,43 @@
 
         <div class="filters-container">
 
-            <div class="wrapper">
+            <form #formFilter="ngForm" (ngSubmit)="onFiltersFormSubmit(formFilter)">
+                <div class="wrapper">
 
-                <div class="filter-tile">
-                    <p class="tile-text">Level</p>
-                    <ul>
-                        <li><input type="checkbox" name="isBeginner" />Beginner</li>
-                        <li><input type="checkbox" name="isIntermediate" />Intermediate</li>
-                        <li><input type="checkbox" name="isAdvanced" />Advanced</li>
-                    </ul>
+
+                    <div class="filter-tile">
+                        <p class="tile-text">Level</p>
+                        <ul>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="beg" />Beginner</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="int" />Intermediate</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="adv" />Advanced</li>
+
+
+                        </ul>
+                    </div>
+
+                    <div class="filter-tile">
+                        <p class="tile-text">Price</p>
+                        <ul>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isPaid" />Paid</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFree" />Free</li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-tile">
+                        <p class="tile-text">Rating</p>
+                        <ul>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isThree" />3</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFour" />4</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFive" />5</li>
+                        </ul>
+                    </div>
+
+                    <button class="btn align-end">Filter</button>
+
+
                 </div>
-
-                <div class="filter-tile">
-                    <p class="tile-text">Price</p>
-                    <ul>
-                        <li><input type="checkbox" name="isPaid" />Paid</li>
-                        <li><input type="checkbox" name="isFree" />Free</li>
-                    </ul>
-                </div>
-
-                <div class="filter-tile">
-                    <p class="tile-text">Rating</p>
-                    <ul>
-                        <li><input type="checkbox" name="isThree" />3</li>
-                        <li><input type="checkbox" name="isFour" />4</li>
-                        <li><input type="checkbox" name="isFive" />5</li>
-                    </ul>
-                </div>
-
-            </div>
+            </form>
 
         </div>
 

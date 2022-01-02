@@ -53,4 +53,17 @@ export class CoursesComponent implements OnInit {
     })
   }
 
+  onFiltersFormSubmit(form: NgForm) {
+    console.log(Object.keys(
+      Object.fromEntries(
+        Object
+          .entries(form.form.value)
+          .filter(([_, value]) => value === true)
+    )))
+
+    form.resetForm()
+
+    // Go to API to search here
+  }
+
 }
