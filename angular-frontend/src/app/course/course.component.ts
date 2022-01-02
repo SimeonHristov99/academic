@@ -9,7 +9,7 @@ import { Video } from './Video';
 })
 
 export class CourseComponent implements OnInit {
-  payed: boolean = false;
+  payed: boolean = true;
   safeURL: any;
   name?: string;
   mainName: string = "Crash Course Psychology";
@@ -34,7 +34,6 @@ export class CourseComponent implements OnInit {
   onCheckboxChange(video: Video, e: any) {
     video.watched = e.target.checked;
     this.changeIsVideoWatched();
-
   }
 
 
