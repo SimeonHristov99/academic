@@ -31,7 +31,7 @@ export class AdminComponent implements OnInit {
     this.userService.removeUser(body).subscribe(res => {
       console.log(res);
     });
-    //window.location.reload();
+    window.location.reload();
   }
 
 }
