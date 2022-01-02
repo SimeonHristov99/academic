@@ -15,4 +15,6 @@ user.post('/logout', authorization, userController.logout);
 
 user.delete('/delete', authorization, roleValidator(['admin']), userController.deleteUser);
 
+user.get('/user/courses', authorization, userController.getUserCourses);
+
 export default user;
