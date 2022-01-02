@@ -11,7 +11,8 @@ interface ICourse {
   duration: Number,
   level: String,
   usersEnrolled?: Set<IUser>,
-  createdAt?: Number,
+  createdAt?: Number, 
+  content: { [week: string]: String },
 }
 
 export default ICourse;
