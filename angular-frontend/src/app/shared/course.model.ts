@@ -8,4 +8,6 @@ export interface Course {
     url: string
     price: number
     duration: number
+
+    status?: string
 }

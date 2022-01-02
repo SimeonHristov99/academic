@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
+import { CartService } from 'src/app/shared/cart.service';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -15,6 +16,7 @@ export class SeeCourseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
+    private cartService: CartService,
     private router: Router
   ) {
     this.course = {
@@ -52,8 +54,16 @@ export class SeeCourseComponent implements OnInit {
     })
   }
 
-  buyCourse() {
-    this.courseService.buyCourse(this.course.id)
+  addToCart() {
+    this.course.status = 'In Cart'
+
+    this.cartService.addItem({
+      courseId: this.course.id,
+      title: this.course.title,
+      description: this.course.description,
+      price: this.course.price,
+      willBuy: false,
+    })
   }
 
 }
