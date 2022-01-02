@@ -31,7 +31,6 @@ export class OrganizationComponent implements OnInit {
     description: '',
     organization: '',
     level: '',
-    url: '',
     price: 1,
     duration: 1
   };

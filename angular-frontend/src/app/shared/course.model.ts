@@ -5,7 +5,6 @@ export interface Course {
     description: string
     organization: string
     level: string
-    url: string
     price: number
     duration: number
 

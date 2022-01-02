@@ -26,7 +26,6 @@ export class SeeCourseComponent implements OnInit {
       description: '',
       organization: '',
       level: '',
-      url: '',
       price: 1,
       duration: 1
     };

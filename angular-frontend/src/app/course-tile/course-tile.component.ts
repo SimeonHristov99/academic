@@ -18,7 +18,6 @@ export class CourseTileComponent implements OnInit {
       description: '',
       organization: '',
       level: '',
-      url: '',
       price: 1,
       duration: 1
     }
