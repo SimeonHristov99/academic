@@ -25,8 +25,9 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SeeCourseComponent } from './components/see-course/see-course.component';
+import { WebReqIterceptor } from './services/web-req.iterceptor';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { SeeCourseComponent } from './components/see-course/see-course.component
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: WebReqIterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
