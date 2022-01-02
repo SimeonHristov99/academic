@@ -11,16 +11,21 @@ import { AuthService } from '../services/auth.service';
 })
 export class InitialPageComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Welcome to Academic',
-    context: 'Create an account or log in to access our courses'
-  };
+  greeting: Greeting
+  errorText: string
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   constructor(
     private authService: AuthService
-  ) { }
+  ) {
+    this.greeting = {
+      header: 'Welcome to Academic',
+      context: 'Create an account or log in to access our courses'
+    }
+
+    this.errorText = ''
+  }
 
   ngOnInit(): void {
     this.headerData.emit(this.greeting);
@@ -29,10 +34,14 @@ export class InitialPageComponent implements OnInit {
   onFormSubmit(form: NgForm) {
     this.authService
       .login(form.value.email, form.value.password)
-      .subscribe((res: HttpResponse<any>) => {
-        console.log(res)
+      .subscribe({
+        next: (res) => {
+          console.log(res)
+        },
+        error: (e) => {
+          this.errorText = 'Invalid email or password'
+        }
       })
   }
-
 
 }
