@@ -4,7 +4,7 @@
     <h1> {{ this.header }} </h1>
     <h2> {{ this.context }} </h2>
 
-    <button class="btn" routerLink="/" *ngIf="router.url !== '/'" (click)="logout()">
+    <button class="btn" routerLink="/" *ngIf="showLogout()" (click)="logout()">
       <div class="button-label-wrapper">
         <i class="material-icons-outlined">logout</i><span class="home-label">Log out</span>
       </div>

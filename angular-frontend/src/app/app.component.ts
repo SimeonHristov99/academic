@@ -130,7 +130,13 @@ export class AppComponent {
 
   logout(): void {
     console.log('Log out called')
+    console.log(document.cookie)
     this.authService.logout()
+    console.log(document.cookie)
+  }
+
+  showLogout(): boolean {
+    return !['', '/', '/register'].includes(this.router.url)
   }
 
 }
