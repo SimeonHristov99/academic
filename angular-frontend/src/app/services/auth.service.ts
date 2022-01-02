@@ -18,29 +18,29 @@ export class AuthService {
     return this.webService.login(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
-        // console.log(res.cookies.auth)
-        // this.setSession()
+        
+        if(!document.cookie) {
+          console.log('ERROR: No cookie')
+          return
+        }
+        
         console.log('Logged In!')
+        console.log('cookie:')
+        console.log(document.cookie)
+
+        this.router.navigateByUrl('/user/courses')
+        // add more according to role
       })
     )
   }
 
   logout() {
-    this.removeSession()
+    document.cookie = 'auth' + "=" +
+      ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
   }
 
   getToken() {
-    // use the cookie service here
-  }
-
-  private setSession(token: string | null) {
-    if(!token) return
-
-    localStorage.setItem('token', token)
-  }
-
-  private removeSession() {
-    localStorage.removeItem('token')
+    return document.cookie.split('=')[1]
   }
 
 }

@@ -1,6 +1,7 @@
 import { animate, query, style, transition, trigger, group } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 export interface Greeting {
   header: string,
@@ -105,8 +106,10 @@ export class AppComponent {
   defaultHeader: string = 'Welcome to Academic';
   defaultContext: string = 'Create an account or log in to access out courses';
 
-  constructor(public router: Router) {
-  }
+  constructor(
+    public router: Router,
+    private authService: AuthService
+  ) { }
 
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) return outlet.activatedRouteData['tab'];
@@ -123,6 +126,11 @@ export class AppComponent {
       this.context = '';
       this.inUser = false;
     }
+  }
+
+  logout(): void {
+    console.log('Log out called')
+    this.authService.logout()
   }
 
 }
