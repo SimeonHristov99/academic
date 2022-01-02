@@ -1,4 +1,7 @@
 <div class="title">
+    <div *ngIf="isError" class="errormessage">
+        {{errorMessage}}
+    </div>
     <div class="grid-container">
         <div class="grid-item">Email: <input type="email" [(ngModel)]="userBody.email" /></div>
         <div class="grid-item">Password: <input type="password" [(ngModel)]="userBody.password" /></div>
@@ -21,6 +24,6 @@
 <div class="btns-container">
     <button type="button" class="btn" routerLink="/"><i class="material-icons-outlined">arrow_back_ios</i>Go
         back</button>
-    <button type="button" class="btn align-end" routerLink="/" (click)="register()"><i
+    <button type="button" class="btn align-end" (click)="register()"><i
             class="material-icons-outlined">add</i>Create new account</button>
 </div>
