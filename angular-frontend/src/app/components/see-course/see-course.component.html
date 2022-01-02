@@ -5,7 +5,7 @@
 
         <div class="btns-container">
             <a routerLink="../" class="btn">Go Back</a>
-            <button class="btn align-end" (click)="buyCourse()">Buy</button>
+            <button *ngIf="!course.status" class="btn align-end" (click)="addToCart()" routerLink="../">Add to cart</button>
         </div>
 
     </div>

@@ -21,7 +21,7 @@ export class CourseTileComponent implements OnInit {
       url: '',
       price: 1,
       duration: 1
-    };
+    }
   }
 
   ngOnInit(): void {
