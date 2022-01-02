@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../shared/user.model';
+import { WebRequestService } from './web-request.service';
+import { HttpResponse } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,7 @@ export class UserService {
 
   users: User[]
 
-  constructor() {
+  constructor(private webService: WebRequestService) {
     this.users = [{
       id: '',
       email: '',
@@ -18,6 +21,11 @@ export class UserService {
       birthDate: undefined,
       role: ''
     }]
+  }
+
+  register(payload: Object) {
+    console.log(123333333)
+    return this.webService.post('register', payload);
   }
 
   getUser(id: string) {
