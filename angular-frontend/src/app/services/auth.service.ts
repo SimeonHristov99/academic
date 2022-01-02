@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
-import { shareReplay, tap } from 'rxjs';
+import { catchError, shareReplay, tap } from 'rxjs';
 import { WebRequestService } from './web-request.service';
 
 @Injectable({
@@ -18,14 +18,13 @@ export class AuthService {
     return this.webService.login(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
-        
-        if(!document.cookie) {
+
+        if (!document.cookie) {
           console.log('ERROR: No cookie')
           return
         }
-        
+
         console.log('Logged In!')
-        console.log('cookie:')
         console.log(document.cookie)
 
         this.router.navigateByUrl('/user/courses')
@@ -35,8 +34,7 @@ export class AuthService {
   }
 
   logout() {
-    document.cookie = 'auth' + "=" +
-      ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    document.cookie = 'auth=; Max-Age=0; path=/; domain=' + location.hostname;
   }
 
   getToken() {
