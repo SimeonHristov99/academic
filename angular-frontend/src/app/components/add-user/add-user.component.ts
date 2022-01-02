@@ -44,7 +44,6 @@ export class AddUserComponent implements OnInit {
     }, err => {
       this.isError = true;
       this.errorMessage = err.error.error;
-
     });
 
   }

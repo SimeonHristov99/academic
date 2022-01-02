@@ -24,7 +24,6 @@ export class UserService {
   }
 
   register(payload: Object) {
-    console.log(123333333)
     return this.webService.post('register', payload);
   }
 

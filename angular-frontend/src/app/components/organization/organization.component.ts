@@ -36,7 +36,7 @@ export class OrganizationComponent implements OnInit {
     duration: 1
   };
 
-  constructor(private courseService: CourseService, private http: HttpClient) {
+  constructor(private courseService: CourseService) {
 
   }
 
@@ -46,14 +46,15 @@ export class OrganizationComponent implements OnInit {
 
   ngOnInit() {
     this.headerData.emit(this.greeting);
-    this.getCourseList();
+    this.getCourses();
     this.closeModals();
   }
 
-  getCourseList(): void {
-    this.courses = this.courseService.getCourses();
-    this.buildGraphics();
-    console.log(this.courses);
+  getCourses(): void {
+    this.courseService.getCourses().subscribe(res => {
+      this.courses = res;
+      this.buildGraphics();
+    });
   }
 
   getAverage(): number[] {
