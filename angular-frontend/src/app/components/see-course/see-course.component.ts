@@ -17,7 +17,6 @@ export class SeeCourseComponent implements OnInit {
     private route: ActivatedRoute,
     private courseService: CourseService,
     private cartService: CartService,
-    private router: Router
   ) {
     this.course = {
       _id: '',
@@ -41,10 +40,9 @@ export class SeeCourseComponent implements OnInit {
         return
       }
 
-      console.log(idParam)
       this.courseService.getCourses().subscribe(res => {
         const course = res.find(c => c._id === idParam)
-
+        
         if (!course) {
           console.log('ERROR: Invalid course ')
           console.log(course)
@@ -57,8 +55,6 @@ export class SeeCourseComponent implements OnInit {
   }
 
   addToCart() {
-    this.course.status = 'In Cart'
-
     this.cartService.addItem({
       courseId: this.course._id,
       title: this.course.title,

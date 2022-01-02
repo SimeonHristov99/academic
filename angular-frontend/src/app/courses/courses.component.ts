@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Greeting } from '../app.component';
 import { CourseService } from '../services/course.service';
 import { Course } from '../shared/course.model';
@@ -10,11 +11,7 @@ import { Course } from '../shared/course.model';
 })
 export class CoursesComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Jim',
-    context: '19:00, 1 January 2022',
-    inUser: true
-  };
+  greeting: Greeting;
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -23,6 +20,12 @@ export class CoursesComponent implements OnInit {
   constructor(
     private courseService: CourseService
   ) {
+    this.greeting = {
+      header: 'Hello, Jim',
+      context: '19:00, 1 January 2022',
+      inUser: true
+    }
+
     this.courses = []
   }
 
@@ -34,8 +37,20 @@ export class CoursesComponent implements OnInit {
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
       this.courses = res;
-      console.log(this.courses)
     });
+  }
+
+  onFormSubmit(form: NgForm) {
+    console.log(form.value.search)
+    this.courseService.getCoursesByKeyword(form.value.search).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: (err) => {
+        console.log('ERROR:')
+        console.log(err)
+      }
+    })
   }
 
 }

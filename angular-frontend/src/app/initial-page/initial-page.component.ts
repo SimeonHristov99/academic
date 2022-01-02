@@ -34,14 +34,11 @@ export class InitialPageComponent implements OnInit {
   onFormSubmit(form: NgForm) {
     this.authService
       .login(form.value.email, form.value.password)
-      .subscribe({
-        next: (res) => {
-          console.log(res)
-        },
-        error: (e) => {
-          this.errorText = 'Invalid email or password'
-        }
-      })
+        .subscribe({
+          error: (_) => {
+            this.errorText = 'Invalid email or password'
+          }
+        })
   }
 
 }

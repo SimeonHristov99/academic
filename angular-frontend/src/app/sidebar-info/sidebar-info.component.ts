@@ -39,9 +39,8 @@ export class SidebarInfoComponent implements OnInit {
       onApprove: async (data: any, actions: { order: { capture: () => any; }; }) => {
         const order = await actions.order.capture()
         this.itemsToBuy.map(i => this.cartService.deleteItem(i.courseId))
-        console.log('Transaction successful!')
-        console.log(order)
         this.itemsToBuy = []
+        console.log('Transaction successful')
       },
       onError: (err: any) => {
         console.log(err)
