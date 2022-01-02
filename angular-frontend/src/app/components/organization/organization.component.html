@@ -55,7 +55,7 @@
                             <div class="grid-item-modal">Duration: <input type="number" [(ngModel)]="updateCourseBody.duration"/></div>
                         </div>
                     </div>
-                    <button class="course-button" (click)= "editCourse(i); showEditModal[i] = false">
+                    <button class="course-button" (click)= "editCourse(course._id); showEditModal[i] = false">
                         <div class="button-label-wrapper">
                             <i class="material-icons-outlined">check</i>Submit changes
                         </div>
