@@ -6,9 +6,10 @@ interface ICourse {
   createdBy: String,
   title: String,
   description: String,
-  price: Decimal128,
-  rating: Decimal128,
+  price: Number,
+  rating: Number,
   duration: Number,
+  level: String,
   usersEnrolled?: Set<IUser>,
   createdAt?: Number,
 }
