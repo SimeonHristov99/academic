@@ -7,6 +7,4 @@ export interface Course {
     level: string
     price: number
     duration: number
-
-    status?: string
 }
