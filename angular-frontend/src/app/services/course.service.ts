@@ -69,10 +69,6 @@ export class CourseService {
     this.courses.splice(courseIdx, 1)
   }
 
-  buyCourse(id: string) {
-    
-  }
-
   getStudentListByCourse() {
     return [{
       id: '',
