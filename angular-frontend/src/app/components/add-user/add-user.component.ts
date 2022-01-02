@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../shared/user.model';
 import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,8 +13,10 @@ import { HttpResponse } from '@angular/common/http';
 export class AddUserComponent implements OnInit {
 
   userBody: User;
+  isError: boolean = false;
+  errorMessage: string = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public router: Router) {
     this.userBody = {
       id: '',
       email: '',
@@ -34,7 +37,15 @@ export class AddUserComponent implements OnInit {
     }
     console.log(this.userBody);
     this.userService.register(this.userBody).subscribe(res => {
-      console.log(res)
+      console.log(res);
+      this.isError = false;
+      this.errorMessage = '';
+      this.router.navigate(['/']);
+    }, err => {
+      this.isError = true;
+      this.errorMessage = err.error.error;
+
     });
+
   }
 }
