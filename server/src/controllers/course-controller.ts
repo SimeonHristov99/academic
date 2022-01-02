@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Course, CourseDocument } from '../models/course';
 import ICourse from '../models/interfaces/ICourse';
+import { User } from '../models/user';
 
 export default class CourseController {
   construct() { }
@@ -22,9 +23,13 @@ export default class CourseController {
   }
 
   getEnrolledUsers = async (req: Request, res: Response) => {
-    Course.findOne({ _id: req.body.id }).select('usersEnrolled')
-      .then(course => { res.status(200).json(course) })
-      .catch(err => { res.status(500).json({ success: false, error: 'Can not get enrolled users in course: ' + err }) });
+    const _id = req.body._id;
+
+    const users = await Course.findOne({ _id: _id }).select('usersEnrolled')
+      .populate({ path: 'usersEnrolled', select: 'email firstname lastname' })
+      .exec();
+
+    res.status(200).json(users.usersEnrolled);
   }
 
   sortCoursesByPrice = async (req: Request, res: Response) => {
@@ -105,15 +110,15 @@ export default class CourseController {
     let user = res.locals.user;
     let course = req.body;
 
-    course.createdBy = res.locals.user.id;
-    course.usersEnrolled = [user.id];
+    // course.createdBy = res.locals.user.id;
+    // course.usersEnrolled = [user.id];
 
     await new Course(course).save((err: Error, course) => {
       if (err) {
         return res.status(500).json({ success: false, err });
       } else {
-        user.courses.push(course.id);
-        user.save();
+        // user.courses.push(course.id);
+        // user.save();
 
         res.status(200).json({ success: true });
       }
@@ -135,7 +140,7 @@ export default class CourseController {
 
   deleteCourse = async (req: Request, res: Response, next: () => void) => {
     const course_id = req.body._id;
-    console.log(course_id);
+
     try {
       const course = await Course.findOne({ _id: course_id }).exec();
 
@@ -161,7 +166,7 @@ export default class CourseController {
 
     const course = await Course.findOneAndUpdate(
       { _id: courseId },
-      { $push: { usersEnrolled: user } }, { returnNewDocument: true }
+      { $addToSet: { usersEnrolled: user } }, { returnNewDocument: true }
     );
 
     user.courses.push(course);
