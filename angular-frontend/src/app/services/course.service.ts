@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Course } from '../shared/course.model';
+import { WebRequestService } from './web-request.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class CourseService {
 
   courses: Course[]
 
-  constructor() {
+  constructor(private webService: WebRequestService) {
     this.courses = [
       {
         id: '1',
@@ -46,8 +48,8 @@ export class CourseService {
     ]
   }
 
-  getCourses() {
-    return this.courses
+  getCourses(): Observable<Course[]> {
+    return this.webService.get('courses') as Observable<Course[]>;
   }
 
   getCourse(id: string) {
