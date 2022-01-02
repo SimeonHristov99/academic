@@ -14,7 +14,7 @@ export class UserService {
   constructor(private webService: WebRequestService) {
     this.users = [{
       id: '',
-      email: '',
+      email: 'zdr@zdr.zdr',
       firstname: '',
       lastname: '',
       password: '',
@@ -33,6 +33,10 @@ export class UserService {
 
   getUsers(): User[] {
     return this.users;
+  }
+
+  removeUser(payload: Object) {
+    return this.webService.delete('/delete', payload);
   }
 
   enroll(userId: string, courseId: string) {
