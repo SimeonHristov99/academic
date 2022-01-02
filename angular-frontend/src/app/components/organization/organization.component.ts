@@ -29,7 +29,7 @@ export class OrganizationComponent implements OnInit {
     rating: 0,
     title: '',
     description: '',
-    organization: '',
+    organization: 'beginner',
     level: '',
     price: 1,
     duration: 1
@@ -53,6 +53,7 @@ export class OrganizationComponent implements OnInit {
     this.courseService.getCoursesByUser().subscribe(res => {
       this.courses = res;
       this.buildGraphics();
+      console.log(this.courses);
     });
   }
 
@@ -156,11 +157,15 @@ export class OrganizationComponent implements OnInit {
   }
 
   editCourse(id: any): void {
-    // console.log(JSON.stringify(this.updateCourseBody));
+    this.updateCourseBody._id = id;
+    this.courseService.updateCourse(this.updateCourseBody).subscribe(res => {
+    });
   }
 
   deleteCourse(id: any): void {
-    console.log("Course: " + id + " deleting");
+    console.log(this.courses[id])
+    this.courseService.deleteCourse(this.courses[id]).subscribe(res => {
+    });
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -10,14 +11,14 @@ export class AddCourseComponent implements OnInit {
 
   courseBody: Course;
 
-  constructor() {
+  constructor(private courseService: CourseService) {
     this.courseBody = {
       _id: '',
       rating: 0,
       title: '',
       description: '',
       organization: '',
-      level: '',
+      level: 'beginner',
       price: 1,
       duration: 1
     };
@@ -27,7 +28,8 @@ export class AddCourseComponent implements OnInit {
   }
 
   addCourse() {
-    console.log(JSON.stringify(this.courseBody));
+    this.courseService.addCourse(this.courseBody).subscribe(res => {
+    });
   }
 
 }

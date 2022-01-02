@@ -134,7 +134,7 @@ export default class CourseController {
   };
 
   deleteCourse = async (req: Request, res: Response, next: () => void) => {
-    const course_id = req.body.course_id;
+    const course_id = req.body._id;
     console.log(course_id);
     try {
       const course = await Course.findOne({ _id: course_id }).exec();
