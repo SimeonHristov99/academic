@@ -1,5 +1,4 @@
 import { Schema, model, Types, Document, Model } from 'mongoose';
-import { Decimal128 } from 'mongodb';
 import ICourse from './interfaces/ICourse';
 
 export interface CourseDocument extends ICourse, Document {

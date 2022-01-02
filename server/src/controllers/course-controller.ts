@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Course } from '../models/course';
+import { Course, CourseDocument } from '../models/course';
 import ICourse from '../models/interfaces/ICourse';
 
 export default class CourseController {
@@ -102,18 +102,22 @@ export default class CourseController {
   }
 
   createCourse = async (req: Request, res: Response) => {
-    let course: ICourse = req.body;
-    console.log(course);
+    let user = res.locals.user;
+    let course = req.body;
+
     course.createdBy = res.locals.user.id;
+    course.usersEnrolled = [user.id];
 
-    const newCourse = new Course(course);
-
-    newCourse.save((err: Error, _) => {
+    await new Course(course).save((err: Error, course) => {
       if (err) {
-        return res.status(500).json({ success: false, error: 'Can not create course because' + err });
+        return res.status(500).json({ success: false, err });
+      } else {
+        user.courses.push(course.id);
+        user.save();
+
+        res.status(200).json({ success: true });
       }
-      res.status(200).json({ success: true });
-    });
+    })
   };
 
   updateCourse = async (req: Request, res: Response) => {
