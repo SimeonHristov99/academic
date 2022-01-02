@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { UserDocument } from '../models/user';
 import IUser from '../models/interfaces/IUser';
 import generateToken from './generate-token';
+import { Course } from '../models/course';
 
 export default class UserController {
   construct() { }
@@ -113,5 +114,15 @@ export default class UserController {
     } catch (error) {
       res.status(401).json({ success: false, error: 'Invalid email' });
     }
+  }
+
+  getUserCourses = async (req: Request, res: Response) => {
+    const user = res.locals.user;
+
+    const courses = await Course
+      .find({ "_id": { $in: user.courses } })
+      .select('-usersEnrolled -__v');;
+
+    res.status(200).json(courses);
   }
 }
