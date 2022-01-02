@@ -33,6 +33,7 @@ export class CoursesComponent implements OnInit {
 
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
+      console.log(res)
       this.courses = res;
     });
   }
