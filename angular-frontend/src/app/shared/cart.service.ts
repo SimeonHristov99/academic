@@ -10,10 +10,34 @@ export class CartService {
 
   constructor() {
     this.items = [
-      new CartItem('This is a test', 0.5),
-      new CartItem('Hey!!', 234),
-      new CartItem('Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus deleniti dolores corporis ratione iusto ipsum minus porro architecto iste id! Tempore eligendi minima illo sed quod ullam non, quae voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus deleniti dolores corporis ratione iusto ipsum minus porro architecto iste id! Tempore eligendi minima illo sed quod ullam non, quae voluptatum.', 345),
-      new CartItem('Hey!!', 456),
+      {
+        courseId: '1',
+        title: 'Title 1',
+        description: 'This is a test',
+        price: 0.5,
+        willBuy: false
+      },
+      {
+        courseId: '2',
+        title: 'Title 2',
+        description: 'heyy!!',
+        price: 234,
+        willBuy: false
+      },
+      {
+        courseId: '3',
+        title: 'Title 3',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus deleniti dolores corporis ratione iusto ipsum minus porro architecto iste id! Tempore eligendi minima illo sed quod ullam non, quae voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus deleniti dolores corporis ratione iusto ipsum minus porro architecto iste id! Tempore eligendi minima illo sed quod ullam non, quae voluptatum.',
+        price: 345,
+        willBuy: false
+      },
+      {
+        courseId: '4',
+        title: 'Title 4',
+        description: 'Yo!',
+        price: 456,
+        willBuy: false
+      },
     ]
   }
   
@@ -22,7 +46,7 @@ export class CartService {
   }
 
   getItem(id: string) {
-    return this.items.find(i => i.id === id)
+    return this.items.find(i => i.courseId === id)
   }
 
   addItem(item: CartItem) {
@@ -35,7 +59,7 @@ export class CartService {
   }
 
   deleteItem(id: string) {
-    const idx = this.items.findIndex(i => i.id === id)
+    const idx = this.items.findIndex(i => i.courseId === id)
     if (idx == -1) return
 
     this.items.splice(idx, 1)

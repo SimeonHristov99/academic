@@ -1,11 +1,7 @@
-import {v4 as uuidv4} from 'uuid'
-
-export class CartItem {
-    id: string
+export interface CartItem {
+    courseId: string
+    title: string
+    description: string
+    price: number
     willBuy: boolean
-
-    constructor(public description: string, public price: number) {
-        this.id = uuidv4()
-        this.willBuy = false
-    }
 }

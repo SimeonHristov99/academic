@@ -44,11 +44,11 @@ export class CartComponent implements OnInit {
   }
 
   toggleWillBuy(item: CartItem) {
-    this.cartService.updateItem(item.id, { willBuy: !item.willBuy })
+    this.cartService.updateItem(item.courseId, { willBuy: !item.willBuy })
   }
 
   onDeleteClick(item: CartItem) {
-    this.cartService.deleteItem(item.id)
+    this.cartService.deleteItem(item.courseId)
   }
 
   getItemsToBuy() {

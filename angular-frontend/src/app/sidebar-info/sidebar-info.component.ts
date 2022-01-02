@@ -27,7 +27,7 @@ export class SidebarInfoComponent implements OnInit {
       createOrder: (data: any, actions: { order: { create: (arg0: { purchase_units: { description: string; amount: { currency_code: string; value: number; }; }[]; }) => any; }; }) => {
         return actions.order.create({
           purchase_units: this.itemsToBuy.map(i => ({
-            reference_id: i.id,
+            reference_id: i.courseId,
             description: i.description.slice(0, 127),
             amount: {
               currency_code: 'USD',
@@ -38,7 +38,7 @@ export class SidebarInfoComponent implements OnInit {
       },
       onApprove: async (data: any, actions: { order: { capture: () => any; }; }) => {
         const order = await actions.order.capture()
-        this.itemsToBuy.map(i => this.cartService.deleteItem(i.id))
+        this.itemsToBuy.map(i => this.cartService.deleteItem(i.courseId))
         console.log('Transaction successful!')
         console.log(order)
         this.itemsToBuy = []
