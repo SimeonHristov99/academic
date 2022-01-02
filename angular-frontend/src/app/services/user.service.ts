@@ -32,8 +32,8 @@ export class UserService {
     return this.users.find(u => u.id)
   }
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Observable<User[]> {
+    return this.webService.get('users') as Observable<User[]>;
   }
 
   getUsersByCourse(payload: Object): Observable<User[]> {
