@@ -3,6 +3,7 @@ import { User } from '../shared/user.model';
 import { WebRequestService } from './web-request.service';
 import { HttpResponse } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class UserService {
 
   getUsers(): User[] {
     return this.users;
+  }
+
+  getUsersByCourse(payload: Object): Observable<User[]> {
+    return this.webService.post('course/users', payload) as Observable<User[]>;
   }
 
   removeUser(payload: Object) {
