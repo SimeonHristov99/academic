@@ -24,7 +24,7 @@
         <h1> {{mainName}} </h1>
         <ul>
             <li *ngFor="let video of videos">
-                <p (click)="loadVideo(video)">
+                <p (click)="loadVideo(video)" >
                     <input type="checkbox" [checked]="video.watched" (change)="onCheckboxChange(video, $event)" />
                     {{video.name}}
                 </p>
