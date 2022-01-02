@@ -51,7 +51,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   getCourses(): void {
-    this.courseService.getCourses().subscribe(res => {
+    this.courseService.getCoursesByUser().subscribe(res => {
       this.courses = res;
       this.buildGraphics();
     });

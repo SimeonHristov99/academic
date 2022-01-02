@@ -52,6 +52,10 @@ export class CourseService {
     return this.webService.get('courses') as Observable<Course[]>;
   }
 
+  getCoursesByUser(): Observable<Course[]> {
+    return this.webService.get('user/courses') as Observable<Course[]>;
+  }
+
   getCourse(id: string) {
     return this.courses.find(c => c.id === id)
   }
