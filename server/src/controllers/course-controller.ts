@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Course, CourseDocument } from '../models/course';
+import { Course } from '../models/course';
 import ICourse from '../models/interfaces/ICourse';
 import { User } from '../models/user';
 
@@ -15,10 +15,29 @@ export default class CourseController {
       }
     },
     {
-      $unset: "__v"
+      $lookup: {
+        "from": User.collection.name,
+        let: { createdById: "$createdBy" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$createdById"] } }, },
+          {
+            $project: { "organization": "$firstname", }
+          },
+        ],
+        as: "createdByName"
+      }
+    },
+    {
+      $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ["$createdByName", 0] }, "$$ROOT"] } }
+    },
+    {
+      $project: { createdByName: 0 }
+    },
+    {
+      $unset: ["__v", "content"]
     }
     ]);
-
+    console.log(courses);
     res.status(200).json(courses);
   }
 
@@ -32,10 +51,10 @@ export default class CourseController {
     res.status(200).json(users.usersEnrolled);
   }
 
-  getContent =  async (req: Request, res: Response) => {
-    Course.findOne({_id: req.body.id}).select('content')
-    .then(course  => {res.status(200).json(course)})
-    .catch(err => {res.status(500).json({ success: false, error: 'Can not get content in course: ' + err })});
+  getContent = async (req: Request, res: Response) => {
+    Course.findOne({ _id: req.body.id }).select('content')
+      .then(course => { res.status(200).json(course) })
+      .catch(err => { res.status(500).json({ success: false, error: 'Can not get content in course: ' + err }) });
   }
 
   sortCoursesByPrice = async (req: Request, res: Response) => {
@@ -47,7 +66,26 @@ export default class CourseController {
       }
     },
     {
-      $unset: "__v"
+      $lookup: {
+        "from": User.collection.name,
+        let: { createdById: "$createdBy" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$createdById"] } }, },
+          {
+            $project: { "organization": "$firstname", }
+          },
+        ],
+        as: "createdByName"
+      }
+    },
+    {
+      $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ["$createdByName", 0] }, "$$ROOT"] } }
+    },
+    {
+      $project: { createdByName: 0 }
+    },
+    {
+      $unset: ["__v", "content"]
     }
     ]).sort({ price: 1 })
       .then(course => { res.status(200).json(course) })
@@ -82,7 +120,26 @@ export default class CourseController {
       }
     },
     {
-      $unset: "__v"
+      $lookup: {
+        "from": User.collection.name,
+        let: { createdById: "$createdBy" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$createdById"] } }, },
+          {
+            $project: { "organization": "$firstname", }
+          },
+        ],
+        as: "createdByName"
+      }
+    },
+    {
+      $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ["$createdByName", 0] }, "$$ROOT"] } }
+    },
+    {
+      $project: { createdByName: 0 }
+    },
+    {
+      $unset: ["__v", "content"]
     }
     ]).sort({ priority: 1 })
       .then(course => { res.status(200).json(course) })
@@ -98,7 +155,26 @@ export default class CourseController {
       }
     },
     {
-      $unset: "__v"
+      $lookup: {
+        "from": User.collection.name,
+        let: { createdById: "$createdBy" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$createdById"] } }, },
+          {
+            $project: { "organization": "$firstname", }
+          },
+        ],
+        as: "createdByName"
+      }
+    },
+    {
+      $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ["$createdByName", 0] }, "$$ROOT"] } }
+    },
+    {
+      $project: { createdByName: 0 }
+    },
+    {
+      $unset: ["__v", "content"]
     }
     ]).sort({ rating: 1 })
       .then(course => { res.status(200).json(course) })
