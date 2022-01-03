@@ -26,7 +26,9 @@ export class WebRequestService {
   }
 
   delete(uri: string, payload: Object) {
-    return this.http.delete(`${this.ROOT_URL}/${uri}`, payload)
+    return this.http.delete(`${this.ROOT_URL}/${uri}`, {
+      body: payload
+   });
   }
 
   login(email: string, password: string) {

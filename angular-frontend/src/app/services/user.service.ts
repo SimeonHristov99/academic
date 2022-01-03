@@ -41,7 +41,7 @@ export class UserService {
   }
 
   removeUser(payload: Object) {
-    return this.webService.delete('/delete', payload);
+    return this.webService.delete('delete', payload);
   }
 
   enroll(courseId: string) {
