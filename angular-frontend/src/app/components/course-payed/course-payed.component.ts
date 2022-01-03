@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
+import { UserService } from 'src/app/services/user.service';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -24,7 +25,8 @@ export class CoursePayedComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private router: Router,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private userService: UserService
   ) {
     this.course = {
       _id: '',
@@ -92,7 +94,14 @@ export class CoursePayedComponent implements OnInit {
   send(link: string, rating: any) {
     if (link === '')
       return alert("Enter a link!")
-    alert(rating)
+
+    this.userService.task(this.course._id, link).subscribe(res => {
+      if (res) {
+        alert("Successfull send!");
+      } else {
+        alert("Error while sending!");
+      }
+    })
   }
 
   getCourse() {
@@ -102,7 +111,10 @@ export class CoursePayedComponent implements OnInit {
       while (this.adCourse._id == this.course._id) {
         this.adCourse = res[n];
       }
-    }) 
+    })
+
+    console.log(this.course.content)
   }
+
 
 }
