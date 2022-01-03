@@ -17,4 +17,6 @@ user.delete('/delete', authorization, roleValidator(['admin']), userController.d
 
 user.get('/user/courses', authorization, userController.getUserCourses);
 
+user.get('/users', authorization, roleValidator(['admin']), userController.getUsers);
+
 export default user;

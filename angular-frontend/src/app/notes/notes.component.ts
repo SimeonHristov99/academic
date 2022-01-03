@@ -10,18 +10,19 @@ import { NoteService } from '../shared/note.service';
 })
 export class NotesComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Jim',
-    context: '19:00, 1 January 2022',
-    inUser: true
-  };
+  greeting: Greeting
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   notes: Note[]
 
   constructor(private noteService: NoteService) {
-     this.notes = []
+    this.greeting = {
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '19:00, 1 January 2022',
+      inUser: true
+    };
+    this.notes = []
   }
 
   ngOnInit(): void {

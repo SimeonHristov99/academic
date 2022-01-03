@@ -15,9 +15,7 @@ export class SidebarInfoComponent implements OnInit {
 
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef | undefined
 
-  constructor(
-    private cartService: CartService
-  ) {
+  constructor(private cartService: CartService) {
     this.itemsToBuy = []
   }
 
@@ -38,6 +36,7 @@ export class SidebarInfoComponent implements OnInit {
       },
       onApprove: async (data: any, actions: { order: { capture: () => any; }; }) => {
         const order = await actions.order.capture()
+        this.itemsToBuy.map(i => this.cartService.buyItem(i.courseId))
         this.itemsToBuy.map(i => this.cartService.deleteItem(i.courseId))
         this.itemsToBuy = []
         console.log('Transaction successful')

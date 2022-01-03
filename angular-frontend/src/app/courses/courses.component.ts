@@ -16,28 +16,36 @@ export class CoursesComponent implements OnInit {
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   courses: Course[]
+  coursesBought: Course[]
 
-  constructor(
-    private courseService: CourseService
-  ) {
+  constructor(private courseService: CourseService) {
     this.greeting = {
-      header: 'Hello, Jim',
+      header: `Hello, ${localStorage.getItem('firstName')}`,
       context: '19:00, 1 January 2022',
       inUser: true
     }
 
     this.courses = []
+    this.coursesBought = []
   }
 
   ngOnInit(): void {
     this.headerData.emit(this.greeting)
-    this.getCourses();
+    this.getCourses()
+    this.getCoursesBought()
   }
 
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
       this.courses = res;
-    });
+    })
+  }
+
+  getCoursesBought(): void {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      this.coursesBought = res
+      console.log(this.coursesBought)
+    })
   }
 
   onFormSubmit(form: NgForm) {
@@ -51,6 +59,19 @@ export class CoursesComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  onFiltersFormSubmit(form: NgForm) {
+    console.log(Object.keys(
+      Object.fromEntries(
+        Object
+          .entries(form.form.value)
+          .filter(([_, value]) => value === true)
+    )))
+
+    form.resetForm()
+
+    // Go to API to search here
   }
 
 }

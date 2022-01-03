@@ -27,37 +27,34 @@ export default class UserController {
     return errors;
   }
 
-  createUser = async (user: IUser): Promise<void> => {
-    bcrypt.hash(user.password, 10, async (error: Error, hash: string) => {
-      if (error) {
-        return error;
-      }
+  createUser = async (user: IUser): Promise<UserDocument> => {
+    const hash = await bcrypt.hash(user.password, 10);
 
-      const newUser = new User({
-        email: user.email,
-        password: hash,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        birthDate: user.birthDate,
-        role: user.role,
-      });
-
-      await newUser.save();
+    const newUser = new User({
+      email: user.email,
+      password: hash,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      birthDate: user.birthDate,
+      role: user.role,
     });
+
+    return await newUser.save();
   };
 
   register = async (req: Request, res: Response, next: () => void) => {
-    const userExist: IUser = await this.findUser(req.body.email);
+    const user = req.body;
+    const userExist: IUser = await this.findUser(user.email);
 
     if (userExist) {
       res.status(400).json({ success: false, error: 'Email is already taken' });
     } else {
-      await this.createUser(req.body).catch((error) => {
-        res.status(400).json({ success: false, error: 'Invalid email or password' });
+      await this.createUser(user).then(newUser => {
+        generateToken(res, user.email);
+        res.status(200).json({ id: newUser.id, role: user.role });
+      }).catch((err) => {
+        res.status(400).json({ error: '1111 Invalid email or password' });
       });
-
-      generateToken(res, req.body.email);
-      res.status(200).json({ success: true, message: 'User created' });
     }
   };
 
@@ -75,7 +72,13 @@ export default class UserController {
 
           if (result) {
             generateToken(res, email);
-            res.status(200).json({ success: true });
+            const resBody = {
+              id: user.id,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              role: user.role,
+            }
+            res.status(200).json(resBody);
           } else {
             res.status(401).json({ success: false, error: 'Invalid password' });
           }
@@ -121,8 +124,16 @@ export default class UserController {
 
     const courses = await Course
       .find({ "_id": { $in: user.courses } })
-      .select('-usersEnrolled -__v');;
+      .select('-usersEnrolled -__v');
 
     res.status(200).json(courses);
+  }
+
+  getUsers = async (req: Request, res: Response) => {
+    const users = await User
+      .find({})
+      .select('email firstname lastname createdAt');
+
+    res.status(200).json(users);
   }
 }

@@ -19,11 +19,17 @@ export class AdminComponent implements OnInit {
   }
 
   getUserList(): void {
-    this.users = this.userService.getUsers();
+    this.userService.getUsers().subscribe(res => {
+      this.users = res;
+    });;
   }
 
-  deleteUser(payload: Object): void {
-    this.userService.removeUser(payload).subscribe(res => {
+  deleteUser(user: User): void {
+    const body = {
+      email: user.email
+    }
+    this.userService.removeUser(body).subscribe(res => {
+      console.log(res);
     });
     window.location.reload();
   }
