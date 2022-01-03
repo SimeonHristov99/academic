@@ -25,7 +25,7 @@ export class AuthService {
         }
 
         const id = res.body.id
-        let firstName = res.body.firstName
+        let firstName = res.body.firstname
         const role: string = res.body.role[0] === 'o' ? 'organization' : res.body.role
 
         if (!id) {
@@ -36,8 +36,6 @@ export class AuthService {
         if (!firstName) {
           firstName = email.split('@')[0]
         }
-
-
 
         localStorage.setItem('userId', id)
         localStorage.setItem('firstName', firstName)
