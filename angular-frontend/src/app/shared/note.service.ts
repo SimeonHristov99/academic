@@ -26,7 +26,7 @@ export class NoteService {
     return this.webService.post('/note/update', note)
   }
 
-  deleteNote(id: string) {
-    return this.webService.delete('/note/delete', id)
+  deleteNote(payload: {_id: string}) {
+    return this.webService.post('note/delete',payload)
   }
 }

@@ -65,8 +65,13 @@ export class EditNoteComponent implements OnInit {
   }
 
   deleteNote() {
-    this.noteService.deleteNote(this.note._id)
-    this.router.navigateByUrl('/user/notes')
+    const payload = {
+      _id: this.note._id
+    }
+
+    this.noteService.deleteNote(payload).subscribe(res => {
+      this.router.navigateByUrl('/user/notes')
+    })
   }
 
 }
