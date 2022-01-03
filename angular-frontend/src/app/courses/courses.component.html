@@ -54,7 +54,7 @@
             <app-course-tile
                 *ngFor="let course of courses"
                 [course]="course"
-                [showBought]="showBought(course)">
+                [status]="getStatus(course)">
             </app-course-tile>
 
         </div>
