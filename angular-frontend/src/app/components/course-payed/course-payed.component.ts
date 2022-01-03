@@ -13,7 +13,7 @@ export class CoursePayedComponent implements OnInit {
   @Input()
   course: Course;
 
-  page = 2;
+  page = 0;
   safeURL: any;
   name?: string;
   rating: any = 1;
