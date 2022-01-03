@@ -18,7 +18,11 @@ export class EditNoteComponent implements OnInit {
     private noteService: NoteService,
     private router: Router
   ) {
-    this.note = new Note('NA', 'NA')
+    this.note = {
+      _id:'',
+      title: 'NA',
+      content: 'NA'
+    }
   }
 
   ngOnInit(): void {
@@ -31,25 +35,28 @@ export class EditNoteComponent implements OnInit {
         return
       }
 
-      const note = this.noteService.getNote(idParam)
+      this.noteService.getNotes().subscribe(res => {
+        const note = res.find(n => n._id === idParam)
 
-      if (!note) {
-        console.log('ERROR: Invalid note ')
-        console.log(note)
-        return
-      }
+        if (!note) {
+          console.log('ERROR: Invalid note ')
+          console.log(note)
+          return
+        }
 
-      this.note = note
+        this.note = note
+      })
     })
   }
 
   onFormSubmit(form: NgForm) {
-    this.noteService.updateNote(this.note.id, form.value)
+    console.log('Make call to updateNote here')
+    // this.noteService.updateNote(this.note._id, form.value)
     this.router.navigateByUrl('/user/notes')
   }
 
   deleteNote() {
-    this.noteService.deleteNote(this.note.id)
+    this.noteService.deleteNote(this.note._id)
     this.router.navigateByUrl('/user/notes')
   }
 

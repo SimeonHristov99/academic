@@ -31,9 +31,10 @@ export class AddNoteComponent implements OnInit {
 
     this.showValidationErrors = false
 
-    this.noteService.addNote(
-      new Note(form.value.title, form.value.content)
-    )
+    console.log('Add note here')
+    // this.noteService.addNote(
+    //   new Note(form.value.title, form.value.content)
+    // )
 
     this.router.navigateByUrl('/user/notes')
   }

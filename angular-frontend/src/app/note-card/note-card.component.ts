@@ -11,7 +11,11 @@ export class NoteCardComponent implements OnInit {
   @Input() note: Note
 
   constructor() {
-    this.note = new Note('NA', 'NA')
+    this.note = {
+      _id:'',
+      title: 'NA',
+      content: 'NA'
+    }
   }
 
   ngOnInit(): void {
