@@ -11,6 +11,7 @@ import { NoteService } from '../shared/note.service';
 export class NotesComponent implements OnInit {
 
   greeting: Greeting
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -19,7 +20,7 @@ export class NotesComponent implements OnInit {
   constructor(private noteService: NoteService) {
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
-      context: '19:00, 1 January 2022',
+      context: '' + this.date,
       inUser: true
     };
     this.notes = []

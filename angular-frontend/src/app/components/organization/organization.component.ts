@@ -12,6 +12,7 @@ import { Greeting } from '../../app.component';
 export class OrganizationComponent implements OnInit {
 
   greeting: Greeting
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -35,7 +36,7 @@ export class OrganizationComponent implements OnInit {
   constructor(private courseService: CourseService) {
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
-      context: '10:00, 17 May 2022'
+      context: '' + this.date
     }
   }
 
