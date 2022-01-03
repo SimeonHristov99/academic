@@ -33,19 +33,19 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.webService.get('users') as Observable<User[]>;
+    return this.webService.get('users') as Observable<User[]>
   }
 
   getUsersByCourse(payload: Object): Observable<User[]> {
-    return this.webService.post('course/users', payload) as Observable<User[]>;
+    return this.webService.post('course/users', payload) as Observable<User[]>
   }
 
   removeUser(payload: Object) {
-    return this.webService.delete('delete', payload);
+    return this.webService.delete('delete', payload)
   }
 
   enroll(courseId: string) {
-    console.log('Will enrol ' + localStorage.getItem('userId') + ' in ' + courseId)
+    return this.webService.post('/course/enroll', { course_id: courseId })
   }
 
   complete() {
