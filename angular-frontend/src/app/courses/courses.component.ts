@@ -142,11 +142,6 @@ export class CoursesComponent implements OnInit {
   getCourseMark(courseId: string) {
     const course = this.coursesBought.find(c => c._id === courseId)
     
-    if(course){
-      console.log(course)
-      return course.mark
-    }
-
-    return undefined
+    return (course ? course.mark : undefined)
   }
 }
