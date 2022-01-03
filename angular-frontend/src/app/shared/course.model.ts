@@ -7,4 +7,8 @@ export interface Course {
     level: string
     price: number
     duration: number
+    content: [{
+        week: string,
+        link: string
+      }]
 }
