@@ -45,7 +45,6 @@ export class CoursesComponent implements OnInit {
   getCoursesBought(): void {
     this.courseService.getCoursesByUser().subscribe(res => {
       this.coursesBought = res
-      console.log(this.coursesBought)
     })
   }
 
@@ -72,7 +71,10 @@ export class CoursesComponent implements OnInit {
 
     form.resetForm()
 
-    // Go to API to search here
+    // Go to API to filter here
   }
 
+  showBought(course: Course): boolean {
+    return this.coursesBought.find(c => c._id === course._id) !== undefined
+  }
 }
