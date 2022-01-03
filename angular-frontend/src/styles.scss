@@ -45,7 +45,7 @@ a {
     align-items: center;
 
     padding: 12px 22px;
-    background: rgba(black, 0.7);
+    background: rgba(2, 48, 71, 0.7);
 
     color: white;
 
@@ -60,7 +60,7 @@ a {
     cursor: pointer;
 
     &:hover {
-        background: rgba(black, 0.78);
+        background: rgba(255, 183, 3, 0.78);
         backdrop-filter: blur(2px);
     }
 
@@ -86,7 +86,7 @@ a {
 }
 
 .container.has-blurred-white-bg {
-    background: rgba(white, 0.85);
+    background: rgba(33, 158, 188, 0.85);
     backdrop-filter: blur(20px);
 }
 
