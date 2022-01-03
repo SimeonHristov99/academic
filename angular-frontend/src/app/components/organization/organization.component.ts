@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CourseService } from 'src/app/services/course.service';
+import { UserService } from 'src/app/services/user.service';
 import { Course } from 'src/app/shared/course.model';
 import { Greeting } from '../../app.component';
 
@@ -21,7 +22,8 @@ export class OrganizationComponent implements OnInit {
   showDeleteModal: boolean[] = [];
 
   courses: Course[] = [];
-
+  people: number[] = [];
+ 
   updateCourseBody: Course = {
     _id: '',
     rating: 0,
@@ -37,7 +39,7 @@ export class OrganizationComponent implements OnInit {
     }]
   };
 
-  constructor(private courseService: CourseService) {
+  constructor(private courseService: CourseService, private userService: UserService) {
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
       context: '' + this.date
@@ -57,9 +59,17 @@ export class OrganizationComponent implements OnInit {
   getCourses(): void {
     this.courseService.getCoursesByUser().subscribe(res => {
       this.courses = res;
-      this.buildGraphics();
-      console.log(this.courses);
+      for(let i = 0; i < this.courses.length; i++){
+        this.getStudentList(this.courses[i], i);
+      }
     });
+  }
+
+  getStudentList(course: Course, index: number): void {
+    this.userService.getUsersByCourse(course).subscribe(res => {
+      this.people[index] = res.length;
+      this.buildGraphics();
+    });;
   }
 
   getAverage(): number[] {
@@ -69,10 +79,12 @@ export class OrganizationComponent implements OnInit {
     for (i = 0; i < this.courses.length; i++) {
       raiting = raiting + this.courses[i].rating;
       price = price + this.courses[i].price;
+      people = people + this.people[i];
     }
 
     result[0] = raiting / i;
     result[1] = price / i;
+    result[2] = people / i;
 
     return result;
   }
@@ -88,11 +100,11 @@ export class OrganizationComponent implements OnInit {
 
       data1[i][0] = this.courses[i].rating;
       data1[i][1] = this.courses[i].price;
-      data1[i][2] = 50;
+      data1[i][2] = this.people[i];
 
       data2[i][0] = average_val[0];
       data2[i][1] = average_val[1];
-      data2[i][2] = 30;
+      data2[i][2] = average_val[2];
 
       this.options[i] = {
         tooltip: {
