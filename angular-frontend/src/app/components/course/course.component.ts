@@ -14,9 +14,7 @@ export class CourseComponent implements OnInit {
   course: Course;
   payed: boolean = false;
 
-  constructor(
-    private cartService: CartService,
-  ) {
+  constructor(private cartService: CartService) {
     this.course = {
       _id: '',
       rating: 0,
@@ -42,4 +40,7 @@ export class CourseComponent implements OnInit {
     })
   }
 
+  showAddToCartButton() {
+    return this.cartService.getItem(this.course._id)
+  }
 }
