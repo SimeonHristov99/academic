@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/shared/course.model';
 import { Video } from './Video';
 

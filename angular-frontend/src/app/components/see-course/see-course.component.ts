@@ -29,9 +29,8 @@ export class SeeCourseComponent implements OnInit {
       price: 1,
       duration: 1
     };
-  }
 
-  ngOnInit(): void {
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const idParam = paramMap.get('id')
 
@@ -55,6 +54,10 @@ export class SeeCourseComponent implements OnInit {
     })
 
     this.getCoursesBought();
+  }
+
+  ngOnInit(): void {
+  
 
   }
 
