@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Video } from './Video';
+import { CourseService } from '../services/course.service';
 
 @Component({
   selector: 'app-course',
@@ -20,7 +21,7 @@ export class CourseComponent implements OnInit {
     { name: 'Getting to Know Your Brain', link: 'https://www.youtube.com/embed/vHrmiy4W9C0', watched: false }
   ];
 
-  constructor(private _sanitizer: DomSanitizer) {
+  constructor(private courseService: CourseService, private _sanitizer: DomSanitizer) {
     //TODO load videos from backend;
     if(!this.payed) return;
     this.name = this.videos[0].name;
@@ -47,5 +48,12 @@ export class CourseComponent implements OnInit {
 
   changeIsVideoWatched() {
     //TODO send to backend;
+  }
+
+
+  getCoursesBought(): void {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      console.log(res)
+    })
   }
 }

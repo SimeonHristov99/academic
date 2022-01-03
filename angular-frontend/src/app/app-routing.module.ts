@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { CourseComponent } from './course/course.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { AddNoteComponent } from './add-note/add-note.component';
@@ -16,8 +15,6 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { SeeCourseComponent } from './components/see-course/see-course.component';
 
 const routes: Routes = [
-  { path: 'bookmarks', component: BookmarksComponent },
-  { path: 'todos', component: TodosComponent },
   { path: 'notes', component: NotesComponent },
   { path: 'course', component: CourseComponent },
   { path: '', component: InitialPageComponent },
