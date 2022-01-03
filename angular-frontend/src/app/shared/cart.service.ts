@@ -37,7 +37,8 @@ export class CartService {
   }
 
   buyItem(courseId: string) {
-    console.log(courseId)
-    this.userService.enroll(courseId)
+    this.userService.enroll(courseId).subscribe(res => {
+      console.log(res)
+    })
   }
 }

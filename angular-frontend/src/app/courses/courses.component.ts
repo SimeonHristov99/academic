@@ -12,6 +12,7 @@ import { Course } from '../shared/course.model';
 export class CoursesComponent implements OnInit {
 
   greeting: Greeting;
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -21,7 +22,7 @@ export class CoursesComponent implements OnInit {
   constructor(private courseService: CourseService) {
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
-      context: '19:00, 1 January 2022',
+      context: '' + this.date,
       inUser: true
     }
 
@@ -44,7 +45,6 @@ export class CoursesComponent implements OnInit {
   getCoursesBought(): void {
     this.courseService.getCoursesByUser().subscribe(res => {
       this.coursesBought = res
-      console.log(this.coursesBought)
     })
   }
 
@@ -71,7 +71,10 @@ export class CoursesComponent implements OnInit {
 
     form.resetForm()
 
-    // Go to API to search here
+    // Go to API to filter here
   }
 
+  showBought(course: Course): boolean {
+    return this.coursesBought.find(c => c._id === course._id) !== undefined
+  }
 }

@@ -41,7 +41,11 @@ const courseSchema = new Schema<CourseDocument, CourseModel>({
     default: 'user',
     required: true,
   },
-  usersEnrolled: [{ type: Types.ObjectId, ref: 'User' }],
+  usersEnrolled: [{ type: Types.ObjectId, ref: 'User' }],  
+  content: [{
+    week: {type: String},
+    link: {type: String}
+  }],
 },
   {
     timestamps: {
