@@ -43,10 +43,17 @@ export class StudentDetailsComponent implements OnInit {
     this.userService.getUsersByCourse(this.course).subscribe(res => {
       console.log(res);
       this.students = res;
-    });;
+    });
   }
 
   submitMark(id: any): void {
+    let body = {
+      userId: this.students[id].id,
+      courseId: this.id,
+      mark: this.studentMark
+    };
+    this.userService.submitStudentMark(body).subscribe(res => {
+    });
     console.log(this.studentMark);
   }
 

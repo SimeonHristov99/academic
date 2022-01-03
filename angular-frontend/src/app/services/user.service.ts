@@ -40,6 +40,10 @@ export class UserService {
     return this.webService.post('course/users', payload) as Observable<User[]>
   }
 
+  submitStudentMark(payload: Object) {
+    return this.webService.post('/user/course/mark', payload);
+  }
+
   removeUser(payload: Object) {
     return this.webService.delete('delete', payload)
   }
