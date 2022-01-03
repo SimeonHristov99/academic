@@ -2,7 +2,7 @@
 
     <div id="main">
 
-        <div *ngIf="!loadedVideo">
+        <div *ngIf="!loadedVideo" id ="description">
 
             <img id="course_cover" src="./assets/course.png" alt="Course">
             <h1>{{course.title}}</h1>
@@ -14,11 +14,13 @@
 
             <p>Description: {{course.description}}</p>
         </div>
-        <div *ngIf="loadedVideo">
+        <div *ngIf="loadedVideo" id="video">
             <iframe [src]='safeURL' frameborder="0" allowfullscreen></iframe>
             <h1>{{name}}</h1>
         </div>
 
+        <a routerLink="../" class="btn">Go Back</a>
+        <a class="btn" id="next">Next</a>
     </div>
 
 
@@ -34,7 +36,9 @@
             </li>
         </ul>
     </div>
+
 </div>
+
 
 <div id="ad" (click)="loadNewCourse()">
     <img src="./assets/course.png" alt="Ad">
