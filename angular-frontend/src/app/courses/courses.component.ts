@@ -49,7 +49,7 @@ export class CoursesComponent implements OnInit {
 
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
-      this.courses = res;
+      this.courses = res
     })
   }
 
@@ -97,24 +97,18 @@ export class CoursesComponent implements OnInit {
         ))
 
     let level: string | undefined = undefined
-    let free: boolean | undefined = true
+    let free: boolean | undefined = false
     let rating: number | undefined = undefined
 
-    filterConditions.filter(i => i !== 'isFree').forEach(item => {
-      if (item === 'isPaid') {
-        free = false
-        console.log('in isPaid')
-        console.log(item)
+    filterConditions.filter(i => i !== 'isPaid').forEach(item => {
+      if (item === 'isFree') {
+        free = true
       }
       else if (+item) {
         rating = +item
-        console.log('in is num')
-        console.log(item)
       }
       else {
         level = item
-        console.log('should be level')
-        console.log(item)
       }
     })
 
@@ -125,8 +119,6 @@ export class CoursesComponent implements OnInit {
     }
 
     form.resetForm()
-
-    console.log(payload)
 
     this.courseService.getCoursesByFilter(payload).subscribe(res => {
       this.courses = res
