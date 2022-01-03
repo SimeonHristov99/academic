@@ -22,11 +22,7 @@ import { CartService } from '../shared/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Jim',
-    context: '19:00, 1 January 2022',
-    inUser: true
-  }
+  greeting: Greeting
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter()
 
@@ -35,6 +31,12 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService
   ) {
+    this.greeting = {
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '19:00, 1 January 2022',
+      inUser: true
+    }
+
     this.items = []
   }
 

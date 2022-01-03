@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../shared/user.model';
 import { WebRequestService } from './web-request.service';
 import { HttpResponse } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { shareReplay, tap } from 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class UserService {
   }
 
   register(payload: Object) {
-    return this.webService.post('register', payload);
+    return this.webService.post('register', payload)
   }
 
   getUser(id: string) {

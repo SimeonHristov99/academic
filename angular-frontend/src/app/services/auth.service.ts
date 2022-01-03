@@ -19,16 +19,14 @@ export class AuthService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
 
-        console.log(res)
-        return
-
         if (!document.cookie) {
           console.log('ERROR: No cookie')
           return
         }
 
         const id = res.body.id
-        const firstName = res.body.firstName
+        let firstName = res.body.firstName
+        const role: string = res.body.role[0] === 'o' ? 'organization' : res.body.role
 
         if (!id) {
           console.log('ERROR: No user id!')
@@ -36,16 +34,16 @@ export class AuthService {
         }
 
         if (!firstName) {
-          console.log('ERROR: No first name!')
-          return
+          firstName = email.split('@')[0]
         }
 
 
-        localStorage.setItem('userId', res.body.firstName)
-        localStorage.setItem('firstName', res.body.firstName)
+
+        localStorage.setItem('userId', id)
+        localStorage.setItem('firstName', firstName)
 
         this.router.navigateByUrl(
-          `/${res.body.role}${res.body.role === "user" ? `/courses` : ''}`
+          `/${role}${res.body.role === "user" ? `/courses` : ''}`
         )
       })
     )
