@@ -32,6 +32,12 @@ export default class CourseController {
     res.status(200).json(users.usersEnrolled);
   }
 
+  getContent =  async (req: Request, res: Response) => {
+    Course.findOne({_id: req.body.id}).select('content')
+    .then(course  => {res.status(200).json(course)})
+    .catch(err => {res.status(500).json({ success: false, error: 'Can not get content in course: ' + err })});
+  }
+
   sortCoursesByPrice = async (req: Request, res: Response) => {
     Course.aggregate([{
       $addFields: {
