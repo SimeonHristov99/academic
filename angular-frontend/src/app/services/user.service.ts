@@ -13,15 +13,7 @@ export class UserService {
   users: User[]
 
   constructor(private webService: WebRequestService) {
-    this.users = [{
-      id: '',
-      email: 'zdr@zdr.zdr',
-      firstname: '',
-      lastname: '',
-      password: '',
-      birthDate: undefined,
-      role: ''
-    }]
+    this.users = []
   }
 
   register(payload: Object) {
