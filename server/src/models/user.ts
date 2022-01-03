@@ -34,7 +34,11 @@ const userSchema = new Schema<IUser>({
     required: true,
   },
   comment: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
+  courses: [{
+    courseId: { type: Schema.Types.ObjectId, ref: 'Course' },
+    mark: Number,
+    url: String,
+  }],
   certificates: [{ type: Schema.Types.ObjectId, ref: 'Certificate' }],
 },
   {
