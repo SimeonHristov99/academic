@@ -22,8 +22,8 @@ export class CourseService {
     return this.webService.get('user/courses') as Observable<Course[]>
   }
 
-  getCoursesByKeyword(keyword: string): Observable<Course[]> {
-    return this.webService.post('courses/search', keyword) as Observable<Course[]>
+  getCoursesByKeyword(payload: { name: string }): Observable<Course[]> {
+    return this.webService.post('courses/search', payload) as Observable<Course[]>
   }
 
   addCourse(course: Course) {
