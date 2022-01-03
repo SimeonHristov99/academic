@@ -27,7 +27,8 @@ export class AddUserComponent implements OnInit {
       lastname: '',
       password: '',
       birthDate: undefined,
-      role: ''
+      role: '',
+      url: ''
     }
 
     this.isError = false

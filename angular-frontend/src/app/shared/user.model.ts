@@ -9,4 +9,5 @@ export interface User {
     birthDate?: Date,
     role?: string,
     courses?: Course[],
+    url: string
 }
