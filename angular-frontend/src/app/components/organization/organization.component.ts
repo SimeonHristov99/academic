@@ -163,6 +163,26 @@ export class OrganizationComponent implements OnInit {
     }
   }
 
+  addField(){
+    let content = [];
+    for(let i = 0; i < this.updateCourseBody.duration; i++) {
+        if(i < this.updateCourseBody.content.length) {
+          content.push(this.updateCourseBody.content[i]);
+        } else {
+          content.push({
+            week: '',
+            link: ''
+          });
+        }
+    }
+    while (this.updateCourseBody.content.length > 0) {
+      this.updateCourseBody.content.pop();
+    }
+    for (let i = 0; i < content.length; i++) {
+      this.updateCourseBody.content.push(content[i]);
+    }
+  }
+
   closeModals(): void {
     for (let i = 0; i < this.courses.length; i++) {
       this.showEditModal[i] = false;
@@ -172,6 +192,7 @@ export class OrganizationComponent implements OnInit {
 
   editCourse(id: any): void {
     this.updateCourseBody._id = id;
+    console.log(this.updateCourseBody)
     this.courseService.updateCourse(this.updateCourseBody).subscribe(res => {
     });
   }

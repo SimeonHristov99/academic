@@ -52,7 +52,12 @@
                             <div class="grid-item-modal">Title: <input [(ngModel)]="updateCourseBody.title"/></div>
                             <div class="grid-item-modal">Price: <input type="number" step="0.01" [(ngModel)]="updateCourseBody.price"/> $</div>
                             <div class="grid-item-modal">Description: <textarea [(ngModel)]="updateCourseBody.description"></textarea></div>
-                            <div class="grid-item-modal">Duration: <input type="number" [(ngModel)]="updateCourseBody.duration"/></div>
+                            <div class="grid-item">Duration: <input type="number" [(ngModel)]="updateCourseBody.duration" (change)="addField()"/></div>
+                            <div class="grid-item">
+                                <div *ngFor="let item of [].constructor(updateCourseBody.duration); let i = index;">Week {{i+1}}: 
+                                    <input [(ngModel)]="updateCourseBody.content[i].week"/>
+                                    <input [(ngModel)]="updateCourseBody.content[i].link"/></div>
+                            </div>
                         </div>
                     </div>
                     <button class="course-button" (click)= "editCourse(course._id); showEditModal[i] = false">
