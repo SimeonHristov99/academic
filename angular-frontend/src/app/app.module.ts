@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
+import { CourseComponent } from './course/course.component';
 import { CourseTileComponent } from './course-tile/course-tile.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -34,6 +35,8 @@ import { WebReqIterceptor } from './services/web-req.iterceptor';
     TabsComponent,
     CoursesComponent,
     NotesComponent,
+    CourseComponent,
+    
     CourseTileComponent,
     OrganizationComponent,
     AddCourseComponent,
