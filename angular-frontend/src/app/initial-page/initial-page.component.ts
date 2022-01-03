@@ -13,6 +13,7 @@ export class InitialPageComponent implements OnInit {
 
   greeting: Greeting
   errorText: string
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -21,7 +22,7 @@ export class InitialPageComponent implements OnInit {
   ) {
     this.greeting = {
       header: 'Welcome to Academic',
-      context: 'Create an account or log in to access our courses'
+      context: '' + this.date
     }
 
     this.errorText = ''
