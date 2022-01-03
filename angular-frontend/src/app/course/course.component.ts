@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Video } from './Video';
 import { CourseService } from '../services/course.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Course } from '../shared/course.model';
 
 @Component({
   selector: 'app-course',
@@ -10,10 +12,12 @@ import { CourseService } from '../services/course.service';
 })
 
 export class CourseComponent implements OnInit {
-  payed: boolean = true;
+
+
+  course: Course;
+  loadedVideo: boolean = false;
   safeURL: any;
   name?: string;
-  mainName: string = "Crash Course Psychology";
   videos: Video[] = [
     { name: 'Intro to Psychology', link: 'https://www.youtube.com/embed/vo4pMVb0R6M', watched: false },
     { name: 'Psychological Research', link: 'https://www.youtube.com/embed/hFV71QPvX2I', watched: false },
@@ -21,15 +25,49 @@ export class CourseComponent implements OnInit {
     { name: 'Getting to Know Your Brain', link: 'https://www.youtube.com/embed/vHrmiy4W9C0', watched: false }
   ];
 
-  constructor(private courseService: CourseService, private _sanitizer: DomSanitizer) {
-    //TODO load videos from backend;
-    if(!this.payed) return;
-    this.name = this.videos[0].name;
+
+  constructor(
+    private route: ActivatedRoute,
+    private courseService: CourseService,
+    private _sanitizer: DomSanitizer
+  ) {
+    this.course = {
+      _id: '',
+      rating: 0,
+      title: '',
+      description: '',
+      organization: '',
+      level: '',
+      price: 1,
+      duration: 1
+    };
+
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.videos[0].link);
-    this.videos[0].watched = true;
+
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      const idParam = paramMap.get('id')
+
+      if (!idParam) {
+        console.log('ERROR: Invalid course id ')
+        console.log(idParam)
+        return
+      }
+
+      this.courseService.getCourses().subscribe(res => {
+        const course = res.find(c => c._id === idParam)
+
+        if (!course) {
+          console.log('ERROR: Invalid course ')
+          console.log(course)
+          return
+        }
+
+        this.course = course
+      })
+    })
   }
 
   onCheckboxChange(video: Video, e: any) {
@@ -39,21 +77,21 @@ export class CourseComponent implements OnInit {
 
 
   loadVideo(video: Video) {
-    if(!this.payed) return;
+    this.loadedVideo = true;
     this.name = video.name;
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(video.link);
     video.watched = true;
     this.changeIsVideoWatched();
   }
 
+  loadDescription() {
+    this.loadedVideo = false;
+  }
   changeIsVideoWatched() {
     //TODO send to backend;
   }
 
-
-  getCoursesBought(): void {
-    this.courseService.getCoursesByUser().subscribe(res => {
-      console.log(res)
-    })
+  loadNewCourse() {
+    //TODO load new course
   }
 }

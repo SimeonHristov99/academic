@@ -16,10 +16,10 @@ import { SeeCourseComponent } from './components/see-course/see-course.component
 
 const routes: Routes = [
   { path: 'notes', component: NotesComponent },
-  { path: 'course', component: CourseComponent },
   { path: '', component: InitialPageComponent },
   
   { path: 'user/courses', component: CoursesComponent, data: {'tab': 0} },
+  { path: 'user/courses/mine/:id', component: CourseComponent },
   { path: 'user/courses/:id', component: SeeCourseComponent },
   { path: 'user/cart', component: CartComponent, data: {'tab': 1} },
   { path: 'user/notes', component: NotesComponent, data: {'tab': 2} },
