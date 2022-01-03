@@ -33,10 +33,23 @@ export class AddCourseComponent implements OnInit {
   }
 
   addField(){
-    this.courseBody.content.push({
-      week: '',
-      link: ''
-    })
+    let content = [];
+    for(let i = 0; i < this.courseBody.duration; i++) {
+        if(i < this.courseBody.content.length) {
+          content.push(this.courseBody.content[i]);
+        } else {
+          content.push({
+            week: '',
+            link: ''
+          });
+        }
+    }
+    while (this.courseBody.content.length > 0) {
+      this.courseBody.content.pop();
+    }
+    for (let i = 0; i < content.length; i++) {
+      this.courseBody.content.push(content[i]);
+    }
   }
 
   addCourse() {

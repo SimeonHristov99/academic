@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -13,12 +15,15 @@ export class CoursePayedComponent implements OnInit {
   @Input()
   course: Course;
 
-  page = 2;
+  adCourse: Course;
+  page = 0;
   safeURL: any;
   name?: string;
   rating: any = 1;
 
   constructor(
+    private courseService: CourseService,
+    private router: Router,
     private _sanitizer: DomSanitizer
   ) {
     this.course = {
@@ -35,10 +40,25 @@ export class CoursePayedComponent implements OnInit {
         link: ''
       }]
     };
+
+    this.adCourse = {
+      _id: '',
+      rating: 0,
+      title: '',
+      description: '',
+      organization: '',
+      level: '',
+      price: 1,
+      duration: 1,
+      content: [{
+        week: '',
+        link: ''
+      }]
+    };
   }
 
   ngOnInit(): void {
-
+   
   }
 
   onCheckboxChange(video: any, e: any) {
@@ -63,7 +83,16 @@ export class CoursePayedComponent implements OnInit {
   }
 
   loadNewCourse() {
-    //TODO load new course
+    this.courseService.getCourses().subscribe(res => {
+      const n = Math.floor(Math.random() * res.length);
+      this.adCourse = res[n];
+      while (this.adCourse._id == this.course._id) {
+        this.adCourse = res[n];
+      }
+    }) 
+
+    this.router.navigateByUrl('/user/courses/' + this.adCourse._id);
+
   }
 
   finish() {

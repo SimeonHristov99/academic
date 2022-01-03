@@ -2,6 +2,9 @@
     color: white;
   }
   
+  img {
+    object-fit: cover;
+  }
   #course {
     margin-top: 100px;
     background-color: rgba(0, 0, 0, 0.5);
