@@ -11,6 +11,7 @@ export class CourseTileComponent implements OnInit {
   @Input() course: Course
   @Input() showBought: boolean
   @Input() status: string | undefined
+  @Input() mark: string | undefined
 
   constructor() {
     this.course = {
@@ -21,6 +22,7 @@ export class CourseTileComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
+      mark: 0,
       duration: 1,
       content: [{
         week: '',

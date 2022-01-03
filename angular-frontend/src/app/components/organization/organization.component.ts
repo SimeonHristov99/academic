@@ -32,6 +32,7 @@ export class OrganizationComponent implements OnInit {
     organization: '',
     level: 'beginner',
     price: 1,
+    mark: 1,
     duration: 1,
     content: [{
       week: '',
