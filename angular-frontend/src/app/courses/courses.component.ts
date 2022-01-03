@@ -50,6 +50,7 @@ export class CoursesComponent implements OnInit {
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
       this.courses = res
+      console.log(this.courses)
     })
   }
 
@@ -126,8 +127,10 @@ export class CoursesComponent implements OnInit {
   }
 
   getStatus(course: Course): string | undefined {
-    if (this.coursesBought.find(c => c._id === course._id)) {
-      return 'Bought!'
+    const courseBought = this.coursesBought.find(c => c._id === course._id)
+    
+    if (courseBought) {
+      return (courseBought.mark ? 'Completed' : 'Bought!')
     }
 
     if (this.cartService.getItem(course._id)) {
