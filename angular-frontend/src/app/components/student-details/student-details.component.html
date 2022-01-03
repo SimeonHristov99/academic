@@ -2,7 +2,7 @@
     <div class="grid-container">
         <div *ngFor="let student of students; let i=index" class="grid-item">
             <div>{{student.firstname}} {{student.lastname}}</div>
-            <div>{{student.url}}</div>
+            <div><a href="{{student.url}}" style="color: white;">View student assignment</a></div>
             <select name="type" [(ngModel)]="studentMark">
                 <option value="1">1</option>
                 <option value="2">2</option>
