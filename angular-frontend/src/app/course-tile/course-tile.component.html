@@ -1,5 +1,5 @@
 <div class="course-tile" [routerLink]="[course._id]">
-    <p class="tile-text" *ngIf="this.showBought"> <em>Bought!</em> </p>
+    <p class="tile-text" *ngIf="this.status"> <em>{{ status }}</em> </p>
     <p class="tile-text"> <strong>{{ course.title }}</strong> </p>
     <!-- <p class="tile-text"> <em>{{ course.organization }}</em> </p> -->
     <p class="tile-text"> Rating: {{ course.rating }} </p>

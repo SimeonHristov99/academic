@@ -68,4 +68,7 @@ export class SeeCourseComponent implements OnInit {
     })
   }
 
+  showAddToCartButton() {
+    return this.cartService.getItem(this.course._id) === undefined
+  }
 }

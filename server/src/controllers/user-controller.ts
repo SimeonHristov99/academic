@@ -122,8 +122,26 @@ export default class UserController {
   getUserCourses = async (req: Request, res: Response) => {
     const user = res.locals.user;
 
+    if (user.role === 'user') {
+      this.getEnrolledCourses(user, res);
+    } else {
+      this.getOrganisationCourses(user, res);
+    }
+  }
+
+  getEnrolledCourses = async (user: IUser, res: Response) => {
+    const ids = user.courses.map(course => course.courseId);
+
     const courses = await Course
-      .find({ "_id": { $in: user.courses } })
+      .find({ "_id": { $in: ids } })
+      .select('-usersEnrolled -__v');
+
+    res.status(200).json(courses);
+  }
+
+  getOrganisationCourses = async (user: IUser, res: Response) => {
+    const courses = await Course
+      .find({ "createdBy": user._id })
       .select('-usersEnrolled -__v');
 
     res.status(200).json(courses);

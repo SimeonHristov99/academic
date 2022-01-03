@@ -10,7 +10,11 @@ interface IUser {
   birthDate: Date,
   role: String,
   comment?: Set<IComment>,
-  courses?: Set<ICourse>,
+  courses?: [{
+    courseId: ICourse,
+    mark: Number,
+    url: String,
+  }],
   certificates?: Set<ICourse>,
   createdAt?: Number,
 }

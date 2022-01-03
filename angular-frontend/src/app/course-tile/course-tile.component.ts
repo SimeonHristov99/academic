@@ -10,6 +10,7 @@ export class CourseTileComponent implements OnInit {
 
   @Input() course: Course
   @Input() showBought: boolean
+  @Input() status: string | undefined
 
   constructor() {
     this.course = {
@@ -24,6 +25,7 @@ export class CourseTileComponent implements OnInit {
     }
 
     this.showBought = false
+    this.status = undefined
   }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Greeting } from '../app.component';
 import { CourseService } from '../services/course.service';
+import { CartService } from '../shared/cart.service';
 import { Course } from '../shared/course.model';
 
 @Component({
@@ -19,7 +20,10 @@ export class CoursesComponent implements OnInit {
   courses: Course[]
   coursesBought: Course[]
 
-  constructor(private courseService: CourseService) {
+  constructor(
+    private courseService: CourseService,
+    private cartService: CartService
+  ) {
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
       context: '' + this.date,
@@ -74,7 +78,15 @@ export class CoursesComponent implements OnInit {
     // Go to API to filter here
   }
 
-  showBought(course: Course): boolean {
-    return this.coursesBought.find(c => c._id === course._id) !== undefined
+  getStatus(course: Course): string | undefined {
+    if(this.coursesBought.find(c => c._id === course._id)) {
+      return 'Bought!'
+    }
+
+    if(this.cartService.getItem(course._id)) {
+      return 'In Cart!'
+    }
+
+    return undefined
   }
 }
