@@ -51,13 +51,15 @@ export class AddUserComponent implements OnInit {
         localStorage.setItem('firstName', this.userBody.firstname)
         this.isError = false;
         this.errorMessage = '';
-        this.router.navigateByUrl("/organization")
       },
       error: (err) => {
         this.isError = true;
         this.errorMessage = err.error.error;
       }
     })
-    
+
+    this.router.navigateByUrl(
+      `/${this.userBody.role}${this.userBody.role === "user" ? `/courses` : ''}`
+    )  
   }
 }
