@@ -19,9 +19,9 @@ export class EditNoteComponent implements OnInit {
     private router: Router
   ) {
     this.note = {
-      _id:'',
+      _id: '',
       title: 'NA',
-      content: 'NA'
+      description: 'NA'
     }
   }
 
@@ -51,8 +51,17 @@ export class EditNoteComponent implements OnInit {
 
   onFormSubmit(form: NgForm) {
     console.log('Make call to updateNote here')
-    // this.noteService.updateNote(this.note._id, form.value)
-    this.router.navigateByUrl('/user/notes')
+
+    const payload: Note = {
+      _id: this.note._id,
+      title: form.value.title,
+      description: form.value.content,
+    }
+
+    this.noteService.updateNote(payload).subscribe(res => {
+      console.log(res)
+      this.router.navigateByUrl('/user/notes')
+    })
   }
 
   deleteNote() {

@@ -14,7 +14,7 @@ export class NoteCardComponent implements OnInit {
     this.note = {
       _id:'',
       title: 'NA',
-      content: 'NA'
+      description: 'NA'
     }
   }
 
