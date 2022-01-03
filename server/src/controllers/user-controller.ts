@@ -132,17 +132,74 @@ export default class UserController {
   getEnrolledCourses = async (user: IUser, res: Response) => {
     const ids = user.courses.map(course => course.courseId);
 
-    const courses = await Course
-      .find({ "_id": { $in: ids } })
-      .select('-usersEnrolled -__v -content');
+    const courses = await Course.aggregate([{ "$match": { "_id": { "$in": ids } } },
+    {
+      $addFields: {
+        "usersEnrolled": {
+          $size: "$usersEnrolled"
+        }
+      }
+    },
+    {
+      $lookup: {
+        "from": User.collection.name,
+        let: { createdById: "$createdBy" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$createdById"] } }, },
+          {
+            $project: { "organization": "$firstname", }
+          },
+        ],
+        as: "createdByName"
+      }
+    },
+    {
+      $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ["$createdByName", 0] }, "$$ROOT"] } }
+    },
+    {
+      $project: { createdByName: 0 }
+    },
+    {
+      $unset: ["__v", "content"]
+    }
+    ]);
 
     res.status(200).json(courses);
   }
 
   getOrganisationCourses = async (user: IUser, res: Response) => {
-    const courses = await Course
-      .find({ "createdBy": user._id })
-      .select('-usersEnrolled -__v -content');
+    const courses = await Course.aggregate([{ "$match": { "createdBy": user._id } },
+    {
+      $addFields: {
+        "usersEnrolled": {
+          $size: "$usersEnrolled"
+        }
+      }
+    },
+    {
+      $lookup: {
+        "from": User.collection.name,
+        let: { createdById: "$createdBy" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$createdById"] } }, },
+          {
+            $project: { "organization": "$firstname", }
+          },
+        ],
+        as: "createdByName"
+      }
+    },
+    {
+      $replaceRoot: { newRoot: { $mergeObjects: [{ $arrayElemAt: ["$createdByName", 0] }, "$$ROOT"] } }
+    },
+    {
+      $project: { createdByName: 0 }
+    },
+    {
+      $unset: ["__v", "content"]
+    }
+    ]);
+
 
     res.status(200).json(courses);
   }
