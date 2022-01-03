@@ -58,7 +58,8 @@ export class CoursePayedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.getCourse();
   }
 
   onCheckboxChange(video: any, e: any) {
@@ -82,19 +83,6 @@ export class CoursePayedComponent implements OnInit {
     //TODO send to backend;
   }
 
-  loadNewCourse() {
-    this.courseService.getCourses().subscribe(res => {
-      const n = Math.floor(Math.random() * res.length);
-      this.adCourse = res[n];
-      while (this.adCourse._id == this.course._id) {
-        this.adCourse = res[n];
-      }
-    }) 
-
-    this.router.navigateByUrl('/user/courses/' + this.adCourse._id);
-
-  }
-
   finish() {
     this.page = 2;
   }
@@ -103,6 +91,16 @@ export class CoursePayedComponent implements OnInit {
     if (link === '')
       return alert("Enter a link!")
     alert(rating)
+  }
+
+  getCourse() {
+    this.courseService.getCourses().subscribe(res => {
+      const n = Math.floor(Math.random() * res.length);
+      this.adCourse = res[n];
+      while (this.adCourse._id == this.course._id) {
+        this.adCourse = res[n];
+      }
+    }) 
   }
 
 }

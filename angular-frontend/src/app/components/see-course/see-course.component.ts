@@ -61,8 +61,6 @@ export class SeeCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
-
   }
 
 

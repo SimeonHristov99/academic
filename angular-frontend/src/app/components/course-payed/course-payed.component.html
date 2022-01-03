@@ -64,7 +64,7 @@
 </div>
 
 
-<div id="ad" (click)="loadNewCourse()">
+<div id="ad" [routerLink]="'../'+[adCourse?._id]">
     <img src="./assets/course.png" alt="Ad">
     <p>You may like this course too</p>
 </div>
