@@ -47,4 +47,8 @@ export class UserService {
   complete() {
     console.log('ERROR: Not implemented')
   }
+
+  task(courseId: string, url: string) {
+    return this.webService.post('/user/course/task', { id: courseId, url: url })
+  }
 }
