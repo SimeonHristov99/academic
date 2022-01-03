@@ -26,23 +26,26 @@ export class AuthService {
 
         const id = res.body.id
         let firstName = res.body.firstname
-        const role: string = res.body.role[0] === 'o' ? 'organization' : res.body.role
-
+        
         if (!id) {
           console.log('ERROR: No user id!')
           return
         }
-
+        
         if (!firstName) {
           firstName = email.split('@')[0]
         }
-
+        
         localStorage.setItem('userId', id)
         localStorage.setItem('firstName', firstName)
+        
+        const prePath = res.body.role == 'admin' ? '/try_to_guess_who_is_here' : ''
+        const role = res.body.role == 'organisation' ? 'organization' : res.body.role
+        const options = res.body.role === "user" ? '/courses' : ''
 
-        this.router.navigateByUrl(
-          `/${role}${res.body.role === "user" ? `/courses` : ''}`
-        )
+        const fullPath = `${prePath}/${role}${options}`
+
+        this.router.navigateByUrl(fullPath)  
       })
     )
   }

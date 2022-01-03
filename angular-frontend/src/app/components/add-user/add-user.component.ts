@@ -36,7 +36,6 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   register() {
     if (this.userBody.role === 'organization') {
       this.userBody.lastname = this.userBody.firstname;
@@ -56,9 +55,10 @@ export class AddUserComponent implements OnInit {
         this.errorMessage = '';
 
         const role = this.userBody.role == 'organisation' ? 'organization' : this.userBody.role
+        const options = this.userBody.role === "user" ? `/courses` : ''
 
         this.router.navigateByUrl(
-          `/${role}${this.userBody.role === "user" ? `/courses` : ''}`
+          `/${role}${options}`
         )  
       },
       error: (err) => {
