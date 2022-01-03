@@ -12,6 +12,7 @@ import { Course } from 'src/app/shared/course.model';
 export class SeeCourseComponent implements OnInit {
 
   course: Course
+  payed: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +29,8 @@ export class SeeCourseComponent implements OnInit {
       price: 1,
       duration: 1
     };
-  }
 
-  ngOnInit(): void {
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const idParam = paramMap.get('id')
 
@@ -42,7 +42,7 @@ export class SeeCourseComponent implements OnInit {
 
       this.courseService.getCourses().subscribe(res => {
         const course = res.find(c => c._id === idParam)
-        
+
         if (!course) {
           console.log('ERROR: Invalid course ')
           console.log(course)
@@ -52,15 +52,19 @@ export class SeeCourseComponent implements OnInit {
         this.course = course
       })
     })
+
+    this.getCoursesBought();
   }
 
-  addToCart() {
-    this.cartService.addItem({
-      courseId: this.course._id,
-      title: this.course.title,
-      description: this.course.description,
-      price: this.course.price,
-      willBuy: false,
+  ngOnInit(): void {
+  
+
+  }
+
+
+  getCoursesBought(): void {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      this.payed = res.some(c => c._id === this.course._id);
     })
   }
 

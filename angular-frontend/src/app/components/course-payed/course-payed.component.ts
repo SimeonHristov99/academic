@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Course } from 'src/app/shared/course.model';
 import { Video } from './Video';
-import { CourseService } from '../services/course.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Course } from '../shared/course.model';
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+  selector: 'app-course-payed',
+  templateUrl: './course-payed.component.html',
+  styleUrls: ['./course-payed.component.scss']
 })
+export class CoursePayedComponent implements OnInit {
 
-export class CourseComponent implements OnInit {
 
-
+  @Input()
   course: Course;
+
   loadedVideo: boolean = false;
   safeURL: any;
   name?: string;
@@ -27,8 +26,6 @@ export class CourseComponent implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute,
-    private courseService: CourseService,
     private _sanitizer: DomSanitizer
   ) {
     this.course = {
@@ -47,27 +44,7 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      const idParam = paramMap.get('id')
 
-      if (!idParam) {
-        console.log('ERROR: Invalid course id ')
-        console.log(idParam)
-        return
-      }
-
-      this.courseService.getCourses().subscribe(res => {
-        const course = res.find(c => c._id === idParam)
-
-        if (!course) {
-          console.log('ERROR: Invalid course ')
-          console.log(course)
-          return
-        }
-
-        this.course = course
-      })
-    })
   }
 
   onCheckboxChange(video: Video, e: any) {
@@ -94,4 +71,5 @@ export class CourseComponent implements OnInit {
   loadNewCourse() {
     //TODO load new course
   }
+
 }

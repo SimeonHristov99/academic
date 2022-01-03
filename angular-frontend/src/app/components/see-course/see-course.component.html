@@ -1,26 +1,3 @@
-<div class="wrapper">
 
-    <div class="container has-blurred-white-bg">
-        <img src="./assets/course.png" alt="course-tile">
-        <h2 class="is-bold"> {{ course.title }} </h2>
-        <div id="main-info">
-            <p>Price: {{course.price}}</p>
-            <p>Rating: {{course.rating}}</p>
-            <p>Duration: {{course.duration}}</p>
-        </div>
-
-        <p>Description: {{course.description}}</p>
-
-        <div class="btns-container">
-            <a routerLink="../" class="btn">Go Back</a>
-            <button
-                class="btn align-end"
-                (click)="addToCart()"
-                routerLink="../"
-                *ngIf="showAddToCartButton()">
-                Add to cart
-            </button>
-        </div>
-
-    </div>
-</div>
+<app-course-payed *ngIf="payed" [course]="course"></app-course-payed>
+<app-course *ngIf="!payed" [course]="course"></app-course>
