@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -10,15 +12,14 @@ export class AddCourseComponent implements OnInit {
 
   courseBody: Course;
 
-  constructor() {
+  constructor(private courseService: CourseService, private router: Router) {
     this.courseBody = {
-      id: '',
+      _id: '',
       rating: 0,
       title: '',
       description: '',
       organization: '',
-      level: '',
-      url: '',
+      level: 'beginner',
       price: 1,
       duration: 1
     };
@@ -28,7 +29,18 @@ export class AddCourseComponent implements OnInit {
   }
 
   addCourse() {
-    console.log(JSON.stringify(this.courseBody));
+    let courseBody: any = {
+      rating: this.courseBody.rating,
+      title: this.courseBody.title,
+      description: this.courseBody.description,
+      organization: this.courseBody.organization,
+      level: this.courseBody.level,
+      price: this.courseBody.price,
+      duration: this.courseBody.duration
+    }
+    this.courseService.addCourse(courseBody).subscribe(res => {
+      this.router.navigateByUrl('/organization')
+    });
   }
 
 }

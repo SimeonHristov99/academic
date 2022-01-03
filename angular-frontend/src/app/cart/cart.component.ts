@@ -22,11 +22,8 @@ import { CartService } from '../shared/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Jim',
-    context: '19:00, 1 January 2022',
-    inUser: true
-  }
+  greeting: Greeting
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter()
 
@@ -35,6 +32,12 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService
   ) {
+    this.greeting = {
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '' + this.date,
+      inUser: true
+    }
+
     this.items = []
   }
 
@@ -44,11 +47,11 @@ export class CartComponent implements OnInit {
   }
 
   toggleWillBuy(item: CartItem) {
-    this.cartService.updateItem(item.id, { willBuy: !item.willBuy })
+    this.cartService.updateItem(item.courseId, { willBuy: !item.willBuy })
   }
 
   onDeleteClick(item: CartItem) {
-    this.cartService.deleteItem(item.id)
+    this.cartService.deleteItem(item.courseId)
   }
 
   getItemsToBuy() {

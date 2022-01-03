@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserService } from '../services/user.service';
 import { CartItem } from './cart.model';
 
 @Injectable({
@@ -8,13 +9,8 @@ export class CartService {
 
   items: CartItem[]
 
-  constructor() {
-    this.items = [
-      new CartItem('This is a test', 0.5),
-      new CartItem('Hey!!', 234),
-      new CartItem('Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus deleniti dolores corporis ratione iusto ipsum minus porro architecto iste id! Tempore eligendi minima illo sed quod ullam non, quae voluptatum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus deleniti dolores corporis ratione iusto ipsum minus porro architecto iste id! Tempore eligendi minima illo sed quod ullam non, quae voluptatum.', 345),
-      new CartItem('Hey!!', 456),
-    ]
+  constructor(private userService: UserService) {
+    this.items = []
   }
   
   getItems() {
@@ -22,7 +18,7 @@ export class CartService {
   }
 
   getItem(id: string) {
-    return this.items.find(i => i.id === id)
+    return this.items.find(i => i.courseId === id)
   }
 
   addItem(item: CartItem) {
@@ -35,9 +31,14 @@ export class CartService {
   }
 
   deleteItem(id: string) {
-    const idx = this.items.findIndex(i => i.id === id)
+    const idx = this.items.findIndex(i => i.courseId === id)
     if (idx == -1) return
-
     this.items.splice(idx, 1)
+  }
+
+  buyItem(courseId: string) {
+    this.userService.enroll(courseId).subscribe(res => {
+      console.log(res)
+    })
   }
 }

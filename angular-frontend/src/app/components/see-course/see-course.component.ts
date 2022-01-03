@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
+import { CartService } from 'src/app/shared/cart.service';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -15,16 +16,15 @@ export class SeeCourseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private router: Router
+    private cartService: CartService,
   ) {
     this.course = {
-      id: '',
+      _id: '',
       rating: 0,
       title: '',
       description: '',
       organization: '',
       level: '',
-      url: '',
       price: 1,
       duration: 1
     };
@@ -34,26 +34,34 @@ export class SeeCourseComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const idParam = paramMap.get('id')
 
-      if(!idParam) {
+      if (!idParam) {
         console.log('ERROR: Invalid course id ')
         console.log(idParam)
         return
       }
 
-      const course = this.courseService.getCourse(idParam)
+      this.courseService.getCourses().subscribe(res => {
+        const course = res.find(c => c._id === idParam)
+        
+        if (!course) {
+          console.log('ERROR: Invalid course ')
+          console.log(course)
+          return
+        }
 
-      if(!course) {
-        console.log('ERROR: Invalid course ')
-        console.log(course)
-        return
-      }
-
-      this.course = course
+        this.course = course
+      })
     })
   }
 
-  buyCourse() {
-    this.courseService.buyCourse(this.course.id)
+  addToCart() {
+    this.cartService.addItem({
+      courseId: this.course._id,
+      title: this.course.title,
+      description: this.course.description,
+      price: this.course.price,
+      willBuy: false,
+    })
   }
 
 }

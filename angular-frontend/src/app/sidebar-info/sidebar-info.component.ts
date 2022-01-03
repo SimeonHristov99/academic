@@ -15,9 +15,7 @@ export class SidebarInfoComponent implements OnInit {
 
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef | undefined
 
-  constructor(
-    private cartService: CartService
-  ) {
+  constructor(private cartService: CartService) {
     this.itemsToBuy = []
   }
 
@@ -27,7 +25,7 @@ export class SidebarInfoComponent implements OnInit {
       createOrder: (data: any, actions: { order: { create: (arg0: { purchase_units: { description: string; amount: { currency_code: string; value: number; }; }[]; }) => any; }; }) => {
         return actions.order.create({
           purchase_units: this.itemsToBuy.map(i => ({
-            reference_id: i.id,
+            reference_id: i.courseId,
             description: i.description.slice(0, 127),
             amount: {
               currency_code: 'USD',
@@ -38,10 +36,10 @@ export class SidebarInfoComponent implements OnInit {
       },
       onApprove: async (data: any, actions: { order: { capture: () => any; }; }) => {
         const order = await actions.order.capture()
-        this.itemsToBuy.map(i => this.cartService.deleteItem(i.id))
-        console.log('Transaction successful!')
-        console.log(order)
+        this.itemsToBuy.map(i => this.cartService.buyItem(i.courseId))
+        this.itemsToBuy.map(i => this.cartService.deleteItem(i.courseId))
         this.itemsToBuy = []
+        console.log('Transaction successful')
       },
       onError: (err: any) => {
         console.log(err)

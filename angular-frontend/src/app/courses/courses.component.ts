@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Greeting } from '../app.component';
 import { CourseService } from '../services/course.service';
 import { Course } from '../shared/course.model';
@@ -10,25 +11,68 @@ import { Course } from '../shared/course.model';
 })
 export class CoursesComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Jim',
-    context: '19:00, 1 January 2022',
-    inUser: true
-  };
+  greeting: Greeting;
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   courses: Course[]
+  coursesBought: Course[]
 
-  constructor(
-    private courseService: CourseService
-  ) {
+  constructor(private courseService: CourseService) {
+    this.greeting = {
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '' + this.date,
+      inUser: true
+    }
+
     this.courses = []
+    this.coursesBought = []
   }
 
   ngOnInit(): void {
     this.headerData.emit(this.greeting)
-    this.courses = this.courseService.getCourses()
+    this.getCourses()
+    this.getCoursesBought()
+  }
+
+  getCourses(): void {
+    this.courseService.getCourses().subscribe(res => {
+      this.courses = res;
+    })
+  }
+
+  getCoursesBought(): void {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      this.coursesBought = res
+      console.log(this.coursesBought)
+    })
+  }
+
+  onFormSubmit(form: NgForm) {
+    console.log(form.value.search)
+    this.courseService.getCoursesByKeyword(form.value.search).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: (err) => {
+        console.log('ERROR:')
+        console.log(err)
+      }
+    })
+  }
+
+  onFiltersFormSubmit(form: NgForm) {
+    console.log(Object.keys(
+      Object.fromEntries(
+        Object
+          .entries(form.form.value)
+          .filter(([_, value]) => value === true)
+    )))
+
+    form.resetForm()
+
+    // Go to API to search here
   }
 
 }

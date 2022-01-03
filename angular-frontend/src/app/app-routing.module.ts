@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CourseComponent } from './course/course.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
@@ -14,9 +15,11 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { SeeCourseComponent } from './components/see-course/see-course.component';
 
 const routes: Routes = [
+  { path: 'notes', component: NotesComponent },
   { path: '', component: InitialPageComponent },
   
   { path: 'user/courses', component: CoursesComponent, data: {'tab': 0} },
+  { path: 'user/courses/mine/:id', component: CourseComponent },
   { path: 'user/courses/:id', component: SeeCourseComponent },
   { path: 'user/cart', component: CartComponent, data: {'tab': 1} },
   { path: 'user/notes', component: NotesComponent, data: {'tab': 2} },

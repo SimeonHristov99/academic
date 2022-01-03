@@ -12,16 +12,15 @@ export class CourseTileComponent implements OnInit {
 
   constructor() {
     this.course = {
-      id: '',
+      _id: '',
       rating: 0,
       title: '',
       description: '',
       organization: '',
       level: '',
-      url: '',
       price: 1,
       duration: 1
-    };
+    }
   }
 
   ngOnInit(): void {

@@ -11,10 +11,8 @@ import { Greeting } from '../../app.component';
 })
 export class OrganizationComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Google',
-    context: '10:00, 17 May 2022'
-  };
+  greeting: Greeting
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -25,19 +23,21 @@ export class OrganizationComponent implements OnInit {
   courses: Course[] = [];
 
   updateCourseBody: Course = {
-    id: '',
+    _id: '',
     rating: 0,
     title: '',
     description: '',
     organization: '',
-    level: '',
-    url: '',
+    level: 'beginner',
     price: 1,
     duration: 1
   };
 
-  constructor(private courseService: CourseService, private http: HttpClient) {
-
+  constructor(private courseService: CourseService) {
+    this.greeting = {
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '' + this.date
+    }
   }
 
   ngDoCheck(): void {
@@ -46,21 +46,23 @@ export class OrganizationComponent implements OnInit {
 
   ngOnInit() {
     this.headerData.emit(this.greeting);
-    this.getCourseList();
+    this.getCourses();
     this.closeModals();
   }
 
-  getCourseList(): void {
-    this.courses = this.courseService.getCourses();
-    this.buildGraphics();
-    console.log(this.courses);
+  getCourses(): void {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      this.courses = res;
+      this.buildGraphics();
+      console.log(this.courses);
+    });
   }
 
   getAverage(): number[] {
     let i = 0, raiting = 0, people = 0, price = 0;
     let result: number[] = [];
 
-    for(i = 0; i < this.courses.length; i++){
+    for (i = 0; i < this.courses.length; i++) {
       raiting = raiting + this.courses[i].rating;
       price = price + this.courses[i].price;
     }
@@ -76,13 +78,10 @@ export class OrganizationComponent implements OnInit {
     const data2: number[][] = [[]];
     const average_val = this.getAverage();
 
-    data1.push([]);
-    data1.push([]);
+    for (let i = 0; i < this.courses.length; i++) {
+      data1.push([]);
+      data2.push([]);
 
-    data2.push([]);
-    data2.push([]);
-
-    for(let i = 0; i < this.courses.length; i++){
       data1[i][0] = this.courses[i].rating;
       data1[i][1] = this.courses[i].price;
       data1[i][2] = 50;
@@ -149,18 +148,22 @@ export class OrganizationComponent implements OnInit {
   }
 
   closeModals(): void {
-    for(let i = 0; i < this.courses.length; i++){
+    for (let i = 0; i < this.courses.length; i++) {
       this.showEditModal[i] = false;
       this.showDeleteModal[i] = false;
     }
   }
 
   editCourse(id: any): void {
-    // console.log(JSON.stringify(this.updateCourseBody));
+    this.updateCourseBody._id = id;
+    this.courseService.updateCourse(this.updateCourseBody).subscribe(res => {
+    });
   }
 
   deleteCourse(id: any): void {
-    console.log("Course: " + id + " deleting");
+    console.log(this.courses[id])
+    this.courseService.deleteCourse(this.courses[id]).subscribe(res => {
+    });
   }
 
 }

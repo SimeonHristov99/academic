@@ -24,17 +24,34 @@ export class AuthService {
           return
         }
 
-        console.log('Logged In!')
-        console.log(document.cookie)
+        const id = res.body.id
+        let firstName = res.body.firstName
+        const role: string = res.body.role[0] === 'o' ? 'organization' : res.body.role
 
-        this.router.navigateByUrl('/user/courses')
-        // add more according to role
+        if (!id) {
+          console.log('ERROR: No user id!')
+          return
+        }
+
+        if (!firstName) {
+          firstName = email.split('@')[0]
+        }
+
+
+
+        localStorage.setItem('userId', id)
+        localStorage.setItem('firstName', firstName)
+
+        this.router.navigateByUrl(
+          `/${role}${res.body.role === "user" ? `/courses` : ''}`
+        )
       })
     )
   }
 
   logout() {
     document.cookie = 'auth=; Max-Age=0; path=/; domain=' + location.hostname;
+    localStorage.clear()
   }
 
   getToken() {

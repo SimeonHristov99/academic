@@ -1,7 +1,7 @@
-<form action="./" method="get">
+<form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
     <div class="searchbar">
-        <input type="text" class="searchbar__input" name="search" placeholder="Search...">
-        <button type="submit" class="searchbar__button">
+        <input type="text" ngModel class="searchbar__input" name="search" placeholder="Search...">
+        <button class="searchbar__button">
             <i class="material-icons-outlined">search</i>
         </button>
     </div>
@@ -12,7 +12,45 @@
     <div class="container">
 
         <div class="filters-container">
-            <app-filters-tile></app-filters-tile>
+
+            <form #formFilter="ngForm" (ngSubmit)="onFiltersFormSubmit(formFilter)">
+                <div class="wrapper">
+
+
+                    <div class="filter-tile">
+                        <p class="tile-text">Level</p>
+                        <ul>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="beg" />Beginner</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="int" />Intermediate</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="adv" />Advanced</li>
+
+
+                        </ul>
+                    </div>
+
+                    <div class="filter-tile">
+                        <p class="tile-text">Price</p>
+                        <ul>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isPaid" />Paid</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFree" />Free</li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-tile">
+                        <p class="tile-text">Rating</p>
+                        <ul>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isThree" />3</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFour" />4</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFive" />5</li>
+                        </ul>
+                    </div>
+
+                    <button class="btn align-end">Filter</button>
+
+
+                </div>
+            </form>
+
         </div>
 
         <div class="bookmark-tiles-container">

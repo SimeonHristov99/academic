@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
+import { CourseComponent } from './course/course.component';
 import { CourseTileComponent } from './course-tile/course-tile.component';
-import { FiltersTileComponent } from './filters-tile/filters-tile.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
@@ -25,8 +25,9 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { SidebarInfoComponent } from './sidebar-info/sidebar-info.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SeeCourseComponent } from './components/see-course/see-course.component';
+import { WebReqIterceptor } from './services/web-req.iterceptor';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,9 @@ import { SeeCourseComponent } from './components/see-course/see-course.component
     TabsComponent,
     CoursesComponent,
     NotesComponent,
+    CourseComponent,
+    
     CourseTileComponent,
-    FiltersTileComponent,
     OrganizationComponent,
     AddCourseComponent,
     InitialPageComponent,
@@ -60,7 +62,9 @@ import { SeeCourseComponent } from './components/see-course/see-course.component
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: WebReqIterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
