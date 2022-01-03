@@ -15,7 +15,6 @@ interface IUser {
     mark: Number,
     url: String,
   }],
-  certificates?: Set<ICourse>,
   createdAt?: Number,
 }
 

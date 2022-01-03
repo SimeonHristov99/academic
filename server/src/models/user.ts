@@ -39,7 +39,6 @@ const userSchema = new Schema<IUser>({
     mark: Number,
     url: String,
   }],
-  certificates: [{ type: Schema.Types.ObjectId, ref: 'Certificate' }],
 },
   {
     timestamps: {
