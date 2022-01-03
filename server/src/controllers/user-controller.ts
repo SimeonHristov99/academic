@@ -134,7 +134,7 @@ export default class UserController {
 
     const courses = await Course
       .find({ "_id": { $in: ids } })
-      .select('-usersEnrolled -__v');
+      .select('-usersEnrolled -__v -content');
 
     res.status(200).json(courses);
   }
@@ -142,7 +142,7 @@ export default class UserController {
   getOrganisationCourses = async (user: IUser, res: Response) => {
     const courses = await Course
       .find({ "createdBy": user._id })
-      .select('-usersEnrolled -__v');
+      .select('-usersEnrolled -__v -content');
 
     res.status(200).json(courses);
   }
@@ -153,5 +153,37 @@ export default class UserController {
       .select('email firstname lastname createdAt');
 
     res.status(200).json(users);
+  }
+
+  addTask = async (req: Request, res: Response) => {
+    const { id, url } = req.body;
+    const user = res.locals.user;
+
+    user.courses.forEach(course => {
+      if (course.courseId.toString() === id) {
+        course.url = url;
+      }
+    });
+
+    await user.save();
+
+    res.status(200).json({ success: true });
+  }
+
+  addMark = async (req: Request, res: Response, next: () => void) => {
+    const { userId, courseId, mark } = req.body;
+
+    let user = await User.findById(userId).exec();
+
+    user.courses.forEach(course => {
+      if (course.courseId.toString() === courseId) {
+        course.mark = mark;
+      }
+    });
+
+    await user.save();
+
+
+    res.status(200).json({ success: true });
   }
 }

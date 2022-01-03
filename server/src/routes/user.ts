@@ -19,4 +19,11 @@ user.get('/user/courses', authorization, userController.getUserCourses);
 
 user.get('/users', authorization, roleValidator(['admin']), userController.getUsers);
 
+user.post('/user/course/task', authorization, userController.addTask);
+
+user.put('/user/course/task', authorization, userController.addTask);
+
+user.post('/user/course/mark', authorization,
+  roleValidator(['admin', 'organisation']), userController.addMark)
+
 export default user;

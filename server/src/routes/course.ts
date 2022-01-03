@@ -28,7 +28,7 @@ course.post('/course/users',
   roleValidator(['organisation', 'admin']),
   courseController.getEnrolledUsers);
 
-course.post('/course/content', 
+course.post('/course/content',
   authorization,
   courseController.getContent);
 
