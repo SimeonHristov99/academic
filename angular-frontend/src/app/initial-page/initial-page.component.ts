@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
 import { Greeting } from '../app.component';
 import { AuthService } from '../services/auth.service';
 
@@ -28,6 +27,10 @@ export class InitialPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(document.cookie) {
+      this.authService.logout()
+    }
+
     this.headerData.emit(this.greeting);
   }
 
