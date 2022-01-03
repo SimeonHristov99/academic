@@ -116,16 +116,12 @@ export default class CourseController {
     let user = res.locals.user;
     let course = req.body;
 
-    // course.createdBy = res.locals.user.id;
-    // course.usersEnrolled = [user.id];
+    course.createdBy = res.locals.user.id;
 
     await new Course(course).save((err: Error, course) => {
       if (err) {
         return res.status(500).json({ success: false, err });
       } else {
-        // user.courses.push(course.id);
-        // user.save();
-
         res.status(200).json({ success: true });
       }
     })
@@ -175,7 +171,11 @@ export default class CourseController {
       { $addToSet: { usersEnrolled: user } }, { returnNewDocument: true }
     );
 
-    user.courses.push(course);
+    user.courses.push({
+      courseId: course,
+      mark: 0,
+      url: '',
+    });
     await user.save();
 
     res.status(200).json({ success: true });
