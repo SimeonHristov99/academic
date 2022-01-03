@@ -12,7 +12,7 @@ import { Course } from 'src/app/shared/course.model';
 export class SeeCourseComponent implements OnInit {
 
   course: Course
-  payed: boolean = false;
+  payed: any = -1;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +27,11 @@ export class SeeCourseComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
-      duration: 1
+      duration: 1,
+      content: [{
+        week: '',
+        link: ''
+      }]
     };
 
 
@@ -64,7 +68,7 @@ export class SeeCourseComponent implements OnInit {
 
   getCoursesBought(): void {
     this.courseService.getCoursesByUser().subscribe(res => {
-      this.payed = res.some(c => c._id === this.course._id);
+      this.payed = res.some(c => c._id === this.course._id) ? 1 : 0;
     })
   }
 

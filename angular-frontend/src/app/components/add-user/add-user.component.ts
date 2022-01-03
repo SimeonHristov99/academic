@@ -36,28 +36,37 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   register() {
     if (this.userBody.role === 'organization') {
       this.userBody.lastname = this.userBody.firstname;
     }
 
-    console.log(this.userBody)
+    let firstname = this.userBody.firstname
+    if(!firstname) {
+      firstname = this.userBody.email.split('@')[0]
+    }
+    localStorage.setItem('firstName', firstname)
 
     this.userService.register(this.userBody).subscribe({
       next: (res: any) => {
         console.log(res);
         localStorage.setItem('orgId', res.id)
-        localStorage.setItem('firstName', this.userBody.firstname)
         this.isError = false;
         this.errorMessage = '';
-        this.router.navigateByUrl("/organization")
+
+        const role = this.userBody.role == 'organisation' ? 'organization' : this.userBody.role
+        const options = this.userBody.role === "user" ? `/courses` : ''
+
+        this.router.navigateByUrl(
+          `/${role}${options}`
+        )  
       },
       error: (err) => {
         this.isError = true;
         this.errorMessage = err.error.error;
       }
     })
+
     
   }
 }

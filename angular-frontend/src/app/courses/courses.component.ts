@@ -13,17 +13,19 @@ import { Course } from '../shared/course.model';
 export class CoursesComponent implements OnInit {
 
   greeting: Greeting;
-  date: Date = new Date();
-
-  @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
+  date: Date
 
   courses: Course[]
   coursesBought: Course[]
+
+  @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   constructor(
     private courseService: CourseService,
     private cartService: CartService
   ) {
+    this.date = new Date()
+
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
       context: '' + this.date,
@@ -38,6 +40,11 @@ export class CoursesComponent implements OnInit {
     this.headerData.emit(this.greeting)
     this.getCourses()
     this.getCoursesBought()
+
+    const wasSearching = localStorage.getItem('searching')
+    if (wasSearching) {
+      this.doSearch(wasSearching)
+    }
   }
 
   getCourses(): void {
@@ -52,11 +59,18 @@ export class CoursesComponent implements OnInit {
     })
   }
 
-  onFormSubmit(form: NgForm) {
-    console.log(form.value.search)
-    this.courseService.getCoursesByKeyword(form.value.search).subscribe({
+  doSearch(name: string) {
+    localStorage.setItem('searching', name)
+
+    const payload = {
+      name: name
+    }
+
+    this.courseService.getCoursesByKeyword(payload).subscribe({
       next: (res) => {
-        console.log(res)
+        const resIds = res.map(resC => resC._id)
+        this.courses = this.courses.filter(c => resIds.includes(c._id))
+        console.log(this.courses)
       },
       error: (err) => {
         console.log('ERROR:')
@@ -65,13 +79,22 @@ export class CoursesComponent implements OnInit {
     })
   }
 
+  onFormSubmit(form: NgForm) {
+    if (form.value.search.length < 1) {
+      this.getCourses()
+      return
+    }
+
+    this.doSearch(form.value.search)
+  }
+
   onFiltersFormSubmit(form: NgForm) {
     console.log(Object.keys(
       Object.fromEntries(
         Object
           .entries(form.form.value)
           .filter(([_, value]) => value === true)
-    )))
+      )))
 
     form.resetForm()
 
@@ -79,11 +102,11 @@ export class CoursesComponent implements OnInit {
   }
 
   getStatus(course: Course): string | undefined {
-    if(this.coursesBought.find(c => c._id === course._id)) {
+    if (this.coursesBought.find(c => c._id === course._id)) {
       return 'Bought!'
     }
 
-    if(this.cartService.getItem(course._id)) {
+    if (this.cartService.getItem(course._id)) {
       return 'In Cart!'
     }
 

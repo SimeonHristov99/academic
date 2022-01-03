@@ -2,7 +2,7 @@
 
     <div id="main">
 
-        <div *ngIf="!loadedVideo">
+        <div *ngIf="page == 0" id="description">
 
             <img id="course_cover" src="./assets/course.png" alt="Course">
             <h1>{{course.title}}</h1>
@@ -14,27 +14,55 @@
 
             <p>Description: {{course.description}}</p>
         </div>
-        <div *ngIf="loadedVideo">
+        <div *ngIf="page == 1" id="video">
             <iframe [src]='safeURL' frameborder="0" allowfullscreen></iframe>
             <h1>{{name}}</h1>
         </div>
 
+        <div *ngIf="page == 2" id="finish">
+            <h1>Finish</h1>
+            <p>Enter link: </p>
+            <textarea id="link" #link></textarea>
+            <p>Rating:</p>
+
+
+            <select name="demo" id="rating" [(ngModel)]="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+            <button class="btn" (click)="send(link.value, rating)">Send</button>
+        </div>
+
+        <a routerLink="../" class="btn">Go Back</a>
+        <!-- <a class="btn" id="next">Next</a> -->
     </div>
 
 
     <div id="videoList">
         <h1 (click)="loadDescription()"> {{course.title}} </h1>
         <ul>
-            <li *ngFor="let video of videos">
+            <li *ngFor="let video of course.content">
                 <p (click)="loadVideo(video)">
-                    <input type="checkbox" [checked]="video.watched" (change)="onCheckboxChange(video, $event)" />
-                    {{video.name}}
+                    <input type="checkbox" (change)="onCheckboxChange(video, $event)" />
+                    {{video.week}}
                 </p>
 
             </li>
+            <li>
+                <p (click)="finish()">
+                    <input type="checkbox" />
+                    Finish
+                </p>
+            </li>
         </ul>
     </div>
+
 </div>
+
 
 <div id="ad" (click)="loadNewCourse()">
     <img src="./assets/course.png" alt="Ad">

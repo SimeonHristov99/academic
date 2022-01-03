@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Course } from 'src/app/shared/course.model';
-import { Video } from './Video';
 
 @Component({
   selector: 'app-course-payed',
@@ -14,16 +13,10 @@ export class CoursePayedComponent implements OnInit {
   @Input()
   course: Course;
 
-  loadedVideo: boolean = false;
+  page = 0;
   safeURL: any;
   name?: string;
-  videos: Video[] = [
-    { name: 'Intro to Psychology', link: 'https://www.youtube.com/embed/vo4pMVb0R6M', watched: false },
-    { name: 'Psychological Research', link: 'https://www.youtube.com/embed/hFV71QPvX2I', watched: false },
-    { name: 'The Chemical Mind', link: 'https://www.youtube.com/embed/W4N-7AlzK7s', watched: false },
-    { name: 'Getting to Know Your Brain', link: 'https://www.youtube.com/embed/vHrmiy4W9C0', watched: false }
-  ];
-
+  rating: any = 1;
 
   constructor(
     private _sanitizer: DomSanitizer
@@ -36,40 +29,51 @@ export class CoursePayedComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
-      duration: 1
+      duration: 1,
+      content: [{
+        week: '',
+        link: ''
+      }]
     };
-
-    this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.videos[0].link);
-
   }
 
   ngOnInit(): void {
 
   }
 
-  onCheckboxChange(video: Video, e: any) {
+  onCheckboxChange(video: any, e: any) {
     video.watched = e.target.checked;
     this.changeIsVideoWatched();
   }
 
 
-  loadVideo(video: Video) {
-    this.loadedVideo = true;
-    this.name = video.name;
+  loadVideo(video: any) {
+    this.page = 1;
+    this.name = video.week;
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(video.link);
-    video.watched = true;
     this.changeIsVideoWatched();
   }
 
   loadDescription() {
-    this.loadedVideo = false;
+    this.page = 0;
   }
+
   changeIsVideoWatched() {
     //TODO send to backend;
   }
 
   loadNewCourse() {
     //TODO load new course
+  }
+
+  finish() {
+    this.page = 2;
+  }
+
+  send(link: string, rating: any) {
+    if (link === '')
+      return alert("Enter a link!")
+    alert(rating)
   }
 
 }

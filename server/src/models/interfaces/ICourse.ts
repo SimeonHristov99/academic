@@ -8,6 +8,8 @@ interface ICourse {
   description: String,
   price: Number,
   rating: Number,
+  totalRating: Number,
+  totalRatingCount: Number,
   duration: Number,
   level: String,
   usersEnrolled?: Set<IUser>,
