@@ -136,4 +136,7 @@ export class AppComponent {
     return !['', '/', '/register'].includes(this.router.url)
   }
 
+  showWelcomeText(): boolean {
+    return ['', '/'].includes(this.router.url)
+  }
 }
