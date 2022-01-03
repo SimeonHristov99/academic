@@ -12,7 +12,6 @@ export default class NoteController {
     }
     ]);
 
-    console.log(notes)
     res.status(200).json(notes);
   }
 
