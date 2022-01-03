@@ -49,7 +49,7 @@ export class CoursesComponent implements OnInit {
 
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
-      this.courses = res;
+      this.courses = res
     })
   }
 
@@ -70,7 +70,6 @@ export class CoursesComponent implements OnInit {
       next: (res) => {
         const resIds = res.map(resC => resC._id)
         this.courses = this.courses.filter(c => resIds.includes(c._id))
-        console.log(this.courses)
       },
       error: (err) => {
         console.log('ERROR:')
@@ -89,16 +88,41 @@ export class CoursesComponent implements OnInit {
   }
 
   onFiltersFormSubmit(form: NgForm) {
-    console.log(Object.keys(
-      Object.fromEntries(
-        Object
-          .entries(form.form.value)
-          .filter(([_, value]) => value === true)
-      )))
+    const filterConditions =
+      Object.keys(
+        Object.fromEntries(
+          Object
+            .entries(form.form.value)
+            .filter(([_, value]) => value === true)
+        ))
+
+    let level: string | undefined = undefined
+    let free: boolean | undefined = false
+    let rating: number | undefined = undefined
+
+    filterConditions.filter(i => i !== 'isPaid').forEach(item => {
+      if (item === 'isFree') {
+        free = true
+      }
+      else if (+item) {
+        rating = +item
+      }
+      else {
+        level = item
+      }
+    })
+
+    const payload = {
+      level: level,
+      free: free,
+      rating: rating
+    }
 
     form.resetForm()
 
-    // Go to API to filter here
+    this.courseService.getCoursesByFilter(payload).subscribe(res => {
+      this.courses = res
+    })
   }
 
   getStatus(course: Course): string | undefined {

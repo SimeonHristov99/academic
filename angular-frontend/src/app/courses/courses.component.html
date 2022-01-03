@@ -16,30 +16,29 @@
             <form #formFilter="ngForm" (ngSubmit)="onFiltersFormSubmit(formFilter)">
                 <div class="wrapper">
 
-
                     <div class="filter-tile">
                         <p class="tile-text">Level</p>
                         <ul>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="beg" />Beginner</li>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="int" />Intermediate</li>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="adv" />Advanced</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="beginner" />Beginner</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="intermediate" />Intermediate</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="advanced" />Advanced</li>
                         </ul>
                     </div>
 
                     <div class="filter-tile">
                         <p class="tile-text">Price</p>
                         <ul>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isPaid" />Paid</li>
                             <li><input ngModel #titleField="ngModel" type="checkbox" name="isFree" />Free</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isPaid" />All</li>
                         </ul>
                     </div>
 
                     <div class="filter-tile">
                         <p class="tile-text">Rating</p>
                         <ul>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isThree" />3</li>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFour" />4</li>
-                            <li><input ngModel #titleField="ngModel" type="checkbox" name="isFive" />5</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="3" />3</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="4" />4</li>
+                            <li><input ngModel #titleField="ngModel" type="checkbox" name="5" />5</li>
                         </ul>
                     </div>
 

@@ -38,6 +38,10 @@ export class CourseService {
     return this.webService.post('course/delete', course);
   }
 
+  getCoursesByFilter(payload: { level: string | undefined, free: boolean | undefined, rating: number | undefined }): Observable<Course[]> {
+    return this.webService.post('/courses/filter', payload) as Observable<Course[]>
+  }
+
   getStudentListByCourse() {
     return [{
       id: '',
