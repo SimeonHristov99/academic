@@ -11,10 +11,8 @@ import { Greeting } from '../../app.component';
 })
 export class OrganizationComponent implements OnInit {
 
-  greeting: Greeting = {
-    header: 'Hello, Google',
-    context: '10:00, 17 May 2022'
-  };
+  greeting: Greeting
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -36,7 +34,10 @@ export class OrganizationComponent implements OnInit {
   };
 
   constructor(private courseService: CourseService) {
-
+    this.greeting = {
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '' + this.date
+    }
   }
 
   ngDoCheck(): void {
@@ -61,7 +62,7 @@ export class OrganizationComponent implements OnInit {
     let i = 0, raiting = 0, people = 0, price = 0;
     let result: number[] = [];
 
-    for(i = 0; i < this.courses.length; i++){
+    for (i = 0; i < this.courses.length; i++) {
       raiting = raiting + this.courses[i].rating;
       price = price + this.courses[i].price;
     }
@@ -77,7 +78,7 @@ export class OrganizationComponent implements OnInit {
     const data2: number[][] = [[]];
     const average_val = this.getAverage();
 
-    for(let i = 0; i < this.courses.length; i++){
+    for (let i = 0; i < this.courses.length; i++) {
       data1.push([]);
       data2.push([]);
 
@@ -147,7 +148,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   closeModals(): void {
-    for(let i = 0; i < this.courses.length; i++){
+    for (let i = 0; i < this.courses.length; i++) {
       this.showEditModal[i] = false;
       this.showDeleteModal[i] = false;
     }

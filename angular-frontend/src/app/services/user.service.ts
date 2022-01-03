@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../shared/user.model';
 import { WebRequestService } from './web-request.service';
 import { HttpResponse } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { shareReplay, tap } from 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class UserService {
   }
 
   register(payload: Object) {
-    return this.webService.post('register', payload);
+    return this.webService.post('register', payload)
   }
 
   getUser(id: string) {
@@ -33,19 +33,19 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.webService.get('users') as Observable<User[]>;
+    return this.webService.get('users') as Observable<User[]>
   }
 
   getUsersByCourse(payload: Object): Observable<User[]> {
-    return this.webService.post('course/users', payload) as Observable<User[]>;
+    return this.webService.post('course/users', payload) as Observable<User[]>
   }
 
   removeUser(payload: Object) {
-    return this.webService.delete('/delete', payload);
+    return this.webService.delete('delete', payload)
   }
 
-  enroll(userId: string, courseId: string) {
-    console.log('Will enrol ' + userId + ' in ' + courseId)
+  enroll(courseId: string) {
+    return this.webService.post('/course/enroll', { course_id: courseId })
   }
 
   complete() {

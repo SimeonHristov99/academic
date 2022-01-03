@@ -14,8 +14,8 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { SeeCourseComponent } from './components/see-course/see-course.component';
 
 const routes: Routes = [
+  { path: 'notes', component: NotesComponent },
   { path: '', component: InitialPageComponent },
-  
   { path: 'user/courses', component: CoursesComponent, data: {'tab': 0} },
   { path: 'user/courses/:id', component: SeeCourseComponent },
   { path: 'user/cart', component: CartComponent, data: {'tab': 1} },

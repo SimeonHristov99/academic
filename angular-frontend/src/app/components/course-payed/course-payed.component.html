@@ -1,0 +1,42 @@
+<div id="course">
+
+    <div id="main">
+
+        <div *ngIf="!loadedVideo">
+
+            <img id="course_cover" src="./assets/course.png" alt="Course">
+            <h1>{{course.title}}</h1>
+            <div id="main-info">
+                <p>Price: {{course.price}}$</p>
+                <p>Rating: {{course.rating}}/5</p>
+                <p>Duration: {{course.duration}}weeks</p>
+            </div>
+
+            <p>Description: {{course.description}}</p>
+        </div>
+        <div *ngIf="loadedVideo">
+            <iframe [src]='safeURL' frameborder="0" allowfullscreen></iframe>
+            <h1>{{name}}</h1>
+        </div>
+
+    </div>
+
+
+    <div id="videoList">
+        <h1 (click)="loadDescription()"> {{course.title}} </h1>
+        <ul>
+            <li *ngFor="let video of videos">
+                <p (click)="loadVideo(video)">
+                    <input type="checkbox" [checked]="video.watched" (change)="onCheckboxChange(video, $event)" />
+                    {{video.name}}
+                </p>
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="ad" (click)="loadNewCourse()">
+    <img src="./assets/course.png" alt="Ad">
+    <p>You may like this course too</p>
+</div>

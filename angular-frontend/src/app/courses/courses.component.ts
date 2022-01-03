@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Greeting } from '../app.component';
 import { CourseService } from '../services/course.service';
+import { CartService } from '../shared/cart.service';
 import { Course } from '../shared/course.model';
 
 @Component({
@@ -12,32 +13,43 @@ import { Course } from '../shared/course.model';
 export class CoursesComponent implements OnInit {
 
   greeting: Greeting;
+  date: Date = new Date();
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
   courses: Course[]
+  coursesBought: Course[]
 
   constructor(
-    private courseService: CourseService
+    private courseService: CourseService,
+    private cartService: CartService
   ) {
     this.greeting = {
-      header: 'Hello, Jim',
-      context: '19:00, 1 January 2022',
+      header: `Hello, ${localStorage.getItem('firstName')}`,
+      context: '' + this.date,
       inUser: true
     }
 
     this.courses = []
+    this.coursesBought = []
   }
 
   ngOnInit(): void {
     this.headerData.emit(this.greeting)
-    this.getCourses();
+    this.getCourses()
+    this.getCoursesBought()
   }
 
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
       this.courses = res;
-    });
+    })
+  }
+
+  getCoursesBought(): void {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      this.coursesBought = res
+    })
   }
 
   onFormSubmit(form: NgForm) {
@@ -63,7 +75,18 @@ export class CoursesComponent implements OnInit {
 
     form.resetForm()
 
-    // Go to API to search here
+    // Go to API to filter here
   }
 
+  getStatus(course: Course): string | undefined {
+    if(this.coursesBought.find(c => c._id === course._id)) {
+      return 'Bought!'
+    }
+
+    if(this.cartService.getItem(course._id)) {
+      return 'In Cart!'
+    }
+
+    return undefined
+  }
 }

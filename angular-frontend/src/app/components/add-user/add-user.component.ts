@@ -12,11 +12,14 @@ import { Router } from '@angular/router';
 })
 export class AddUserComponent implements OnInit {
 
-  userBody: User;
-  isError: boolean = false;
-  errorMessage: string = '';
+  userBody: User
+  isError: boolean
+  errorMessage: string
 
-  constructor(private userService: UserService, public router: Router) {
+  constructor(
+    private userService: UserService,
+    public router: Router
+  ) {
     this.userBody = {
       id: '',
       email: '',
@@ -25,7 +28,10 @@ export class AddUserComponent implements OnInit {
       password: '',
       birthDate: undefined,
       role: ''
-    };
+    }
+
+    this.isError = false
+    this.errorMessage = ''
   }
 
   ngOnInit(): void {
@@ -35,16 +41,23 @@ export class AddUserComponent implements OnInit {
     if (this.userBody.role === 'organization') {
       this.userBody.lastname = this.userBody.firstname;
     }
-    console.log(this.userBody);
-    this.userService.register(this.userBody).subscribe(res => {
-      console.log(res);
-      this.isError = false;
-      this.errorMessage = '';
-      this.router.navigate(['/']);
-    }, err => {
-      this.isError = true;
-      this.errorMessage = err.error.error;
-    });
 
+    console.log(this.userBody)
+
+    this.userService.register(this.userBody).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        localStorage.setItem('orgId', res.id)
+        localStorage.setItem('firstName', this.userBody.firstname)
+        this.isError = false;
+        this.errorMessage = '';
+        this.router.navigateByUrl("/organization")
+      },
+      error: (err) => {
+        this.isError = true;
+        this.errorMessage = err.error.error;
+      }
+    })
+    
   }
 }

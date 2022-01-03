@@ -23,8 +23,6 @@
                             <li><input ngModel #titleField="ngModel" type="checkbox" name="beg" />Beginner</li>
                             <li><input ngModel #titleField="ngModel" type="checkbox" name="int" />Intermediate</li>
                             <li><input ngModel #titleField="ngModel" type="checkbox" name="adv" />Advanced</li>
-
-
                         </ul>
                     </div>
 
@@ -46,8 +44,6 @@
                     </div>
 
                     <button class="btn align-end">Filter</button>
-
-
                 </div>
             </form>
 
@@ -55,7 +51,11 @@
 
         <div class="bookmark-tiles-container">
 
-            <app-course-tile *ngFor="let course of courses" [course]="course"></app-course-tile>
+            <app-course-tile
+                *ngFor="let course of courses"
+                [course]="course"
+                [status]="getStatus(course)">
+            </app-course-tile>
 
         </div>
 
