@@ -18,8 +18,6 @@ export default class NoteController {
   createNote = async (req: Request, res: Response) => {
     let note = req.body;
 
-    console.log(note)
-
     await new Note(note).save((err: Error, course) => {
       if (err) {
         return res.status(500).json({ success: false, err });

@@ -50,7 +50,6 @@ export class CoursesComponent implements OnInit {
   getCourses(): void {
     this.courseService.getCourses().subscribe(res => {
       this.courses = res
-      console.log(this.courses)
     })
   }
 
@@ -130,12 +129,22 @@ export class CoursesComponent implements OnInit {
     const courseBought = this.coursesBought.find(c => c._id === course._id)
     
     if (courseBought) {
-      console.log(courseBought.mark)
-      return (courseBought.mark ? 'Completed' : 'Bought!')
+      return (courseBought.mark ? 'Completed!' : 'Bought!')
     }
 
     if (this.cartService.getItem(course._id)) {
       return 'In Cart!'
+    }
+
+    return undefined
+  }
+
+  getCourseMark(courseId: string) {
+    const course = this.coursesBought.find(c => c._id === courseId)
+    
+    if(course){
+      console.log(course)
+      return course.mark
     }
 
     return undefined
