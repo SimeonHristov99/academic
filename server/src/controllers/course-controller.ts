@@ -107,9 +107,13 @@ export default class CourseController {
 
   searchCoursesByName = async (req: Request, res: Response) => {
     const searchName = req.body.name;
-    Course.find({ title: { $regex: `${searchName}`, $options: "i" } })
-      .then(course => { res.status(200).json(course) })
-      .catch(err => { res.status(500).json({ success: false, error: 'Can not get courses: ' + err }) });
+    await Course.find({ title: { $regex: `${searchName}`, $options: "i" } })
+    .exec(function (err, courses) {
+      if (err) {
+        res.status(500).json({ success: false, error: 'Can not get courses' });
+      }
+      res.status(200).json(courses);
+    });
   }
 
   createCourse = async (req: Request, res: Response) => {
@@ -179,5 +183,65 @@ export default class CourseController {
     await user.save();
 
     res.status(200).json({ success: true });
+  }
+
+  rateCourse = async (req: Request, res: Response, next: () => void) => {
+    const newRating = req.body.rating;
+    const courseId = req.body.id;
+
+    const courseWithTottals = await Course.findOneAndUpdate(
+      { _id: courseId },
+      {
+        $inc: {
+          totalRating: newRating,
+          totalRatingCount: 1,
+        },
+          $div: ["$totalRating", "$totalRatingCount"]
+
+      },
+      {new: true});
+
+    courseWithTottals.rating = (courseWithTottals.totalRating as number) / (courseWithTottals.totalRatingCount as number);
+    await courseWithTottals.save((err, data) => { 
+      if(err){
+          return res.status(500).json({ success: false, error: 'Could not rate course: ' + err });
+      } else {
+          return res.status(200).send(data);
+    }
+  })
+
+  }
+
+  filterCourses = async (req: Request, res: Response, next: () => void) => {
+    const level_search = req.body.level ? req.body.level : /.*/;
+    const free_search = req.body.free ? req.body.free : false;
+    const rating_search = req.body.rating ? req.body.rating : 0;
+
+    let filterCriteria;
+    if (free_search) {
+      filterCriteria = {
+        level: level_search,
+        price: 0,
+        rating: {
+          $gte: rating_search
+        }
+      }
+    } else {
+      filterCriteria = {
+        level: level_search,
+        rating: {
+          $gte: rating_search
+        }
+      }
+    }
+
+    const courses = await Course.find(filterCriteria).exec();
+
+    if (courses) {
+      res.status(200).json(courses);
+    }
+    else {
+      res.status(500).json({ success: false, error: 'Could not filter courses' });
+    }
   }
 }

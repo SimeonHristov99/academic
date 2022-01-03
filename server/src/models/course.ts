@@ -31,6 +31,16 @@ const courseSchema = new Schema<CourseDocument, CourseModel>({
     required: false,
     default: 0,
   },
+  totalRating: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  totalRatingCount: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   duration: {
     type: Number,
     required: true,

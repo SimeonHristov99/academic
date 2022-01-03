@@ -21,7 +21,6 @@ course.post('/course',
 
 course.post('/courses/search',
   authorization,
-  roleValidator(['organisation', 'admin']),
   courseController.searchCoursesByName);
 
 course.post('/course/users',
@@ -31,7 +30,6 @@ course.post('/course/users',
 
 course.post('/course/content', 
   authorization,
-  roleValidator(['organisation', 'admin']),
   courseController.getContent);
 
 course.post('/course/delete',
@@ -45,5 +43,11 @@ course.post('/course/update',
   courseController.updateCourse);
 
 course.post('/course/enroll', authorization, courseController.courseEnroll);
+
+course.post('/courses/filter', courseController.filterCourses);
+
+course.post('/course/rate',
+  authorization,
+  courseController.rateCourse);
 
 export default course;
