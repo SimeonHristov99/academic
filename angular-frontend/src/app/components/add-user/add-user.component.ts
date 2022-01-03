@@ -42,15 +42,24 @@ export class AddUserComponent implements OnInit {
       this.userBody.lastname = this.userBody.firstname;
     }
 
-    console.log(this.userBody)
+    let firstname = this.userBody.firstname
+    if(!firstname) {
+      firstname = this.userBody.email.split('@')[0]
+    }
+    localStorage.setItem('firstName', firstname)
 
     this.userService.register(this.userBody).subscribe({
       next: (res: any) => {
         console.log(res);
         localStorage.setItem('orgId', res.id)
-        localStorage.setItem('firstName', this.userBody.firstname)
         this.isError = false;
         this.errorMessage = '';
+
+        const role = this.userBody.role == 'organisation' ? 'organization' : this.userBody.role
+
+        this.router.navigateByUrl(
+          `/${role}${this.userBody.role === "user" ? `/courses` : ''}`
+        )  
       },
       error: (err) => {
         this.isError = true;
@@ -58,8 +67,6 @@ export class AddUserComponent implements OnInit {
       }
     })
 
-    this.router.navigateByUrl(
-      `/${this.userBody.role}${this.userBody.role === "user" ? `/courses` : ''}`
-    )  
+    
   }
 }
