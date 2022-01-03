@@ -13,9 +13,10 @@ export class CoursePayedComponent implements OnInit {
   @Input()
   course: Course;
 
-  loadedVideo: boolean = false;
+  page = 2;
   safeURL: any;
   name?: string;
+  rating: any = 1;
 
   constructor(
     private _sanitizer: DomSanitizer
@@ -47,14 +48,14 @@ export class CoursePayedComponent implements OnInit {
 
 
   loadVideo(video: any) {
-    this.loadedVideo = true;
+    this.page = 1;
     this.name = video.week;
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(video.link);
     this.changeIsVideoWatched();
   }
 
   loadDescription() {
-    this.loadedVideo = false;
+    this.page = 0;
   }
 
   changeIsVideoWatched() {
@@ -63,6 +64,16 @@ export class CoursePayedComponent implements OnInit {
 
   loadNewCourse() {
     //TODO load new course
+  }
+
+  finish() {
+    this.page = 2;
+  }
+
+  send(link: string, rating: any) {
+    if (link === '')
+      return alert("Enter a link!")
+    alert(rating)
   }
 
 }

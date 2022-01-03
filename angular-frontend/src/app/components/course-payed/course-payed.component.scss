@@ -23,7 +23,7 @@
     height: 330px;
   }
   
-  #videoList h1:hover {
+  #videoList h1:hover, #ad:hover, #videoList p:hover {
     cursor: pointer;
   }
   
@@ -54,13 +54,9 @@
   }
   
   #videoList p:hover {
-    cursor: pointer;
     font-size: x-large;
   }
-  
-  #ad:hover {
-    cursor: pointer;
-  }
+
   
   #ad {
     background-color: rgba(0, 0, 0, 0.5);
@@ -99,10 +95,35 @@
     text-align: center;
   }
   
-  #description, #video {
+  #description, #video, #finish {
     height: 420px;
   }
 
   #next {
     margin-left: 550px;
+  }
+
+  #link, #rating, option {
+    resize: none;
+    border-radius: 100px;
+    color: black;
+  }
+
+  #finish  p, select, textarea, button {
+    
+    margin-left: 20px;
+  }
+  #finish p {
+    margin-top: 20px;
+  }
+  #rating {
+    width: 60px;
+    padding: 8px 0 8px 13px;
+    margin-bottom: 20px;
+  }
+
+  #link {
+    padding: 10px 0 0 10px;
+    width: 500px;
+    border: solid 2px red;
   }
