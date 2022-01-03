@@ -24,7 +24,11 @@ export class StudentDetailsComponent implements OnInit {
     organization: '',
     level: 'beginner',
     price: 1,
-    duration: 1
+    duration: 1,
+    content: [{
+      week: '',
+      link: ''
+    }]
   };
 
   constructor(private userService: UserService, private route: ActivatedRoute) { }

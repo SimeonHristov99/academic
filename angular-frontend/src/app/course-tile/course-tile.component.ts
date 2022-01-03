@@ -21,7 +21,11 @@ export class CourseTileComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
-      duration: 1
+      duration: 1,
+      content: [{
+        week: '',
+        link: ''
+      }]
     }
 
     this.showBought = false

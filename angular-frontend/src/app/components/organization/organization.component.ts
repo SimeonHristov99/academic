@@ -30,7 +30,11 @@ export class OrganizationComponent implements OnInit {
     organization: '',
     level: 'beginner',
     price: 1,
-    duration: 1
+    duration: 1,
+    content: [{
+      week: '',
+      link: ''
+    }]
   };
 
   constructor(private courseService: CourseService) {

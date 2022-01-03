@@ -21,11 +21,22 @@ export class AddCourseComponent implements OnInit {
       organization: '',
       level: 'beginner',
       price: 1,
-      duration: 1
+      duration: 1,
+      content: [{
+        week: '',
+        link: ''
+      }]
     };
   }
 
   ngOnInit(): void {
+  }
+
+  addField(){
+    this.courseBody.content.push({
+      week: '',
+      link: ''
+    })
   }
 
   addCourse() {
@@ -36,8 +47,10 @@ export class AddCourseComponent implements OnInit {
       organization: this.courseBody.organization,
       level: this.courseBody.level,
       price: this.courseBody.price,
-      duration: this.courseBody.duration
+      duration: this.courseBody.duration,
+      content: this.courseBody.content
     }
+    console.log(courseBody);
     this.courseService.addCourse(courseBody).subscribe(res => {
       this.router.navigateByUrl('/organization')
     });
