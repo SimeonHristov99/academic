@@ -50,8 +50,6 @@ export class EditNoteComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm) {
-    console.log('Make call to updateNote here')
-
     const payload: Note = {
       _id: this.note._id,
       title: form.value.title,
@@ -59,7 +57,6 @@ export class EditNoteComponent implements OnInit {
     }
 
     this.noteService.updateNote(payload).subscribe(res => {
-      console.log(res)
       this.router.navigateByUrl('/user/notes')
     })
   }
@@ -69,7 +66,7 @@ export class EditNoteComponent implements OnInit {
       _id: this.note._id
     }
 
-    this.noteService.deleteNote(payload).subscribe(res => {
+    this.noteService.deleteNote(payload).subscribe(_ => {
       this.router.navigateByUrl('/user/notes')
     })
   }

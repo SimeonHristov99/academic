@@ -130,6 +130,7 @@ export class CoursesComponent implements OnInit {
     const courseBought = this.coursesBought.find(c => c._id === course._id)
     
     if (courseBought) {
+      console.log(courseBought.mark)
       return (courseBought.mark ? 'Completed' : 'Bought!')
     }
 

@@ -30,9 +30,7 @@ export class NotesComponent implements OnInit {
     this.headerData.emit(this.greeting)
 
     this.noteService.getNotes().subscribe(res => {
-      console.log(res)
       this.notes = res
-      console.log(this.notes)
     })
   }
 

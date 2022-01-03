@@ -18,8 +18,8 @@ export class NoteService {
     return this.webService.get('/notes') as Observable<Note[]>
   }
 
-  addNote(note: Note) {
-    return this.webService.post('/note', note)
+  addNote(note: any) {
+    return this.webService.post('note', note)
   }
 
   updateNote(note: Note) {
