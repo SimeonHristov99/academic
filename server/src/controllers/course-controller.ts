@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { ObjectId } from 'mongodb';
+import { Mongoose, Types } from 'mongoose';
 import { Course } from '../models/course';
 import ICourse from '../models/interfaces/ICourse';
 import { User } from '../models/user';
@@ -37,18 +39,38 @@ export default class CourseController {
       $unset: ["__v", "content"]
     }
     ]);
-    console.log(courses);
+
     res.status(200).json(courses);
   }
 
   getEnrolledUsers = async (req: Request, res: Response) => {
-    const _id = req.body._id;
+    const id = req.body._id;
 
-    const users = await Course.findOne({ _id: _id }).select('usersEnrolled')
-      .populate({ path: 'usersEnrolled', select: 'email firstname lastname' })
+    const users = await Course.findOne({ _id: id }).select('usersEnrolled')
+      .populate({ path: 'usersEnrolled', select: 'email firstname lastname courses' })
       .exec();
 
-    res.status(200).json(users.usersEnrolled);
+    const users1 = users.usersEnrolled;
+    let result = []
+
+    users1.forEach(user => {
+      user.courses.forEach(course => {
+        if (course.courseId.toString() === id) {
+          let obj = {
+            id: user._id,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            url: course.url,
+            mark: course.mark,
+          };
+
+          result.push(obj);
+        }
+      });
+    });
+
+    res.status(200).json(result);
   }
 
   getContent = async (req: Request, res: Response) => {
@@ -184,12 +206,12 @@ export default class CourseController {
   searchCoursesByName = async (req: Request, res: Response) => {
     const searchName = req.body.name;
     await Course.find({ title: { $regex: `${searchName}`, $options: "i" } })
-    .exec(function (err, courses) {
-      if (err) {
-        res.status(500).json({ success: false, error: 'Can not get courses' });
-      }
-      res.status(200).json(courses);
-    });
+      .exec(function (err, courses) {
+        if (err) {
+          res.status(500).json({ success: false, error: 'Can not get courses' });
+        }
+        res.status(200).json(courses);
+      });
   }
 
   createCourse = async (req: Request, res: Response) => {
@@ -248,11 +270,11 @@ export default class CourseController {
 
     const course = await Course.findOneAndUpdate(
       { _id: courseId },
-      { $addToSet: { usersEnrolled: user } }, { returnNewDocument: true }
+      { $addToSet: { usersEnrolled: user._id } }, { returnNewDocument: true }
     );
 
     user.courses.push({
-      courseId: course,
+      courseId: courseId,
       mark: 0,
       url: '',
     });
@@ -272,19 +294,19 @@ export default class CourseController {
           totalRating: newRating,
           totalRatingCount: 1,
         },
-          $div: ["$totalRating", "$totalRatingCount"]
+        $div: ["$totalRating", "$totalRatingCount"]
 
       },
-      {new: true});
+      { new: true });
 
     courseWithTottals.rating = (courseWithTottals.totalRating as number) / (courseWithTottals.totalRatingCount as number);
-    await courseWithTottals.save((err, data) => { 
-      if(err){
-          return res.status(500).json({ success: false, error: 'Could not rate course: ' + err });
+    await courseWithTottals.save((err, data) => {
+      if (err) {
+        return res.status(500).json({ success: false, error: 'Could not rate course: ' + err });
       } else {
-          return res.status(200).send(data);
-    }
-  })
+        return res.status(200).send(data);
+      }
+    })
 
   }
 

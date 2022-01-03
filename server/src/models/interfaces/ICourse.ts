@@ -1,4 +1,3 @@
-import { Decimal128 } from 'mongoose';
 import IUser from './IUser';
 
 interface ICourse {
@@ -13,7 +12,7 @@ interface ICourse {
   duration: Number,
   level: String,
   usersEnrolled?: Set<IUser>,
-  createdAt?: Number,  
+  createdAt?: Number,
   content: [{
     week: String,
     link: String
