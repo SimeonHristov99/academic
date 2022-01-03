@@ -164,6 +164,16 @@ export default class UserController {
     }
     ]);
 
+    let result = courses;
+
+    result.forEach(course => {
+      user.courses.forEach(c => {
+        if (c.courseId.toString() === course._id.toString()) {
+          course.mark = c.mark;
+        }
+      });
+    });
+
     res.status(200).json(courses);
   }
 
