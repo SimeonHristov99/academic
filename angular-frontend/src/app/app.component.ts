@@ -104,7 +104,7 @@ export class AppComponent {
   inUser: boolean = false;
 
   defaultHeader: string = 'Welcome to Academic';
-  defaultContext: string = 'Create an account or log in to access out courses';
+  defaultContext: string = 'Create an account or log in to access our courses';
 
   constructor(
     public router: Router,
