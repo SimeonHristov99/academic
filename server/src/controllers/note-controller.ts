@@ -6,11 +6,9 @@ export default class NoteController {
   construct() { }
 
   listNotes = async (req: Request, res: Response) => {
-    const notes = await Note.aggregate([
-    {
-      $unset: "__v"
-    }
-    ]);
+    const noteCreator: INote = req.body.createdBy;
+
+    const notes = await Note.find({createdBy: noteCreator});
 
     res.status(200).json(notes);
   }
