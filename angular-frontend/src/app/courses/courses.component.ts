@@ -126,8 +126,10 @@ export class CoursesComponent implements OnInit {
   }
 
   getStatus(course: Course): string | undefined {
-    if (this.coursesBought.find(c => c._id === course._id)) {
-      return 'Bought!'
+    const courseBought = this.coursesBought.find(c => c._id === course._id)
+    
+    if (courseBought) {
+      return (courseBought.mark ? 'Completed!' : 'Bought!')
     }
 
     if (this.cartService.getItem(course._id)) {
@@ -135,5 +137,11 @@ export class CoursesComponent implements OnInit {
     }
 
     return undefined
+  }
+
+  getCourseMark(courseId: string) {
+    const course = this.coursesBought.find(c => c._id === courseId)
+    
+    return (course ? course.mark : undefined)
   }
 }

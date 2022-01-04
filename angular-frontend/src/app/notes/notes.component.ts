@@ -27,8 +27,11 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headerData.emit(this.greeting);
-    this.notes = this.noteService.getNotes()
+    this.headerData.emit(this.greeting)
+
+    this.noteService.getNotes().subscribe(res => {
+      this.notes = res
+    })
   }
 
 }

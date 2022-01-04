@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import { Content } from 'src/app/shared/content.model';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -15,6 +16,8 @@ export class CoursePayedComponent implements OnInit {
 
   @Input()
   course: Course;
+  content: Content;
+  mark: number
 
   adCourse: Course;
   page = 0;
@@ -28,6 +31,14 @@ export class CoursePayedComponent implements OnInit {
     private _sanitizer: DomSanitizer,
     private userService: UserService
   ) {
+    this.content = {
+      _id: '',
+      content: [{
+        week: '',
+        link: ''
+      }]
+    };
+
     this.course = {
       _id: '',
       rating: 0,
@@ -36,6 +47,7 @@ export class CoursePayedComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
+      mark: 0,
       duration: 1,
       content: [{
         week: '',
@@ -51,17 +63,22 @@ export class CoursePayedComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
+      mark: 0,
       duration: 1,
       content: [{
         week: '',
         link: ''
       }]
     };
+
+    this.mark = -1
   }
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.loadVideos();
     this.getCourse();
+    this.setMark();
   }
 
   onCheckboxChange(video: any, e: any) {
@@ -69,6 +86,12 @@ export class CoursePayedComponent implements OnInit {
     this.changeIsVideoWatched();
   }
 
+  loadVideos() {
+    this.courseService.content(this.course._id).subscribe(res => {
+      console.log(res)
+      this.content = res;
+    })
+  }
 
   loadVideo(video: any) {
     this.page = 1;
@@ -93,26 +116,40 @@ export class CoursePayedComponent implements OnInit {
     if (link === '')
       return alert("Enter a link!")
 
+    this.sendLink(link);
+    this.setMark();
+  }
+
+
+  getCourse() {
+    this.courseService.getCourses().subscribe(resAll => {
+
+      this.courseService.getCoursesByUser().subscribe(resUser => {
+        const n = Math.floor(Math.random() * resAll.length);
+        this.adCourse = resAll[n];
+        while (this.adCourse._id == this.course._id || resUser.some(e => e._id === this.adCourse._id)) {
+          const n = Math.floor(Math.random() * resAll.length);
+          this.adCourse = resAll[n];
+        }
+      })
+
+    })
+  }
+
+  setMark() {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      const course = res.find(c => c._id === this.course._id)
+      this.mark = (course ? course.mark : -1)
+    })
+  }
+
+  sendLink(link: string) {
     this.userService.task(this.course._id, link).subscribe(res => {
       if (res) {
-        alert("Successfull send!");
+        alert("Link successfull send!");
       } else {
         alert("Error while sending!");
       }
     })
   }
-
-  getCourse() {
-    this.courseService.getCourses().subscribe(res => {
-      const n = Math.floor(Math.random() * res.length);
-      this.adCourse = res[n];
-      while (this.adCourse._id == this.course._id) {
-        this.adCourse = res[n];
-      }
-    })
-
-    console.log(this.course.content)
-  }
-
-
 }

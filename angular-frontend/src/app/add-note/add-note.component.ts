@@ -31,11 +31,14 @@ export class AddNoteComponent implements OnInit {
 
     this.showValidationErrors = false
 
-    this.noteService.addNote(
-      new Note(form.value.title, form.value.content)
-    )
+    const payload = {
+      title: form.value.title,
+      description: form.value.content,
+    }
 
-    this.router.navigateByUrl('/user/notes')
+    this.noteService.addNote(payload).subscribe(res => {
+      this.router.navigateByUrl('/user/notes')
+    })
   }
 
 }

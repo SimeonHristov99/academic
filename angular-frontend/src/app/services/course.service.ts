@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Content } from '../shared/content.model';
 import { Course } from '../shared/course.model';
 import { WebRequestService } from './web-request.service';
 
@@ -52,5 +53,10 @@ export class CourseService {
       birthDate: undefined,
       role: ''
     }]
+  }
+
+
+  content(courseId: string) : Observable<Content>{
+    return this.webService.post('/course/content', { id: courseId }) as Observable<Content>
   }
 }

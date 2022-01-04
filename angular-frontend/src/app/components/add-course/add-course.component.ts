@@ -20,8 +20,9 @@ export class AddCourseComponent implements OnInit {
       description: '',
       organization: '',
       level: 'beginner',
-      price: 1,
-      duration: 1,
+      price: 0,
+      mark: 0,
+      duration: 0,
       content: [{
         week: '',
         link: ''

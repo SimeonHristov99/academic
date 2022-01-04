@@ -23,6 +23,7 @@ export class CourseComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
+      mark: 0,
       duration: 1,
       content: [{
         week: '',

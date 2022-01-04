@@ -63,13 +63,13 @@
     border-radius: 5px;
     width: 500px;
     height: 250px;
-    cursor: pointer;
     transition: all 0.1s;
     &:hover {
-        background: rgba(black, 0.68);
+        background: rgba(255, 183, 3, 0.78);
         backdrop-filter: blur(2px);
         .headers {
             color: white;
+            font-style: italic;
             margin: 18%;
         }
     }

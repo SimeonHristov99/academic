@@ -5,6 +5,7 @@
         <div *ngIf="page == 0" id="description">
 
             <img id="course_cover" src="./assets/course.png" alt="Course">
+            <h1 *ngIf="mark > 0"> Completed with mark = {{mark}}</h1>
             <h1>{{course.title}}</h1>
             <div id="main-info">
                 <p>Price: {{course.price}}$</p>
@@ -45,7 +46,7 @@
     <div id="videoList">
         <h1 (click)="loadDescription()"> {{course.title}} </h1>
         <ul>
-            <li *ngFor="let video of course.content">
+            <li *ngFor="let video of content.content">
                 <p (click)="loadVideo(video)">
                     <input type="checkbox" (change)="onCheckboxChange(video, $event)" />
                     {{video.week}}
