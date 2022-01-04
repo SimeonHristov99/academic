@@ -31,9 +31,9 @@ export class OrganizationComponent implements OnInit {
     description: '',
     organization: '',
     level: 'beginner',
-    price: 1,
+    price: 0,
     mark: 1,
-    duration: 1,
+    duration: 0,
     content: [{
       week: '',
       link: ''
@@ -189,6 +189,13 @@ export class OrganizationComponent implements OnInit {
       this.showEditModal[i] = false;
       this.showDeleteModal[i] = false;
     }
+  }
+
+  populateValues(i: number) {
+    this.updateCourseBody.title = this.courses[i].title;
+    this.updateCourseBody.description = this.courses[i].description;
+    this.updateCourseBody.price = this.courses[i].price;
+    this.updateCourseBody.duration = this.courses[i].duration;
   }
 
   editCourse(id: any): void {
