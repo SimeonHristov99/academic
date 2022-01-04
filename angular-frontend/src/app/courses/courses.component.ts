@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Greeting } from '../app.component';
 import { CourseService } from '../services/course.service';
 import { CartService } from '../shared/cart.service';
@@ -10,13 +11,14 @@ import { Course } from '../shared/course.model';
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
 
   greeting: Greeting;
   date: Date
 
   courses: Course[]
   coursesBought: Course[]
+  subscriptions: Subscription[]
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -34,6 +36,7 @@ export class CoursesComponent implements OnInit {
 
     this.courses = []
     this.coursesBought = []
+    this.subscriptions = []
   }
 
   ngOnInit(): void {
@@ -48,16 +51,24 @@ export class CoursesComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
+  }
+
   getCourses(): void {
-    this.courseService.getCourses().subscribe(res => {
-      this.courses = res
-    })
+    this.subscriptions.push(
+      this.courseService.getCourses().subscribe(res => {
+        this.courses = res
+      })
+    )
   }
 
   getCoursesBought(): void {
-    this.courseService.getCoursesByUser().subscribe(res => {
-      this.coursesBought = res
-    })
+    this.subscriptions.push(
+      this.courseService.getCoursesByUser().subscribe(res => {
+        this.coursesBought = res
+      })
+    )
   }
 
   doSearch(name: string) {
@@ -67,16 +78,18 @@ export class CoursesComponent implements OnInit {
       name: name
     }
 
-    this.courseService.getCoursesByKeyword(payload).subscribe({
-      next: (res) => {
-        const resIds = res.map(resC => resC._id)
-        this.courses = this.courses.filter(c => resIds.includes(c._id))
-      },
-      error: (err) => {
-        console.log('ERROR:')
-        console.log(err)
-      }
-    })
+    this.subscriptions.push(
+      this.courseService.getCoursesByKeyword(payload).subscribe({
+        next: (res) => {
+          const resIds = res.map(resC => resC._id)
+          this.courses = this.courses.filter(c => resIds.includes(c._id))
+        },
+        error: (err) => {
+          console.log('ERROR:')
+          console.log(err)
+        }
+      })
+    )
   }
 
   onFormSubmit(form: NgForm) {
@@ -121,14 +134,16 @@ export class CoursesComponent implements OnInit {
 
     form.resetForm()
 
-    this.courseService.getCoursesByFilter(payload).subscribe(res => {
-      this.courses = res
-    })
+    this.subscriptions.push(
+      this.courseService.getCoursesByFilter(payload).subscribe(res => {
+        this.courses = res
+      })
+    )
   }
 
   getStatus(course: Course): string | undefined {
     const courseBought = this.coursesBought.find(c => c._id === course._id)
-    
+
     if (courseBought) {
       return (courseBought.mark ? 'Completed!' : 'Bought!')
     }
@@ -142,7 +157,7 @@ export class CoursesComponent implements OnInit {
 
   getCourseMark(courseId: string) {
     const course = this.coursesBought.find(c => c._id === courseId)
-    
+
     return (course ? course.mark : undefined)
   }
 }

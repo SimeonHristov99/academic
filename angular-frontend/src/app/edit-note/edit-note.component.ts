@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Note } from '../shared/note.model';
 import { NoteService } from '../shared/note.service';
 
@@ -9,9 +10,10 @@ import { NoteService } from '../shared/note.service';
   templateUrl: './edit-note.component.html',
   styleUrls: ['./edit-note.component.scss']
 })
-export class EditNoteComponent implements OnInit {
+export class EditNoteComponent implements OnInit, OnDestroy {
 
   note: Note
+  subscriptions: Subscription[]
 
   constructor(
     private route: ActivatedRoute,
@@ -23,30 +25,39 @@ export class EditNoteComponent implements OnInit {
       title: 'NA',
       description: 'NA'
     }
+    this.subscriptions = []
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      const idParam = paramMap.get('id')
+    this.subscriptions.push(
+      this.route.paramMap.subscribe((paramMap: ParamMap) => {
+        const idParam = paramMap.get('id')
 
-      if (!idParam) {
-        console.log('ERROR: Invalid note id ')
-        console.log(idParam)
-        return
-      }
-
-      this.noteService.getNotes().subscribe(res => {
-        const note = res.find(n => n._id === idParam)
-
-        if (!note) {
-          console.log('ERROR: Invalid note ')
-          console.log(note)
+        if (!idParam) {
+          console.log('ERROR: Invalid note id ')
+          console.log(idParam)
           return
         }
 
-        this.note = note
+        this.subscriptions.push(
+          this.noteService.getNotes().subscribe(res => {
+            const note = res.find(n => n._id === idParam)
+
+            if (!note) {
+              console.log('ERROR: Invalid note ')
+              console.log(note)
+              return
+            }
+
+            this.note = note
+          })
+        )
       })
-    })
+    )
+  }
+
+  ngOnDestroy(): void {
+      this.subscriptions.map(s => s.unsubscribe())
   }
 
   onFormSubmit(form: NgForm) {
@@ -56,9 +67,11 @@ export class EditNoteComponent implements OnInit {
       description: form.value.content,
     }
 
-    this.noteService.updateNote(payload).subscribe(res => {
-      this.router.navigateByUrl('/user/notes')
-    })
+    this.subscriptions.push(
+      this.noteService.updateNote(payload).subscribe(res => {
+        this.router.navigateByUrl('/user/notes')
+      })
+    )
   }
 
   deleteNote() {
@@ -66,9 +79,11 @@ export class EditNoteComponent implements OnInit {
       _id: this.note._id
     }
 
-    this.noteService.deleteNote(payload).subscribe(_ => {
-      this.router.navigateByUrl('/user/notes')
-    })
+    this.subscriptions.push(
+      this.noteService.deleteNote(payload).subscribe(_ => {
+        this.router.navigateByUrl('/user/notes')
+      })
+    )
   }
 
 }

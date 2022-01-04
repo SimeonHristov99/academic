@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 import { Course } from 'src/app/shared/course.model';
@@ -10,10 +11,11 @@ import { Greeting } from '../../app.component';
   templateUrl: './organization.component.html',
   styleUrls: ['./organization.component.scss']
 })
-export class OrganizationComponent implements OnInit {
+export class OrganizationComponent implements OnInit, OnDestroy {
 
   greeting: Greeting
   date: Date = new Date();
+  subscriptions: Subscription[]
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -45,10 +47,11 @@ export class OrganizationComponent implements OnInit {
       header: `Hello, ${localStorage.getItem('firstName')}`,
       context: '' + this.date
     }
+    this.subscriptions = []
   }
 
-  ngDoCheck(): void {
-    console.log('doCheck');
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
   }
 
   ngOnInit() {
@@ -58,19 +61,23 @@ export class OrganizationComponent implements OnInit {
   }
 
   getCourses(): void {
-    this.courseService.getCoursesByUser().subscribe(res => {
-      this.courses = res;
-      for (let i = 0; i < this.courses.length; i++) {
-        this.getStudentList(this.courses[i], i);
-      }
-    });
+    this.subscriptions.push(
+      this.courseService.getCoursesByUser().subscribe(res => {
+        this.courses = res;
+        for (let i = 0; i < this.courses.length; i++) {
+          this.getStudentList(this.courses[i], i);
+        }
+      })
+    )
   }
 
   getStudentList(course: Course, index: number): void {
-    this.userService.getUsersByCourse(course).subscribe(res => {
-      this.people[index] = res.length;
-      this.buildGraphics();
-    });;
+    this.subscriptions.push(
+      this.userService.getUsersByCourse(course).subscribe(res => {
+        this.people[index] = res.length;
+        this.buildGraphics();
+      })
+    )
   }
 
   getAverage(): number[] {
@@ -209,14 +216,18 @@ export class OrganizationComponent implements OnInit {
       duration: this.updateCourseBody.duration,
       content: this.updateCourseBody.content
     }
-    this.courseService.updateCourse(updateBody).subscribe(res => {
-    });
+    this.subscriptions.push(
+      this.courseService.updateCourse(updateBody).subscribe(res => {
+      })
+    )
     window.location.reload();
   }
 
   deleteCourse(id: any): void {
-    this.courseService.deleteCourse(this.courses[id]).subscribe(res => {
-    });
+    this.subscriptions.push(
+      this.courseService.deleteCourse(this.courses[id]).subscribe(res => {
+      })
+    )
     window.location.reload();
   }
 

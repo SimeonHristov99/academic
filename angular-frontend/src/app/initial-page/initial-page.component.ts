@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Greeting } from '../app.component';
 import { AuthService } from '../services/auth.service';
 
@@ -8,11 +9,12 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './initial-page.component.html',
   styleUrls: ['./initial-page.component.scss']
 })
-export class InitialPageComponent implements OnInit {
+export class InitialPageComponent implements OnInit, OnDestroy {
 
   greeting: Greeting
   errorText: string
-  date: Date = new Date();
+  date: Date = new Date()
+  subscriptions: Subscription[]
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter();
 
@@ -25,24 +27,31 @@ export class InitialPageComponent implements OnInit {
     }
 
     this.errorText = ''
+    this.subscriptions = []
   }
 
   ngOnInit(): void {
-    if(document.cookie) {
+    if (document.cookie) {
       this.authService.logout()
     }
 
     this.headerData.emit(this.greeting);
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
+  }
+
   onFormSubmit(form: NgForm) {
-    this.authService
-      .login(form.value.email, form.value.password)
+    this.subscriptions.push(
+      this.authService
+        .login(form.value.email, form.value.password)
         .subscribe({
           error: (_) => {
             this.errorText = 'Invalid email or password'
           }
         })
+    )
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CourseService } from 'src/app/services/course.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { Course } from 'src/app/shared/course.model';
@@ -9,10 +10,11 @@ import { Course } from 'src/app/shared/course.model';
   templateUrl: './see-course.component.html',
   styleUrls: ['./see-course.component.scss']
 })
-export class SeeCourseComponent implements OnInit {
+export class SeeCourseComponent implements OnInit, OnDestroy {
 
   course: Course
   payed: any = -1;
+  subscriptions: Subscription[]
 
   constructor(
     private route: ActivatedRoute,
@@ -33,30 +35,35 @@ export class SeeCourseComponent implements OnInit {
         week: '',
         link: ''
       }]
-    };
+    }
 
+    this.subscriptions = []
 
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      const idParam = paramMap.get('id')
+    this.subscriptions.push(
+      this.route.paramMap.subscribe((paramMap: ParamMap) => {
+        const idParam = paramMap.get('id')
 
-      if (!idParam) {
-        console.log('ERROR: Invalid course id ')
-        console.log(idParam)
-        return
-      }
-
-      this.courseService.getCourses().subscribe(res => {
-        const course = res.find(c => c._id === idParam)
-
-        if (!course) {
-          console.log('ERROR: Invalid course ')
-          console.log(course)
+        if (!idParam) {
+          console.log('ERROR: Invalid course id ')
+          console.log(idParam)
           return
         }
 
-        this.course = course
+        this.subscriptions.push(
+          this.courseService.getCourses().subscribe(res => {
+            const course = res.find(c => c._id === idParam)
+
+            if (!course) {
+              console.log('ERROR: Invalid course ')
+              console.log(course)
+              return
+            }
+
+            this.course = course
+          })
+        )
       })
-    })
+    )
 
     this.getCoursesBought();
   }
@@ -64,11 +71,16 @@ export class SeeCourseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
+  }
 
   getCoursesBought(): void {
-    this.courseService.getCoursesByUser().subscribe(res => {
-      this.payed = res.some(c => c._id === this.course._id) ? 1 : 0;
-    })
+    this.subscriptions.push(
+      this.courseService.getCoursesByUser().subscribe(res => {
+        this.payed = res.some(c => c._id === this.course._id) ? 1 : 0;
+      })
+    )
   }
 
   showAddToCartButton() {

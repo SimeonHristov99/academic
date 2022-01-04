@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Note } from '../shared/note.model';
 import { NoteService } from '../shared/note.service';
 
@@ -9,22 +10,28 @@ import { NoteService } from '../shared/note.service';
   templateUrl: './add-note.component.html',
   styleUrls: ['./add-note.component.scss']
 })
-export class AddNoteComponent implements OnInit {
+export class AddNoteComponent implements OnInit, OnDestroy {
 
-  showValidationErrors: boolean;
+  showValidationErrors: boolean
+  subscriptions: Subscription[]
 
   constructor(
     private noteService: NoteService,
     private router: Router
   ) {
-    this.showValidationErrors = false;
+    this.showValidationErrors = false
+    this.subscriptions = []
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
+  }
+
   onFormSubmit(form: NgForm) {
-    if(form.invalid) {
+    if (form.invalid) {
       this.showValidationErrors = true
       return
     }
@@ -36,9 +43,9 @@ export class AddNoteComponent implements OnInit {
       description: form.value.content,
     }
 
-    this.noteService.addNote(payload).subscribe(res => {
+    this.subscriptions.push(this.noteService.addNote(payload).subscribe(res => {
       this.router.navigateByUrl('/user/notes')
-    })
+    }))
   }
 
 }

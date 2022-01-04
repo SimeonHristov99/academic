@@ -15,11 +15,15 @@ export class NoteService {
   }
 
   getNotes() {
-    return this.webService.get('/notes') as Observable<Note[]>
+    return this.webService.get('notes') as Observable<Note[]>
   }
 
   addNote(note: any) {
-    return this.webService.post('note', note)
+    return this.webService.post('note', {
+      createdBy: localStorage.getItem('userId'),
+      title: note.title,
+      description: note.description
+    })
   }
 
   updateNote(note: Note) {

@@ -6,7 +6,7 @@ import roleValidator from '../middleware/role-validator';
 const note = Router();
 const noteController: NoteController = new NoteController();
 
-note.get('/notes', noteController.listNotes);
+note.get('/notes', authorization, noteController.listNotes);
 
 note.post('/note',
   authorization,

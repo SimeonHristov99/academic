@@ -1,18 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { CartItem } from './cart.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService implements OnDestroy {
 
   items: CartItem[]
+  subscriptions: Subscription[]
 
   constructor(private userService: UserService) {
     this.items = []
+    this.subscriptions = []
   }
-  
+
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
+  }
+
   getItems() {
     return this.items
   }
@@ -37,8 +44,10 @@ export class CartService {
   }
 
   buyItem(courseId: string) {
-    this.userService.enroll(courseId).subscribe(res => {
-      console.log(res)
-    })
+    this.subscriptions.push(
+      this.userService.enroll(courseId).subscribe(res => {
+        console.log(res)
+      })
+    )
   }
 }

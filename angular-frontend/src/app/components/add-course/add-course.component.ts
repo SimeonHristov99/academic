@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/shared/course.model';
 
@@ -8,9 +9,10 @@ import { Course } from 'src/app/shared/course.model';
   templateUrl: './add-course.component.html',
   styleUrls: ['./add-course.component.scss']
 })
-export class AddCourseComponent implements OnInit {
+export class AddCourseComponent implements OnInit, OnDestroy {
 
   courseBody: Course;
+  subscriptions: Subscription[]
 
   constructor(private courseService: CourseService, private router: Router) {
     this.courseBody = {
@@ -27,23 +29,29 @@ export class AddCourseComponent implements OnInit {
         week: '',
         link: ''
       }]
-    };
+    }
+
+    this.subscriptions = []
   }
 
   ngOnInit(): void {
   }
 
-  addField(){
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe())
+  }
+
+  addField() {
     let content = [];
-    for(let i = 0; i < this.courseBody.duration; i++) {
-        if(i < this.courseBody.content.length) {
-          content.push(this.courseBody.content[i]);
-        } else {
-          content.push({
-            week: '',
-            link: ''
-          });
-        }
+    for (let i = 0; i < this.courseBody.duration; i++) {
+      if (i < this.courseBody.content.length) {
+        content.push(this.courseBody.content[i]);
+      } else {
+        content.push({
+          week: '',
+          link: ''
+        });
+      }
     }
     while (this.courseBody.content.length > 0) {
       this.courseBody.content.pop();
@@ -64,10 +72,12 @@ export class AddCourseComponent implements OnInit {
       duration: this.courseBody.duration,
       content: this.courseBody.content
     }
+
     console.log(courseBody);
-    this.courseService.addCourse(courseBody).subscribe(res => {
+
+    this.subscriptions.push(this.courseService.addCourse(courseBody).subscribe(res => {
       this.router.navigateByUrl('/organization')
-    });
+    }))
   }
 
 }

@@ -8,7 +8,7 @@ export default class NoteController {
   listNotes = async (req: Request, res: Response) => {
     const user = res.locals.user;
 
-    const notes = await Note.find({ createdBy: user._id });
+    const notes = await Note.find({ createdBy: user.id });
 
     res.status(200).json(notes);
   }
