@@ -44,6 +44,7 @@ export class CoursesComponent implements OnInit {
     const wasSearching = localStorage.getItem('searching')
     if (wasSearching) {
       this.doSearch(wasSearching)
+      localStorage.removeItem('searching')
     }
   }
 
