@@ -122,15 +122,20 @@ export class CoursePayedComponent implements OnInit {
 
 
   getCourse() {
-    this.courseService.getCourses().subscribe(res => {
-      const n = Math.floor(Math.random() * res.length);
-      this.adCourse = res[n];
-      while (this.adCourse._id == this.course._id) {
-        this.adCourse = res[n];
-      }
+    this.courseService.getCourses().subscribe(resAll => {
+
+      this.courseService.getCoursesByUser().subscribe(resUser => {
+        const n = Math.floor(Math.random() * resAll.length);
+        this.adCourse = resAll[n];
+        while (this.adCourse._id == this.course._id || resUser.some(e => e._id === this.adCourse._id)) {
+          const n = Math.floor(Math.random() * resAll.length);
+          this.adCourse = resAll[n];
+        }
+      })
+
     })
   }
-  
+
   setMark() {
     this.courseService.getCoursesByUser().subscribe(res => {
       const course = res.find(c => c._id === this.course._id)
