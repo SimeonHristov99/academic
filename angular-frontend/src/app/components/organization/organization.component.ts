@@ -32,6 +32,7 @@ export class OrganizationComponent implements OnInit {
     organization: '',
     level: 'beginner',
     price: 1,
+    mark: 1,
     duration: 1,
     content: [{
       week: '',
@@ -192,15 +193,15 @@ export class OrganizationComponent implements OnInit {
 
   editCourse(id: any): void {
     this.updateCourseBody._id = id;
-    console.log(this.updateCourseBody)
     this.courseService.updateCourse(this.updateCourseBody).subscribe(res => {
     });
+    window.location.reload();
   }
 
   deleteCourse(id: any): void {
-    console.log(this.courses[id])
     this.courseService.deleteCourse(this.courses[id]).subscribe(res => {
     });
+    window.location.reload();
   }
 
 }

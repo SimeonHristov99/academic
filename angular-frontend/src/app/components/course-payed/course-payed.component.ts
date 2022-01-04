@@ -15,6 +15,7 @@ export class CoursePayedComponent implements OnInit {
 
   @Input()
   course: Course;
+  mark: number
 
   adCourse: Course;
   page = 0;
@@ -36,6 +37,7 @@ export class CoursePayedComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
+      mark: 0,
       duration: 1,
       content: [{
         week: '',
@@ -51,17 +53,21 @@ export class CoursePayedComponent implements OnInit {
       organization: '',
       level: '',
       price: 1,
+      mark: 0,
       duration: 1,
       content: [{
         week: '',
         link: ''
       }]
     };
+
+    this.mark = -1
   }
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.getCourse();
+    this.setMark()
   }
 
   onCheckboxChange(video: any, e: any) {
@@ -94,7 +100,7 @@ export class CoursePayedComponent implements OnInit {
       return alert("Enter a link!")
 
     this.sendLink(link);
-    this.sendRating(rating);
+    this.setMark();
   }
 
 
@@ -109,7 +115,13 @@ export class CoursePayedComponent implements OnInit {
 
     console.log(this.course.content)
   }
-
+  
+  setMark() {
+    this.courseService.getCoursesByUser().subscribe(res => {
+      const course = res.find(c => c._id === this.course._id)
+      this.mark = (course ? course.mark : -1)
+    })
+  }
 
   sendLink(link: string) {
     this.userService.task(this.course._id, link).subscribe(res => {
@@ -119,9 +131,5 @@ export class CoursePayedComponent implements OnInit {
         alert("Error while sending!");
       }
     })
-  }
-
-  sendRating(rating: any) {
-    throw new Error('Method not implemented.');
   }
 }

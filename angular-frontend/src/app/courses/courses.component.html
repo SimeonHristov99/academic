@@ -53,6 +53,7 @@
             <app-course-tile
                 *ngFor="let course of courses"
                 [course]="course"
+                [mark]="getCourseMark(course._id)"
                 [status]="getStatus(course)">
             </app-course-tile>
 

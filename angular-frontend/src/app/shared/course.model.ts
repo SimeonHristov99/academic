@@ -7,6 +7,7 @@ export interface Course {
     level: string
     price: number
     duration: number
+    mark: number
     content: [{
         week: string,
         link: string

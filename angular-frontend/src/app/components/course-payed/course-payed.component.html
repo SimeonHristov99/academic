@@ -5,6 +5,7 @@
         <div *ngIf="page == 0" id="description">
 
             <img id="course_cover" src="./assets/course.png" alt="Course">
+            <h1 *ngIf="mark > 0"> Completed with mark = {{mark}}</h1>
             <h1>{{course.title}}</h1>
             <div id="main-info">
                 <p>Price: {{course.price}}$</p>

@@ -10,17 +10,14 @@ note.get('/notes', noteController.listNotes);
 
 note.post('/note',
   authorization,
-  roleValidator(['organisation', 'admin']),
   noteController.createNote);
 
   note.post('/note/delete',
   authorization,
-  roleValidator(['organisation', 'admin']),
   noteController.deleteNote);
 
   note.post('/note/update',
   authorization,
-  roleValidator(['organisation', 'admin']),
   noteController.updateNote);
 
 export default note;
