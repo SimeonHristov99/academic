@@ -23,7 +23,7 @@ export class OrganizationComponent implements OnInit {
 
   courses: Course[] = [];
   people: number[] = [];
- 
+
   updateCourseBody: Course = {
     _id: '',
     rating: 0,
@@ -60,7 +60,7 @@ export class OrganizationComponent implements OnInit {
   getCourses(): void {
     this.courseService.getCoursesByUser().subscribe(res => {
       this.courses = res;
-      for(let i = 0; i < this.courses.length; i++){
+      for (let i = 0; i < this.courses.length; i++) {
         this.getStudentList(this.courses[i], i);
       }
     });
@@ -164,17 +164,17 @@ export class OrganizationComponent implements OnInit {
     }
   }
 
-  addField(){
+  addField() {
     let content = [];
-    for(let i = 0; i < this.updateCourseBody.duration; i++) {
-        if(i < this.updateCourseBody.content.length) {
-          content.push(this.updateCourseBody.content[i]);
-        } else {
-          content.push({
-            week: '',
-            link: ''
-          });
-        }
+    for (let i = 0; i < this.updateCourseBody.duration; i++) {
+      if (i < this.updateCourseBody.content.length) {
+        content.push(this.updateCourseBody.content[i]);
+      } else {
+        content.push({
+          week: '',
+          link: ''
+        });
+      }
     }
     while (this.updateCourseBody.content.length > 0) {
       this.updateCourseBody.content.pop();
@@ -200,7 +200,16 @@ export class OrganizationComponent implements OnInit {
 
   editCourse(id: any): void {
     this.updateCourseBody._id = id;
-    this.courseService.updateCourse(this.updateCourseBody).subscribe(res => {
+    let updateBody = {
+      _id: this.updateCourseBody,
+      title: this.updateCourseBody.title,
+      description: this.updateCourseBody.description,
+      level: this.updateCourseBody.level,
+      price: this.updateCourseBody.price,
+      duration: this.updateCourseBody.duration,
+      content: this.updateCourseBody.content
+    }
+    this.courseService.updateCourse(updateBody).subscribe(res => {
     });
     window.location.reload();
   }

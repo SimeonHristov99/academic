@@ -31,8 +31,8 @@ export class CourseService {
     return this.webService.post('course', course);
   }
 
-  updateCourse(course: Course) {
-    return this.webService.post('course/update', course);
+  updateCourse(payload: Object) {
+    return this.webService.post('course/update', payload);
   }
 
   deleteCourse(course: Course) {
