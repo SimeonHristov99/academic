@@ -46,7 +46,7 @@
     <div id="videoList">
         <h1 (click)="loadDescription()"> {{course.title}} </h1>
         <ul>
-            <li *ngFor="let video of course.content">
+            <li *ngFor="let video of content.content">
                 <p (click)="loadVideo(video)">
                     <input type="checkbox" (change)="onCheckboxChange(video, $event)" />
                     {{video.week}}

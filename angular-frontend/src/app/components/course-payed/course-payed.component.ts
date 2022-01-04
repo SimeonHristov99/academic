@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import { Content } from 'src/app/shared/content.model';
 import { Course } from 'src/app/shared/course.model';
 
 @Component({
@@ -15,6 +16,7 @@ export class CoursePayedComponent implements OnInit {
 
   @Input()
   course: Course;
+  content: Content;
   mark: number
 
   adCourse: Course;
@@ -29,6 +31,14 @@ export class CoursePayedComponent implements OnInit {
     private _sanitizer: DomSanitizer,
     private userService: UserService
   ) {
+    this.content = {
+      _id: '',
+      content: [{
+        week: '',
+        link: ''
+      }]
+    };
+
     this.course = {
       _id: '',
       rating: 0,
@@ -66,8 +76,9 @@ export class CoursePayedComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.loadVideos();
     this.getCourse();
-    this.setMark()
+    this.setMark();
   }
 
   onCheckboxChange(video: any, e: any) {
@@ -75,6 +86,12 @@ export class CoursePayedComponent implements OnInit {
     this.changeIsVideoWatched();
   }
 
+  loadVideos() {
+    this.courseService.content(this.course._id).subscribe(res => {
+      console.log(res)
+      this.content = res;
+    })
+  }
 
   loadVideo(video: any) {
     this.page = 1;
@@ -112,8 +129,6 @@ export class CoursePayedComponent implements OnInit {
         this.adCourse = res[n];
       }
     })
-
-    console.log(this.course.content)
   }
   
   setMark() {
