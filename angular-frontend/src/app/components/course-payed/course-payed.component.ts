@@ -93,14 +93,10 @@ export class CoursePayedComponent implements OnInit {
     if (link === '')
       return alert("Enter a link!")
 
-    this.userService.task(this.course._id, link).subscribe(res => {
-      if (res) {
-        alert("Successfull send!");
-      } else {
-        alert("Error while sending!");
-      }
-    })
+    this.sendLink(link);
+    this.sendRating(rating);
   }
+
 
   getCourse() {
     this.courseService.getCourses().subscribe(res => {
@@ -115,4 +111,17 @@ export class CoursePayedComponent implements OnInit {
   }
 
 
+  sendLink(link: string) {
+    this.userService.task(this.course._id, link).subscribe(res => {
+      if (res) {
+        alert("Link successfull send!");
+      } else {
+        alert("Error while sending!");
+      }
+    })
+  }
+
+  sendRating(rating: any) {
+    throw new Error('Method not implemented.');
+  }
 }
