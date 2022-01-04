@@ -23,15 +23,19 @@ import { CartService } from '../shared/cart.service';
 export class CartComponent implements OnInit {
 
   greeting: Greeting
-  date: Date = new Date();
+  date: Date
+  showReceipt: boolean
 
   @Output() headerData: EventEmitter<Greeting> = new EventEmitter()
 
   items: CartItem[]
+  itemsBought: CartItem[]
 
   constructor(
     private cartService: CartService
   ) {
+    this.date = new Date()
+
     this.greeting = {
       header: `Hello, ${localStorage.getItem('firstName')}`,
       context: '' + this.date,
@@ -39,6 +43,8 @@ export class CartComponent implements OnInit {
     }
 
     this.items = []
+    this.itemsBought = []
+    this.showReceipt = false
   }
 
   ngOnInit(): void {
@@ -58,4 +64,17 @@ export class CartComponent implements OnInit {
     return this.items.filter(s => s.willBuy)
   }
 
+  getBoughtItems() {
+    const itemsBought = localStorage.getItem('boughtItems')
+    
+    if(!itemsBought) return
+    
+    this.itemsBought = JSON.parse(itemsBought)
+    localStorage.removeItem('boughtItems')
+  }
+
+  toggleShowReceipt(event: any) {
+    this.showReceipt = true
+    this.getBoughtItems()
+  }
 }

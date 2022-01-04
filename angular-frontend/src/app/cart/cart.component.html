@@ -1,9 +1,28 @@
 <div class="cart-wrapper">
-    
-    <div class="container" *ngIf="this.items.length > 0; else elseBlock">
+
+    <ng-container *ngIf="showReceipt">
+        <div class="modal">
+            <div class="modal-content">
+                <h2 class="modal-header">Congratulations! Your transaction was successful!</h2>
+                <div class="title-modal">
+                    <div class="grid-container-modal">
+                        <div class="grid-item-modal">Bought Item(s)</div>
+                    </div>
+                </div>
+                <div class="grid-container-modal" *ngFor="let item of this.itemsBought">
+                    <div class="grid-item-modal"> {{ item.title }} | {{ item.description }} | {{ item.price }} </div>
+                </div>
+                <button class="btn" (click)="showReceipt = false">
+                    <i class="material-icons-outlined">thumb_up_alt</i>OK
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+    <div class="container" *ngIf="!showReceipt && this.items.length > 0; else elseBlock">
 
         <div class="filters-container">
-            <app-sidebar-info [itemsToBuy]="this.getItemsToBuy()"></app-sidebar-info>
+            <app-sidebar-info [itemsToBuy]="this.getItemsToBuy()" (toggle)="toggleShowReceipt($event)"></app-sidebar-info>
         </div>
 
         <div class="cart-items-container">
@@ -21,7 +40,7 @@
     </div>
 
     <ng-template #elseBlock>
-        <p>Cart is empty</p>
+        <p *ngIf="!showReceipt">Cart is empty</p>
     </ng-template>
 
 </div>
