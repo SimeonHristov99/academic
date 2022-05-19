@@ -18,9 +18,10 @@ export default class UserController {
 
     if (!user.email) {
       errors.push('Email is empty');
+      return errors;
     }
 
-    if (!user.password.match(/^[a-zA-Z0-9*.!@#$%^&(){}[\]:;<>,.?\/~_+-=|].{8,}$/)) {
+    if (!user.password.match(/^[a-zA-Z0-9*.!@#$%^&(){}[\]:;<>,.?\/~_+-=|].{7,}$/)) {
       errors.push('Password must be at least 8 symbols');
     }
 
@@ -104,7 +105,7 @@ export default class UserController {
       const user = await this.findUser(email);
 
       if (user) {
-        user.remove((err: Error, _) => {
+        user.remove((err: Error) => {
           if (err) {
             console.log(err);
             res.status(401).json({ success: false, error: err });

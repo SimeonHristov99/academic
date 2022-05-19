@@ -48,7 +48,7 @@
         <ul>
             <li *ngFor="let video of content.content">
                 <p (click)="loadVideo(video)">
-                    <input type="checkbox" (change)="onCheckboxChange(video, $event)" />
+                    <input type="checkbox"/>
                     {{video.week}}
                 </p>
 
@@ -66,6 +66,6 @@
 
 
 <div id="ad" [routerLink]="'../'+[adCourse?._id]">
-    <img src="./assets/course.png" alt="Ad">
+    <img src="./assets/ad2.png" alt="Ad">
     <p>You may like this course too</p>
 </div>

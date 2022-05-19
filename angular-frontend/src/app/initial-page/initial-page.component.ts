@@ -47,8 +47,8 @@ export class InitialPageComponent implements OnInit, OnDestroy {
       this.authService
         .login(form.value.email, form.value.password)
         .subscribe({
-          error: (_) => {
-            this.errorText = 'Invalid email or password'
+          error: (e) => {
+            this.errorText = e.error.error
           }
         })
     )
