@@ -1,133 +1,144 @@
 * {
-    color: white;
-  }
-  
-  img {
-    object-fit: cover;
-  }
-  
-  #course {
-    margin-top: 100px;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 1300px;
-    height: 500px;
-    overflow: hidden;
-  }
-  
-  #main {
-    margin: 2%;
-    width: 60%;
-    float: left;
-  }
-  
-  #videoList {
-    margin: 2%;
-    overflow: hidden;
-    overflow-y: auto;
-    height: 330px;
-  }
-  
-  #videoList h1:hover, #ad:hover, #videoList p:hover {
-    cursor: pointer;
-  }
-  
-  #course_cover {
-    width: 100%;
-    height: 200px;
-  }
-  
-  h1 {
-    color: white;
-    text-align: center;
-    width: 560;
-  }
-  
-  iframe {
-    width: 100%;
-    height: 350px;
-  }
-  
-  input {
-    margin: 3%;
-    width: 20px;
-    height: 20px;
-  }
-  
-  p {
-    font-size: large;
-  }
-  
-  #videoList p:hover {
-    font-size: x-large;
-  }
+  color: white;
+}
 
-  
-  #ad {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 1300px;
-    height: 200px;
-    margin-top: 10px;
-    text-align: center;
-    position: relative;
-  }
-  
-  #ad img {
-    padding: 10px;
-    width: 100%;
-    height: 100%;
-  }
-  
-  #ad p {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    font-size: xx-large;
-    color: gray;
-  }
-  
-  #main p {
-    font-size: x-large;
-  }
-  
-  #main-info p {
-    display: inline-block;
-    margin: 15px 0 15px 0;
-    width: 250px;
-    text-align: center;
-  }
-  
-  #description, #video, #finish {
-    height: 420px;
-  }
+img {
+  object-fit: cover;
+}
 
-  #next {
-    margin-left: 550px;
-  }
+#course {
+  margin-top: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 1300px;
+  height: 500px;
+  overflow: hidden;
+}
 
-  #link, #rating, option {
-    resize: none;
-    border-radius: 100px;
-    color: black;
-  }
+#main {
+  margin: 2%;
+  width: 60%;
+  float: left;
+}
 
-  #finish  p, select, textarea, button {
-    
-    margin-left: 20px;
-  }
-  #finish p {
-    margin-top: 20px;
-  }
-  #rating {
-    width: 60px;
-    padding: 8px 0 8px 13px;
-    margin-bottom: 20px;
-  }
+#videoList {
+  margin: 2%;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 330px;
+}
 
-  #link {
-    padding: 10px 0 0 10px;
-    width: 500px;
-    border: solid 2px red;
-  }
+#videoList h1:hover,
+#ad:hover,
+#videoList p:hover {
+  cursor: pointer;
+}
+
+#course_cover {
+  width: 100%;
+  height: 200px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  width: 560;
+}
+
+iframe {
+  width: 100%;
+  height: 350px;
+}
+
+input {
+  margin: 3%;
+  width: 20px;
+  height: 20px;
+}
+
+p {
+  font-size: large;
+}
+
+#videoList p:hover {
+  font-size: x-large;
+}
+
+
+#ad {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 1300px;
+  height: 200px;
+  margin-top: 10px;
+  text-align: center;
+  position: relative;
+}
+
+#ad img {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+#ad p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+  color: black;
+}
+
+#main p {
+  font-size: x-large;
+}
+
+#main-info p {
+  display: inline-block;
+  margin: 15px 0 15px 0;
+  width: 250px;
+  text-align: center;
+}
+
+#description,
+#video,
+#finish {
+  height: 420px;
+}
+
+#next {
+  margin-left: 550px;
+}
+
+#link,
+#rating,
+option {
+  resize: none;
+  border-radius: 100px;
+  color: black;
+}
+
+#finish p,
+select,
+textarea,
+button {
+
+  margin-left: 20px;
+}
+
+#finish p {
+  margin-top: 20px;
+}
+
+#rating {
+  width: 60px;
+  padding: 8px 0 8px 13px;
+  margin-bottom: 20px;
+}
+
+#link {
+  padding: 10px 0 0 10px;
+  width: 500px;
+  border: solid 2px red;
+}
