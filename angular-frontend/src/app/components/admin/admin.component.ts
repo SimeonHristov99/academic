@@ -42,10 +42,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userService.removeUser(body).subscribe(res => {
         console.log(res)
+        window.location.reload()
       })
     )
 
-    window.location.reload();
   }
 
 }

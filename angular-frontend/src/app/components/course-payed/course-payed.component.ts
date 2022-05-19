@@ -7,6 +7,8 @@ import { UserService } from 'src/app/services/user.service';
 import { Content } from 'src/app/shared/content.model';
 import { Course } from 'src/app/shared/course.model';
 
+const EMBED_YT_URI: string = 'https://www.youtube.com/embed/'
+
 @Component({
   selector: 'app-course-payed',
   templateUrl: './course-payed.component.html',
@@ -89,15 +91,9 @@ export class CoursePayedComponent implements OnInit, OnDestroy {
     this.subscriptions.map(s => s.unsubscribe())
   }
 
-  onCheckboxChange(video: any, e: any) {
-    video.watched = e.target.checked;
-    this.changeIsVideoWatched();
-  }
-
   loadVideos() {
     this.subscriptions.push(
       this.courseService.content(this.course._id).subscribe(res => {
-        console.log(res)
         this.content = res;
       })
     )
@@ -106,16 +102,12 @@ export class CoursePayedComponent implements OnInit, OnDestroy {
   loadVideo(video: any) {
     this.page = 1;
     this.name = video.week;
+    video.link = EMBED_YT_URI + video.link
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(video.link);
-    this.changeIsVideoWatched();
   }
 
   loadDescription() {
     this.page = 0;
-  }
-
-  changeIsVideoWatched() {
-    //TODO send to backend;
   }
 
   finish() {
@@ -129,7 +121,6 @@ export class CoursePayedComponent implements OnInit, OnDestroy {
     this.sendLink(link);
     this.setMark();
   }
-
 
   getCourse() {
     this.subscriptions.push(
